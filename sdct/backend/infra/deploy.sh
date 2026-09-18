@@ -55,12 +55,14 @@ VITE_ENTRA_CLIENT_ID=$SPA_APP_ID
 VITE_ENTRA_TENANT_ID=$TENANT_ID
 VITE_API_SCOPE=api://stability-capture-api-$ENV/access_as_user
 ENVEOF
-(cd "$ROOT/frontend" && npm install --no-audit --no-fund && npm run build)
+(cd "$ROOT/frontend" && npm install --no-audit --no-fund && npm run build && npm run build:mockup)
 
 echo "== 4/6 Package and deploy (frontend/dist + backend/api)"
 TMP=$(mktemp -d); mkdir -p "$TMP/frontend" "$TMP/backend"
 cp -r "$ROOT/frontend/dist" "$TMP/frontend/dist"; cp -r "$ROOT/backend/api" "$TMP/backend/api"; rm -rf "$TMP/backend/api/node_modules"
 cp -r "$ROOT/frontend/dist/." "$TMP/"
+cp "$ROOT/frontend/dist-mockup/index.html" "$TMP/index.html"
+cp "$ROOT/frontend/dist-mockup/index.html" "$TMP/frontend/dist/index.html"
 cat > "$TMP/deploy-marker.json" <<MARKER
 {
   "app": "stability-capture",

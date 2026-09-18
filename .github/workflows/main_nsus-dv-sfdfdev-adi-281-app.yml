@@ -49,7 +49,7 @@ jobs:
           FRONTEND_ENTRA_CLIENT_ID: ${{ secrets.VITE_ENTRA_CLIENT_ID || vars.VITE_ENTRA_CLIENT_ID }}
           FRONTEND_ENTRA_TENANT_ID: ${{ secrets.VITE_ENTRA_TENANT_ID || vars.VITE_ENTRA_TENANT_ID }}
         run: |
-          rm -rf dist
+          rm -rf dist dist-mockup
           export VITE_BUILD_STAMP="${GITHUB_SHA::7}-$(date -u +%Y%m%d%H%M%S)"
           if [ -n "$FRONTEND_ENTRA_CLIENT_ID" ] && [ -n "$FRONTEND_ENTRA_TENANT_ID" ]; then
             echo "Building frontend in Azure API + Microsoft Entra mode."
@@ -64,7 +64,8 @@ jobs:
             export VITE_AUTH_MODE=demo
           fi
           npm run build
-          if grep -R "Loading Stability Capture\|Preparing demo data" dist; then
+          npm run build:mockup
+          if grep -R "Loading Stability Capture\|Preparing demo data" dist dist-mockup; then
             echo "Old loading screen text found in built frontend. Refusing to deploy stale bundle."
             exit 1
           fi
@@ -76,6 +77,8 @@ jobs:
           mkdir -p deploy_package/frontend deploy_package/backend
           cp -R sdct/frontend/dist deploy_package/frontend/dist
           cp -R sdct/frontend/dist/. deploy_package/
+          cp sdct/frontend/dist-mockup/index.html deploy_package/index.html
+          cp sdct/frontend/dist-mockup/index.html deploy_package/frontend/dist/index.html
           cp -R sdct/backend/api deploy_package/backend/api
           rm -rf deploy_package/backend/api/node_modules
           cat > deploy_package/deploy-marker.json <<MARKER
@@ -114,6 +117,14 @@ jobs:
           fi
           test -f verify_package/index.html || { echo "Missing root index.html in deploy.zip"; exit 1; }
           test -f verify_package/frontend/dist/index.html || { echo "Missing frontend/dist/index.html in deploy.zip"; exit 1; }
+          if grep -q "/assets/" verify_package/index.html; then
+            echo "Root index.html still references external assets. Refusing to deploy stale-prone package."
+            exit 1
+          fi
+          if grep -q "/assets/" verify_package/frontend/dist/index.html; then
+            echo "frontend/dist/index.html still references external assets. Refusing to deploy stale-prone package."
+            exit 1
+          fi
           test -f verify_package/deploy-marker.json || { echo "Missing root deploy-marker.json in deploy.zip"; exit 1; }
           test -f verify_package/frontend/dist/deploy-marker.json || { echo "Missing frontend/dist/deploy-marker.json in deploy.zip"; exit 1; }
           echo "Deployment package verified."

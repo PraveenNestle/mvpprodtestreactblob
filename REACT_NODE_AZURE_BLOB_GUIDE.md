@@ -755,6 +755,7 @@ az ad app delete --id <spa-app-id>
 | Runtime container verification fails | Check container name mismatch or RBAC propagation delay |
 | Reference import rejected | Fix the entity and field named in the validation error |
 | Web App stays on `Loading Stability Capture` / `Preparing demo data` | The React app was built in demo mode. Set `VITE_API_BASE` to `https://nsus-dv-sfdfdev-adi-281-app.azurewebsites.net` and make sure `VITE_ENTRA_CLIENT_ID` and `VITE_ENTRA_TENANT_ID` GitHub variables or secrets are populated, then redeploy |
+| Multiple deploys still show the old loading page | Use the `fresh-deploy` branch. The workflow now packages the single-file mockup as both root `index.html` and `frontend/dist/index.html`, verifies neither contains the old loading text, and writes `/deploy-marker.json` so you can confirm the commit Azure is serving |
 
 ## 25. Most Important Implementation Rule
 

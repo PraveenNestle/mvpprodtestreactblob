@@ -1,0 +1,139 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "metadata": {
+    "_generator": {
+      "name": "bicep",
+      "version": "0.46.1.21595",
+      "templateHash": "7696851816731909452"
+    }
+  },
+  "parameters": {
+    "env": {
+      "type": "string",
+      "defaultValue": "dev",
+      "metadata": {
+        "description": "Environment suffix: dev | tst | prd"
+      }
+    },
+    "location": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "Azure region"
+      }
+    },
+    "prefix": {
+      "type": "string",
+      "defaultValue": "sdct",
+      "metadata": {
+        "description": "Short prefix for resource names (3-8 chars, lowercase)"
+      }
+    },
+    "webAppName": {
+      "type": "string",
+      "defaultValue": "nsus-dv-sfdfdev-adi-281-app",
+      "metadata": {
+        "description": "Existing Azure Web App name"
+      }
+    },
+    "storageAccountName": {
+      "type": "string",
+      "defaultValue": "namsdvsrmcoreuseasta",
+      "metadata": {
+        "description": "Existing storage account name"
+      }
+    },
+    "entraTenantId": {
+      "type": "string",
+      "metadata": {
+        "description": "Entra tenant id used to validate API tokens"
+      }
+    },
+    "entraApiAudience": {
+      "type": "string",
+      "metadata": {
+        "description": "Application ID URI of the API app registration"
+      }
+    },
+    "allowedOrigins": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Allowed browser origin(s) for CORS, comma separated"
+      }
+    }
+  },
+  "resources": [
+    {
+      "type": "Microsoft.OperationalInsights/workspaces",
+      "apiVersion": "2023-09-01",
+      "name": "[format('log-{0}-{1}', parameters('prefix'), parameters('env'))]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "sku": {
+          "name": "PerGB2018"
+        },
+        "retentionInDays": 90
+      }
+    },
+    {
+      "type": "Microsoft.Insights/components",
+      "apiVersion": "2020-02-02",
+      "name": "[format('appi-{0}-{1}', parameters('prefix'), parameters('env'))]",
+      "location": "[parameters('location')]",
+      "kind": "web",
+      "properties": {
+        "Application_Type": "web",
+        "WorkspaceResourceId": "[resourceId('Microsoft.OperationalInsights/workspaces', format('log-{0}-{1}', parameters('prefix'), parameters('env')))]"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.OperationalInsights/workspaces', format('log-{0}-{1}', parameters('prefix'), parameters('env')))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Web/sites/config",
+      "apiVersion": "2023-12-01",
+      "name": "[format('{0}/{1}', parameters('webAppName'), 'appsettings')]",
+      "properties": {
+        "PORT": "8080",
+        "LOCAL_MODE": "false",
+        "STATIC_DIR": "/home/site/wwwroot/frontend/dist",
+        "ALLOWED_ORIGINS": "[if(empty(parameters('allowedOrigins')), format('https://{0}.azurewebsites.net', parameters('webAppName')), parameters('allowedOrigins'))]",
+        "ENTRA_TENANT_ID": "[parameters('entraTenantId')]",
+        "ENTRA_API_AUDIENCE": "[parameters('entraApiAudience')]",
+        "STORAGE_ACCOUNT_NAME": "[parameters('storageAccountName')]",
+        "CONTAINER_REFERENCE": "reference",
+        "CONTAINER_OBSERVATIONS": "observations",
+        "CONTAINER_MEDIA": "media",
+        "CONTAINER_CURATED": "curated",
+        "CONTAINER_CONFIG": "config",
+        "SAS_UPLOAD_MINUTES": "15",
+        "APPLICATIONINSIGHTS_CONNECTION_STRING": "[reference(resourceId('Microsoft.Insights/components', format('appi-{0}-{1}', parameters('prefix'), parameters('env'))), '2020-02-02').ConnectionString]",
+        "SCM_DO_BUILD_DURING_DEPLOYMENT": "true",
+        "WEBSITE_NODE_DEFAULT_VERSION": "~20"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Insights/components', format('appi-{0}-{1}', parameters('prefix'), parameters('env')))]"
+      ]
+    }
+  ],
+  "outputs": {
+    "webAppUrl": {
+      "type": "string",
+      "value": "[format('https://{0}', reference(resourceId('Microsoft.Web/sites', parameters('webAppName')), '2023-12-01').defaultHostName)]"
+    },
+    "storageAccountName": {
+      "type": "string",
+      "value": "[parameters('storageAccountName')]"
+    },
+    "blobEndpoint": {
+      "type": "string",
+      "value": "[format('https://{0}.blob.{1}/', parameters('storageAccountName'), environment().suffixes.storage)]"
+    },
+    "webAppPrincipalId": {
+      "type": "string",
+      "value": "[reference(resourceId('Microsoft.Web/sites', parameters('webAppName')), '2023-12-01', 'full').identity.principalId]"
+    }
+  }
+}

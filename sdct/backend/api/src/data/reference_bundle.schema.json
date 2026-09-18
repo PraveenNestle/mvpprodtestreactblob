@@ -1,0 +1,458 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://nhsc.example/schemas/stability/reference_bundle.schema.json",
+  "title": "Reference data bundle (reference container)",
+  "description": "Exports from NESTMS (projects, ARs, trials, variants, samples, plans) plus the user directory. Lab results are typed into the questionnaire; there is no LIMS integration. Uploaded through the Admin screen or backend/api/tools/import_reference.mjs; the API stores one JSON array per entity under reference/ and a _manifest.json. Generated from vocabularies.csv so condition and time point codes match the capture vocabulary.",
+  "type": "object",
+  "required": [
+    "projects",
+    "ars",
+    "trials",
+    "variants",
+    "samples",
+    "plans"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "projects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "projectCode",
+          "projectName",
+          "status",
+          "formulationClass"
+        ],
+        "properties": {
+          "projectCode": {
+            "type": "string"
+          },
+          "projectName": {
+            "type": "string"
+          },
+          "businessUnit": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "i2lCode": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "consumerUsagePeriodHours": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "description": "e.g. 24 for tube-fed products; drives the serum re-separation check"
+          },
+          "status": {
+            "enum": [
+              "ACTIVE",
+              "ON_HOLD",
+              "CLOSED"
+            ]
+          },
+          "formulationClass": {
+            "enum": [
+              "LIQUID_RTD",
+              "POWDER",
+              "VMS"
+            ]
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "ars": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "arNumber",
+          "projectCode",
+          "arTitle",
+          "status"
+        ],
+        "properties": {
+          "arNumber": {
+            "type": "string"
+          },
+          "projectCode": {
+            "type": "string"
+          },
+          "arTitle": {
+            "type": "string"
+          },
+          "requestedBy": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "arType": {
+            "enum": [
+              "STABILITY_STUDY",
+              "OTHER",
+              null
+            ]
+          },
+          "forecastedDate": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date"
+          },
+          "plannedStart": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date"
+          },
+          "status": {
+            "enum": [
+              "ACTIVE",
+              "ON_HOLD",
+              "CLOSED"
+            ]
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "trials": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "trialNumber",
+          "arNumber",
+          "formulationClass"
+        ],
+        "properties": {
+          "trialNumber": {
+            "type": "string"
+          },
+          "arNumber": {
+            "type": "string"
+          },
+          "trialDescription": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "formulationClass": {
+            "enum": [
+              "LIQUID_RTD",
+              "POWDER",
+              "VMS"
+            ]
+          },
+          "productFormat": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "processScale": {
+            "enum": [
+              "MICROTHERMICS",
+              "PILOT_PLANT",
+              "INDUSTRIAL_TRIAL",
+              "FACTORY",
+              null
+            ]
+          },
+          "status": {
+            "enum": [
+              "ACTIVE",
+              "FAILED_DISCONTINUED",
+              "COMPLETE",
+              "CANCELLED",
+              null
+            ]
+          },
+          "terminationReason": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "variants": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "variantId",
+          "trialNumber",
+          "arNumber",
+          "variantNumber"
+        ],
+        "properties": {
+          "variantId": {
+            "type": "string"
+          },
+          "trialNumber": {
+            "type": "string"
+          },
+          "arNumber": {
+            "type": "string"
+          },
+          "variantNumber": {
+            "type": "string"
+          },
+          "variantDescription": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "recipeId": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "phTarget": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "containsHydrolysates": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "description": "hydrolysate recipes are more prone to serum (Mural)"
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "samples": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "sampleCode",
+          "variantId",
+          "conditionCode"
+        ],
+        "properties": {
+          "sampleCode": {
+            "type": "string"
+          },
+          "variantId": {
+            "type": "string"
+          },
+          "conditionCode": {
+            "type": "string",
+            "enum": [
+              "4C",
+              "25C",
+              "30C",
+              "35C",
+              "45C",
+              "55C",
+              "FRZ"
+            ]
+          },
+          "containerType": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "packageVolumeMl": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "fillHeightMm": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "bottleClarity": {
+            "enum": [
+              "CLEAR",
+              "OPAQUE",
+              null
+            ]
+          },
+          "bottleBaseGeometry": {
+            "enum": [
+              "FLAT",
+              "RAISED_CENTER",
+              null
+            ],
+            "description": "SOP: a rating of 4 needs 4 mm on a raised-center BOOST bottle"
+          },
+          "packagingDescription": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "sourceFactory": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "plans": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "planId",
+          "planVersion",
+          "arNumber",
+          "intervalScheme",
+          "durationMonths",
+          "planStatus",
+          "conditions",
+          "timePoints",
+          "validFrom"
+        ],
+        "properties": {
+          "planId": {
+            "type": "string"
+          },
+          "planVersion": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "arNumber": {
+            "type": "string"
+          },
+          "intervalScheme": {
+            "type": "string"
+          },
+          "durationMonths": {
+            "type": "integer"
+          },
+          "planStatus": {
+            "enum": [
+              "ACTIVE",
+              "CANCELLED_EARLY",
+              "COMPLETE"
+            ]
+          },
+          "conditions": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "4C",
+                "25C",
+                "30C",
+                "35C",
+                "45C",
+                "55C",
+                "FRZ"
+              ]
+            },
+            "minItems": 1
+          },
+          "timePoints": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "T0",
+                "1D",
+                "1W",
+                "2W",
+                "1M",
+                "2M",
+                "3M",
+                "4M",
+                "6M",
+                "9M",
+                "12M",
+                "15M",
+                "18M"
+              ]
+            },
+            "minItems": 1
+          },
+          "sourceSystem": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "validFrom": {
+            "type": "string",
+            "format": "date"
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "users": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "userId",
+          "displayName",
+          "upn",
+          "role"
+        ],
+        "properties": {
+          "userId": {
+            "type": "string"
+          },
+          "displayName": {
+            "type": "string"
+          },
+          "upn": {
+            "type": "string"
+          },
+          "role": {
+            "enum": [
+              "SCIENTIST",
+              "REVIEWER",
+              "ADMIN"
+            ]
+          },
+          "title": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "exportedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "source": {
+      "type": "string",
+      "description": "e.g. NESTMS weekly export, LIMS nightly export"
+    }
+  }
+}

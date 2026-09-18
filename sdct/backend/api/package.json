@@ -1,0 +1,29 @@
+{
+  "name": "stability-capture-api",
+  "private": true,
+  "version": "1.0.0",
+  "description": "R&D Stability Data Collection Tool - API on Azure Web App. Azure Blob Storage is the only data store: reference data (NESTMS/LIMS exports), observation documents, media, curated NDJSON for Power BI, templates and vocabularies. Validates observations against the generated JSON Schema, issues short-lived SAS for media uploads and enforces the media naming convention.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "LOCAL_MODE=true PORT=8080 node --watch src/server.js",
+    "test": "LOCAL_MODE=true node test/smoke.test.mjs",
+    "import-reference": "node tools/import_reference.mjs",
+    "import-history": "node tools/import_history.mjs"
+  },
+  "dependencies": {
+    "@azure/identity": "^4.4.1",
+    "@azure/storage-blob": "^12.24.0",
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "helmet": "^7.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "jwks-rsa": "^3.1.0",
+    "xlsx": "^0.18.5"
+  }
+}

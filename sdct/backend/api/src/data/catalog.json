@@ -1,0 +1,6426 @@
+{
+  "catalogVersion": "1.0",
+  "generatedAt": "2026-09-01T17:25:11Z",
+  "coreFieldCount": 113,
+  "sopFieldCount": 66,
+  "extensionFieldCount": 16,
+  "domains": [
+    {
+      "domainCode": "TEST_CONTEXT",
+      "name": "Test context",
+      "shortName": "Context",
+      "sortOrder": 10,
+      "mvpScope": "MVP",
+      "sourceReq": "R-02",
+      "description": "Reference-store hierarchy (NESTMS via Blob), capture metadata and overall result"
+    },
+    {
+      "domainCode": "LAB_RESULTS",
+      "name": "Lab results",
+      "shortName": "Lab",
+      "sortOrder": 20,
+      "mvpScope": "MVP",
+      "sourceReq": "R-15, Team sheet",
+      "description": "pH, viscosity (with instrument, geometry, shear rate, temperature), Brix, D50 typed in by the scientist from LIMS; there is no LIMS integration"
+    },
+    {
+      "domainCode": "GENERAL_MEDIA",
+      "name": "Sample media",
+      "shortName": "Media",
+      "sortOrder": 30,
+      "mvpScope": "MVP",
+      "sourceReq": "R-17",
+      "description": "Mandatory full-bottle and emptied-bottle photos, optional beaker photo and pour-out video"
+    },
+    {
+      "domainCode": "HOMOG",
+      "name": "Homogeneity",
+      "shortName": "Homogeneity",
+      "sortOrder": 40,
+      "mvpScope": "MVP",
+      "sourceReq": "R-07",
+      "description": "Unshaken and shaken homogeneity with post-shake color"
+    },
+    {
+      "domainCode": "CREAMING",
+      "name": "Creaming",
+      "shortName": "Creaming",
+      "sortOrder": 50,
+      "mvpScope": "MVP",
+      "sourceReq": "R-08",
+      "description": "SOP rating, ring thickness, pour exit time, rim residue (not creaming), shaken residue type, emulsifier flags"
+    },
+    {
+      "domainCode": "SERUM",
+      "name": "Serum separation",
+      "shortName": "Serum",
+      "sortOrder": 60,
+      "mvpScope": "MVP",
+      "sourceReq": "R-09",
+      "description": "SOP rating, % of package volume, locations, shaken result, optional re-separation check after the consumer usage period"
+    },
+    {
+      "domainCode": "SEDIMENT",
+      "name": "Sediment",
+      "shortName": "Sediment",
+      "sortOrder": 70,
+      "mvpScope": "MVP",
+      "sourceReq": "R-10",
+      "description": "SOP rating, height, coverage, texture, measurement point, bottle coating; Protein, Mineral and Cocoa sub-flows"
+    },
+    {
+      "domainCode": "GELLING",
+      "name": "Gelling",
+      "shortName": "Gelling",
+      "sortOrder": 80,
+      "mvpScope": "MVP",
+      "sourceReq": "R-11, SOP-202",
+      "description": "Gelled state, reversibility and spoilage relation"
+    },
+    {
+      "domainCode": "NON_HOMOG",
+      "name": "Non-homogeneity",
+      "shortName": "Non-homog.",
+      "sortOrder": 90,
+      "mvpScope": "MVP",
+      "sourceReq": "R-11, SOP-202",
+      "description": "Rippling, lumps, curdling"
+    },
+    {
+      "domainCode": "PROTEIN_SAG",
+      "name": "Protein sagging",
+      "shortName": "Sagging",
+      "sortOrder": 100,
+      "mvpScope": "MVP",
+      "sourceReq": "R-11, SOP-202",
+      "description": "Vertical protein stripes on the container wall"
+    },
+    {
+      "domainCode": "APPEARANCE_SENSORY",
+      "name": "Appearance and sensory",
+      "shortName": "Sensory",
+      "sortOrder": 105,
+      "mvpScope": "SCHEMA_READY",
+      "sourceReq": "SOP-202, Mural",
+      "description": "Color change vs T0 (visual or L*a*b*) and texture in mouth or on pour"
+    },
+    {
+      "domainCode": "CUSTOM",
+      "name": "Custom observations",
+      "shortName": "Custom",
+      "sortOrder": 106,
+      "mvpScope": "SCHEMA_READY",
+      "sourceReq": "Mural",
+      "description": "Three free slots for a one-off parameter, unshaken and shaken, without a catalog change"
+    },
+    {
+      "domainCode": "EXT_POWDER",
+      "name": "Powder (extension)",
+      "shortName": "Powder",
+      "sortOrder": 110,
+      "mvpScope": "SCHEMA_READY",
+      "sourceReq": "OnePager",
+      "description": "Powder stability descriptors; extension beyond the URS taxonomy"
+    },
+    {
+      "domainCode": "EXT_VMS",
+      "name": "VMS (extension)",
+      "shortName": "VMS",
+      "sortOrder": 120,
+      "mvpScope": "SCHEMA_READY",
+      "sourceReq": "OnePager",
+      "description": "VMS stability descriptors; extension beyond the URS taxonomy"
+    }
+  ],
+  "vocabularies": [
+    {
+      "code": "FORMULATION_CLASS",
+      "name": "Formulation class",
+      "values": [
+        {
+          "code": "LIQUID_RTD",
+          "label": "Liquid RTD",
+          "sortOrder": 1,
+          "isActive": true
+        },
+        {
+          "code": "POWDER",
+          "label": "Powder",
+          "sortOrder": 2,
+          "isActive": true
+        },
+        {
+          "code": "VMS",
+          "label": "VMS",
+          "sortOrder": 3,
+          "isActive": true
+        }
+      ]
+    },
+    {
+      "code": "PRODUCT_FORMAT",
+      "name": "Product format",
+      "values": [
+        {
+          "code": "BOTTLE_PET",
+          "label": "PET bottle",
+          "sortOrder": 1,
+          "isActive": true
+        },
+        {
+          "code": "BOTTLE_HDPE",
+          "label": "HDPE bottle",
+          "sortOrder": 2,
+          "isActive": true
+        },
+        {
+          "code": "CAN",
+          "label": "Aluminium can",
+          "sortOrder": 3,
+          "isActive": true
+        },
+        {
+          "code": "TETRA",
+          "label": "Aseptic carton",
+          "sortOrder": 4,
+          "isActive": true
+        },
+        {
+          "code": "POUCH",
+          "label": "Pouch",
+          "sortOrder": 5,
+          "isActive": true
+        },
+        {
+          "code": "SACHET",
+          "label": "Sachet",
+          "sortOrder": 6,
+          "isActive": true
+        },
+        {
+          "code": "TUB",
+          "label": "Tub",
+          "sortOrder": 7,
+          "isActive": true
+        },
+        {
+          "code": "BLISTER",
+          "label": "Blister",
+          "sortOrder": 8,
+          "isActive": true
+        },
+        {
+          "code": "JAR",
+          "label": "Jar",
+          "sortOrder": 9,
+          "isActive": true
+        }
+      ]
+    },
+    {
+      "code": "CONTAINER_TYPE",
+      "name": "Container type",
+      "values": [
+        {
+          "code": "CLEAR_PLASTIC",
+          "label": "Clear plastic",
+          "sortOrder": 1,
+          "isActive": true
+        },
+        {
+          "code": "OPAQUE_PLASTIC",
+          "label": "Opaque plastic",
+          "sortOrder": 2,
+          "isActive": true
+        },
+        {
+          "code": "GLASS",
+          "label": "Glass",
+          "sortOrder": 3,
+          "isActive": true
+        },
+        {
+          "code": "METAL",
+          "label": "Metal",
+          "sortOrder": 4,
+          "isActive": true
+        },
+        {
+          "code": "LAMINATE",
+          "label": "Laminate carton",
+          "sortOrder": 5,
+          "isActive": true
+        },
+        {
+          "code": "LAB_TUBE",
+          "label": "Lab tube / centrifuge tube",
+          "sortOrder": 6,
+          "isActive": true
+        }
+      ]
+    },
+    {
+      "code": "ORIENTATION",
+      "name": "Storage orientation",
+      "values": [
+        {
+          "code": "UPRIGHT",
+          "label": "Upright",
+          "sortOrder": 1,
+          "isActive": true
+        },
+        {
+          "code": "INVERTED",
+          "label": "Inverted",
+          "sortOrder": 2,
+          "isActive": true
+        },
+        {
+          "code": "HORIZONTAL",
+          "label": "Horizontal",
+          "sortOrder": 3,
+          "isActive": true
+        }
+      ]
+    },
+    {
+      "code": "RESULT_TYPE",
+      "name": "Result type",
+      "values": [
+        {
+          "code": "SCHEDULED",
+          "label": "Scheduled pull",
+          "sortOrder": 1,
+          "isActive": true
+        },
+        {
+          "code": "AD_HOC",
+          "label": "Ad hoc check",
+          "sortOrder": 2,
+          "isActive": true
+        },
+        {
+          "code": "RETEST",
+          "label": "Retest",
+          "sortOrder": 3,
+          "isActive": true
+        },
+        {
+          "code": "PULL_FORWARD",
+          "label": "Pull-forward",
+          "sortOrder": 4,
+          "isActive": true
+        },
+        {
+          "code": "HISTORICAL_IMPORT",
+          "label": "Historical import (spreadsheet)",
+          "sortOrder": 5,
+          "isActive": true
+        }
+      ]
+    },
+    {
+      "code": "PLAN_STATUS",
+      "name": "Plan status",
+      "values": [
+        {
+          "code": "ACTIVE",
+          "label": "Active",
+          "sortOrder": 1,
+          "isActive": true
+        },
+        {
+          "code": "CANCELLED_EARLY",
+          "label": "Cancelled early on failure",
+          "sortOrder": 2,
+          "isActive": true
+        },
+        {
+          "code": "COMPLETE",
+          "label": "Complete",
+          "sortOrder": 3,
+          "isActive": true
+        }
+      ]
+    },
+    {
+      "code": "TEST_STATUS",
+      "name": "Test status",
+      "values": [
+        {
+          "code": "DRAFT",
+          "label": "Draft",
+          "sortOrder": 1,
+          "isActive": true
+        },
+        {
+          "code": "SUBMITTED",
+          "label": "Submitted",
+          "sortOrder": 2,
+          "isActive": true
+        },
+        {
+          "code": "REVIEWED",
+          "label": "Reviewed",
+          "sortOrder": 3,
+          "isActive": true
+        },
+        {
+          "code": "REJECTED",
+          "label": "Rejected",
+          "sortOrder": 4,
+          "isActive": true
+        }
+      ]
+    },
+    {
+      "code": "APPEARANCE",
+      "name": "Appearance",
+      "values": [
+        {
+          "code": "UNIFORM",
+          "label": "Uniform",
+          "sortOrder": 1,
+          "isActive": true
+        },
+        {
+          "code": "SLIGHT_LAYERING",
+          "label": "Slight layering",
+          "sortOrder": 2,
+          "isActive": true
+        },
+        {
+          "code": "DISTINCT_PHASES",
+          "label": "Distinct phases",
+          "sortOrder": 3,
+          "isActive": true
+        },
+        {
+          "code": "CLOUDY",
+          "label": "Cloudy",
+          "sortOrder": 4,
+          "isActive": true
+        }
+      ]
+    },
+    {
+      "code": "COLOR_DESC",
+      "name": "Color descriptor",
+      "values": [
+        {
+          "code": "WHITE",
+          "label": "White",
+          "sortOrder": 1,
+          "isActive": true
+        },
+        {
+          "code": "OFF_WHITE",
+          "label": "Off-white",
+          "sortOrder": 2,
+          "isActive": true
+        },
+        {
+          "code": "CREAM",
+          "label": "Cream",
+          "sortOrder": 3,
+          "isActive": true
+        },
+        {
+          "code": "LIGHT_TAN",
+          "label": "Light tan",
+          "sortOrder": 4,
+          "isActive": true
+        },
+        {
+          "code": "TAN",
+          "label": "Tan",
+          "sortOrder": 5,
+          "isActive": true
+        },
+        {
+          "code": "LIGHT_BROWN",
+          "label": "Light brown",
+          "sortOrder": 6,
+          "isActive": true
+        },
+        {
+          "code": "BROWN",
+          "label": "Brown",
+          "sortOrder": 7,
+          "isActive": true
+        },
+        {
+          "code": "YELLOW",
+          "label": "Yellow",
+          "sortOrder": 8,
+          "isActive": true
+        },
+        {
+          "code": "PINK",
+          "label": "Pink",
+          "sortOrder": 9,
+          "isActive": true
+        },
+        {
+          "code": "GREY",
+          "label": "Grey",
+          "sortOrder": 10,
+          "isActive": true
+        },
+        {
+          "code": "TRANSLUCENT",
+          "label": "Translucent",
+          "sortOrder": 11,
+          "isActive": true
+        },
+        {
+          "code": "PALE_YELLOW",
+          "label": "Pale yellow",
+          "sortOrder": 12,
+          "isActive": true
+        },
+        {
+          "code": "OILY",
+          "label": "Oily / fat layer (real food)",
+          "sortOrder": 13,
+          "isActive": true
+        }
+      ]
+    },
+    {
+      "code": "COLOR_CODE",
+      "name": "Color code",
+      "values": [
+        {
+          "code": "C01",
+          "label": "C01 White",
+          "sortOrder": 1,
+          "isActive": true
+        },
+        {
+          "code": "C02",
+          "label": "C02 Off-white",
+          "sortOrder": 2,
+          "isActive": true
+        },
+        {
+          "code": "C03",
+          "label": "C03 Cream",
+          "sortOrder": 3,
+          "isActive": true
+        },
+        {
+          "code": "C04",
+          "label": "C04 Light tan",
+          "sortOrder": 4,
+          "isActive": true
+        },
+        {
+          "code": "C05",
+          "label": "C05 Tan",
+          "sortOrder": 5,
+          "isActive": true
+        },
+        {
+          "code": "C06",
+          "label": "C06 Light brown",
+          "sortOrder": 6,
+          "isActive": true
+        },
+        {
+          "code": "C07",
+          "label": "C07 Brown",
+          "sortOrder": 7,
+          "isActive": true
+        },
+        {
+          "code": "C08",
+          "label": "C08 Yellow",
+          "sortOrder": 8,
+          "isActive": true
+        },
+        {
+          "code": "C09",
+          "label": "C09 Pink",
+          "sortOrder": 9,
+          "isActive": true
+        },
+        {
+          "code": "C10",
+          "label": "C10 Grey",
+          "sortOrder": 10,
+          "isActive": true
+        }
+      ]
+    },
+    {
+      "code": "UNIT_LENGTH",
+      "name": "Length unit",
+      "values": [
+        {
+          "code": "MM",
+          "label": "mm",
+          "sortOrder": 1,
+          "isActive": true
+        },
+        {
+          "code": "CM",
+          "label": "cm",
+          "sortOrder": 2,
+          "isActive": true
+        }
+      ]
+    },
+    {
+      "code": "UNIT_SERUM",
+      "name": "Serum unit",
+      "values": [
+        {
+          "code": "MM",
+          "label": "mm",
+          "sortOrder": 1,
+          "isActive": true
+        },
+        {
+          "code": "ML",
+          "label": "mL",
+          "sortOrder": 2,
+          "isActive": true
+        },
+        {
+          "code": "PCT",
+          "label": "% of package",
+          "sortOrder": 3,
+          "isActive": true
+        }
+      ]
+    },
+    {
+      "code": "POUR_RESULT",
+      "name": "Pour-out result",
+      "values": [
+        {
+          "code": "POURS_CLEAN",
+          "label": "Pours clean",
+          "sortOrder": 1,
+          "isActive": true
+        },
+        {
+          "code": "RESIDUE_ON_WALL",
+          "label": "Residue on wall",
+          "sortOrder": 2,
+          "isActive": true
+        },
+        {
+          "code": "PLUG_REMAINS",
+          "label": "Plug remains in container",
+          "sortOrder": 3,
+          "isActive": true
+        }
+      ]
+    },
+    {
+      "code": "SHAKE_RESULT",
+      "name": "Shaken result",
+      "values": [
+        {
+          "code": "FULLY_REDISPERSED",
+          "label": "Fully redispersed",
+          "sortOrder": 1,
+          "isActive": true
+        },
+        {
+          "code": "PARTIAL",
+          "label": "Partially redispersed",
+          "sortOrder": 2,
+          "isActive": true
+        },
+        {
+          "code": "NOT_REDISPERSED",
+          "label": "Not redispersed",
+          "sortOrder": 3,
+          "isActive": true
+        }
+      ]
+    },
+    {
+      "code": "SERUM_LOCATION",
+      "name": "Serum location",
+      "values": [
+        {
+          "code": "TOP",
+          "label": "Top",
+          "sortOrder": 1,
+          "isActive": true
+        },
+        {
+          "code": "BOTTOM",
+          "label": "Bottom",
+          "sortOrder": 2,
+          "isActive": true
+        },
+        {
+          "code": "SIDE_WALL",
+          "label": "Side wall",
+          "sortOrder": 3,
+          "isActive": true
+        },
+        {
+          "code": "NECK",
+          "label": "Neck / shoulder",
+          "sortOrder": 4,
+          "isActive": true
+        },
+        {
+          "code": "THROUGHOUT",
+          "label": "Throughout",
+          "sortOrder": 5,
+          "isActive": true
+        }
+      ]
+    },
+    {
+      "code": "SERUM_CLARITY",
+      "name": "Serum clarity",
+      "values": [
+        {
+          "code": "CLEAR",
+          "label": "Clear",
+          "sortOrder": 1,
+          "isActive": true
+        },
+        {
+          "code": "TRANSLUCENT",
+          "label": "Translucent",
+          "sortOrder": 2,
+          "isActive": true
+        },
+        {
+          "code": "OPAQUE",
+          "label": "Opaque",
+          "sortOrder": 3,
+          "isActive": true
+        }
+      ]
+    },
+    {
+      "code": "SED_TYPE",
+      "name": "Sediment type",
+      "values": [
+        {
+          "code": "PROTEIN",
+          "label": "Protein",
+          "sortOrder": 1,
+          "isActive": true
+        },
+        {
+          "code": "MINERAL",
+          "label": "Mineral",
+          "sortOrder": 2,
+          "isActive": true
+        },
+        {
+          "code": "COCOA",
+          "label": "Cocoa",
+          "sortOrder": 3,
+          "isActive": true
+        },
+        {
+          "code": "UNDETERMINED",
+          "label": "Undetermined",
+          "sortOrder": 4,
+          "isActive": true
+        }
+      ]
+    },
+    {
+      "code": "SHAKE_EXTENT",
+      "name": "Shake-in extent",
+      "values": [
+        {
+          "code": "NONE",
+          "label": "None",
+          "sortOrder": 1,
+          "isActive": true
+        },
+        {
+          "code": "PARTIAL",
+          "label": "Partial",
+          "sortOrder": 2,
+          "isActive": true
+        },
+        {
+          "code": "COMPLETE",
+          "label": "Complete",
+          "sortOrder": 3,
+          "isActive": true
+        }
+      ]
+    },
+    {
+      "code": "SED_MIN_APPEAR",
+      "name": "Mineral sediment appearance",
+      "values": [
+        {
+          "code": "FINE_POWDER",
+          "label": "Fine powder",
+          "sortOrder": 1,
+          "isActive": true
+        },
+        {
+          "code": "GRITTY",
+          "label": "Gritty",
+          "sortOrder": 2,
+          "isActive": true
+        },
+        {
+          "code": "CRYSTALLINE",
+          "label": "Crystalline",
+          "sortOrder": 3,
+          "isActive": true
+        }
+      ]
+    },
+    {
+      "code": "GEL_TYPE",
+      "name": "Gel type",
+      "values": [
+        {
+          "code": "AGE_GELATION",
+          "label": "Age gelation",
+          "sortOrder": 1,
+          "isActive": true
+        },
+        {
+          "code": "THERMAL",
+          "label": "Thermal",
+          "sortOrder": 2,
+          "isActive": true
+        },
+        {
+          "code": "MICROBIAL",
+          "label": "Microbial",
+          "sortOrder": 3,
+          "isActive": true
+        },
+        {
+          "code": "UNDETERMINED",
+          "label": "Undetermined",
+          "sortOrder": 4,
+          "isActive": true
+        }
+      ]
+    },
+    {
+      "code": "GEL_FIRMNESS",
+      "name": "Gel firmness",
+      "values": [
+        {
+          "code": "SOFT",
+          "label": "Soft",
+          "sortOrder": 1,
+          "isActive": true
+        },
+        {
+          "code": "FIRM",
+          "label": "Firm",
+          "sortOrder": 2,
+          "isActive": true
+        },
+        {
+          "code": "RIGID",
+          "label": "Rigid",
+          "sortOrder": 3,
+          "isActive": true
+        }
+      ]
+    },
+    {
+      "code": "GEL_REVERSIBILITY",
+      "name": "Gel reversibility",
+      "values": [
+        {
+          "code": "REVERSIBLE",
+          "label": "Reversible",
+          "sortOrder": 1,
+          "isActive": true
+        },
+        {
+          "code": "PARTIALLY_REVERSIBLE",
+          "label": "Partially reversible",
+          "sortOrder": 2,
+          "isActive": true
+        },
+        {
+          "code": "IRREVERSIBLE",
+          "label": "Irreversible",
+          "sortOrder": 3,
+          "isActive": true
+        }
+      ]
+    },
+    {
+      "code": "TRI_STATE",
+      "name": "Yes / No / Unknown",
+      "values": [
+        {
+          "code": "YES",
+          "label": "Yes",
+          "sortOrder": 1,
+          "isActive": true
+        },
+        {
+          "code": "NO",
+          "label": "No",
+          "sortOrder": 2,
+          "isActive": true
+        },
+        {
+          "code": "UNKNOWN",
+          "label": "Unknown",
+          "sortOrder": 3,
+          "isActive": true
+        }
+      ]
+    },
+    {
+      "code": "SEVERITY",
+      "name": "Severity",
+      "values": [
+        {
+          "code": "SLIGHT",
+          "label": "Slight",
+          "sortOrder": 1,
+          "isActive": true
+        },
+        {
+          "code": "MODERATE",
+          "label": "Moderate",
+          "sortOrder": 2,
+          "isActive": true
+        },
+        {
+          "code": "SEVERE",
+          "label": "Severe",
+          "sortOrder": 3,
+          "isActive": true
+        }
+      ]
+    },
+    {
+      "code": "SEVERITY_NONE",
+      "name": "Severity with none",
+      "values": [
+        {
+          "code": "NONE",
+          "label": "None",
+          "sortOrder": 0,
+          "isActive": true
+        },
+        {
+          "code": "SLIGHT",
+          "label": "Slight",
+          "sortOrder": 1,
+          "isActive": true
+        },
+        {
+          "code": "MODERATE",
+          "label": "Moderate",
+          "sortOrder": 2,
+          "isActive": true
+        },
+        {
+          "code": "SEVERE",
+          "label": "Severe",
+          "sortOrder": 3,
+          "isActive": true
+        }
+      ]
+    },
+    {
+      "code": "LUMP_SIZE",
+      "name": "Lump size class",
+      "values": [
+        {
+          "code": "FINE",
+          "label": "Fine (<1 mm)",
+          "sortOrder": 1,
+          "isActive": true
+        },
+        {
+          "code": "SMALL",
+          "label": "Small (1 to 3 mm)",
+          "sortOrder": 2,
+          "isActive": true
+        },
+        {
+          "code": "LARGE",
+          "label": "Large (>3 mm)",
+          "sortOrder": 3,
+          "isActive": true
+        }
+      ]
+    },
+    {
+      "code": "COVERAGE",
+      "name": "Coverage",
+      "values": [
+        {
+          "code": "ISOLATED",
+          "label": "Isolated",
+          "sortOrder": 1,
+          "isActive": true
+        },
+        {
+          "code": "PARTIAL",
+          "label": "Partial",
+          "sortOrder": 2,
+          "isActive": true
+        },
+        {
+          "code": "EXTENSIVE",
+          "label": "Extensive",
+          "sortOrder": 3,
+          "isActive": true
+        }
+      ]
+    },
+    {
+      "code": "FLOWABILITY",
+      "name": "Flowability",
+      "values": [
+        {
+          "code": "FREE_FLOWING",
+          "label": "Free flowing",
+          "sortOrder": 1,
+          "isActive": true
+        },
+        {
+          "code": "SLIGHTLY_COHESIVE",
+          "label": "Slightly cohesive",
+          "sortOrder": 2,
+          "isActive": true
+        },
+        {
+          "code": "COHESIVE",
+          "label": "Cohesive",
+          "sortOrder": 3,
+          "isActive": true
+        },
+        {
+          "code": "NON_FLOWING",
+          "label": "Non-flowing",
+          "sortOrder": 4,
+          "isActive": true
+        }
+      ]
+    },
+    {
+      "code": "OVERALL_RESULT",
+      "name": "Overall result (KSC language)",
+      "values": [
+        {
+          "code": "IN",
+          "label": "In",
+          "sortOrder": 0,
+          "isActive": true
+        },
+        {
+          "code": "JUST_IN",
+          "label": "Just In",
+          "sortOrder": 1,
+          "isActive": true
+        },
+        {
+          "code": "OUT",
+          "label": "Out",
+          "sortOrder": 2,
+          "isActive": true
+        }
+      ]
+    },
+    {
+      "code": "CREAM_LAYER_DESC",
+      "name": "Cream layer description (SOP Table 2 words)",
+      "values": [
+        {
+          "code": "TRACE",
+          "label": "Trace",
+          "sortOrder": 0,
+          "isActive": true
+        },
+        {
+          "code": "SLIGHT_THIN_RING",
+          "label": "Slight: thin ring (under 5 mm)",
+          "sortOrder": 1,
+          "isActive": true
+        },
+        {
+          "code": "DISTINCT_RING",
+          "label": "Distinct ring (5 to 8 mm)",
+          "sortOrder": 2,
+          "isActive": true
+        },
+        {
+          "code": "HEAVY_RING",
+          "label": "Heavy ring (8 to 10 mm)",
+          "sortOrder": 3,
+          "isActive": true
+        },
+        {
+          "code": "VERY_HEAVY_RING",
+          "label": "Very heavy ring (10 mm or more)",
+          "sortOrder": 4,
+          "isActive": true
+        }
+      ]
+    },
+    {
+      "code": "SED_TEXTURE",
+      "name": "Sediment texture",
+      "values": [
+        {
+          "code": "LOOSE",
+          "label": "Loose",
+          "sortOrder": 0,
+          "isActive": true
+        },
+        {
+          "code": "SOFT",
+          "label": "Soft",
+          "sortOrder": 1,
+          "isActive": true
+        },
+        {
+          "code": "COMPACT",
+          "label": "Compact",
+          "sortOrder": 2,
+          "isActive": true
+        },
+        {
+          "code": "HARD",
+          "label": "Hard",
+          "sortOrder": 3,
+          "isActive": true
+        },
+        {
+          "code": "STICKY",
+          "label": "Sticky",
+          "sortOrder": 4,
+          "isActive": true
+        },
+        {
+          "code": "LUMPY",
+          "label": "Lumpy / clumps",
+          "sortOrder": 5,
+          "isActive": true
+        },
+        {
+          "code": "SANDY_GRITTY",
+          "label": "Sandy / gritty",
+          "sortOrder": 6,
+          "isActive": true
+        },
+        {
+          "code": "FLAKY",
+          "label": "Flaky",
+          "sortOrder": 7,
+          "isActive": true
+        }
+      ]
+    },
+    {
+      "code": "TIME_POINT",
+      "name": "Stability time point",
+      "values": [
+        {
+          "code": "T0",
+          "label": "T0 (immediate)",
+          "sortOrder": 0,
+          "isActive": true
+        },
+        {
+          "code": "1D",
+          "label": "1 day",
+          "sortOrder": 1,
+          "isActive": true
+        },
+        {
+          "code": "1W",
+          "label": "1 week",
+          "sortOrder": 2,
+          "isActive": true
+        },
+        {
+          "code": "2W",
+          "label": "2 weeks",
+          "sortOrder": 3,
+          "isActive": true
+        },
+        {
+          "code": "1M",
+          "label": "1 month",
+          "sortOrder": 4,
+          "isActive": true
+        },
+        {
+          "code": "2M",
+          "label": "2 months",
+          "sortOrder": 5,
+          "isActive": true
+        },
+        {
+          "code": "3M",
+          "label": "3 months",
+          "sortOrder": 6,
+          "isActive": true
+        },
+        {
+          "code": "4M",
+          "label": "4 months",
+          "sortOrder": 7,
+          "isActive": true
+        },
+        {
+          "code": "6M",
+          "label": "6 months",
+          "sortOrder": 8,
+          "isActive": true
+        },
+        {
+          "code": "9M",
+          "label": "9 months",
+          "sortOrder": 9,
+          "isActive": true
+        },
+        {
+          "code": "12M",
+          "label": "12 months",
+          "sortOrder": 10,
+          "isActive": true
+        },
+        {
+          "code": "15M",
+          "label": "15 months",
+          "sortOrder": 11,
+          "isActive": true
+        },
+        {
+          "code": "18M",
+          "label": "18 months",
+          "sortOrder": 12,
+          "isActive": true
+        }
+      ]
+    },
+    {
+      "code": "TEMP_CONDITION",
+      "name": "Storage condition",
+      "values": [
+        {
+          "code": "4C",
+          "label": "Refrigerated 4\u00b0C",
+          "sortOrder": 0,
+          "isActive": true
+        },
+        {
+          "code": "25C",
+          "label": "Ambient 25\u00b0C",
+          "sortOrder": 1,
+          "isActive": true
+        },
+        {
+          "code": "30C",
+          "label": "Tropical 30\u00b0C",
+          "sortOrder": 2,
+          "isActive": true
+        },
+        {
+          "code": "35C",
+          "label": "Elevated 35\u00b0C",
+          "sortOrder": 3,
+          "isActive": true
+        },
+        {
+          "code": "45C",
+          "label": "Elevated 45\u00b0C",
+          "sortOrder": 4,
+          "isActive": true
+        },
+        {
+          "code": "55C",
+          "label": "Elevated 55\u00b0C",
+          "sortOrder": 5,
+          "isActive": true
+        },
+        {
+          "code": "FRZ",
+          "label": "Freezer -18\u00b0C",
+          "sortOrder": 6,
+          "isActive": true
+        }
+      ]
+    },
+    {
+      "code": "RATING_CREAMING",
+      "name": "Creaming rating (SOP Table 2)",
+      "values": [
+        {
+          "code": "0",
+          "label": "0 Zero: no creaming visible",
+          "sortOrder": 0,
+          "isActive": true
+        },
+        {
+          "code": "1",
+          "label": "1 Trace: creaming present",
+          "sortOrder": 1,
+          "isActive": true
+        },
+        {
+          "code": "2",
+          "label": "2 Slight: thin ring (under 5 mm)",
+          "sortOrder": 2,
+          "isActive": true
+        },
+        {
+          "code": "3",
+          "label": "3 Distinct: ring 5 to 8 mm",
+          "sortOrder": 3,
+          "isActive": true
+        },
+        {
+          "code": "4",
+          "label": "4 Heavy: ring 8 to 10 mm",
+          "sortOrder": 4,
+          "isActive": true
+        },
+        {
+          "code": "5",
+          "label": "5 Very heavy: ring 10 mm or more",
+          "sortOrder": 5,
+          "isActive": true
+        }
+      ]
+    },
+    {
+      "code": "RATING_SERUM",
+      "name": "Serum rating (SOP Table 3)",
+      "values": [
+        {
+          "code": "0",
+          "label": "0 Zero: no serum visible",
+          "sortOrder": 0,
+          "isActive": true
+        },
+        {
+          "code": "1",
+          "label": "1 Trace: line during pouring",
+          "sortOrder": 1,
+          "isActive": true
+        },
+        {
+          "code": "2",
+          "label": "2 Slight: about 2% of package volume",
+          "sortOrder": 2,
+          "isActive": true
+        },
+        {
+          "code": "3",
+          "label": "3 Distinct: about 5% of package volume",
+          "sortOrder": 3,
+          "isActive": true
+        },
+        {
+          "code": "4",
+          "label": "4 Heavy: about 10% of package volume",
+          "sortOrder": 4,
+          "isActive": true
+        },
+        {
+          "code": "5",
+          "label": "5 Very heavy: 20% or more of package volume",
+          "sortOrder": 5,
+          "isActive": true
+        }
+      ]
+    },
+    {
+      "code": "RATING_SEDIMENT",
+      "name": "Sediment rating (SOP Table 4)",
+      "values": [
+        {
+          "code": "0",
+          "label": "0 Zero: no sediment on the bottom",
+          "sortOrder": 0,
+          "isActive": true
+        },
+        {
+          "code": "1",
+          "label": "1 Trace: partial ring or coverage in depressions",
+          "sortOrder": 1,
+          "isActive": true
+        },
+        {
+          "code": "2",
+          "label": "2 Slight: complete ring, 1 to 2 mm",
+          "sortOrder": 2,
+          "isActive": true
+        },
+        {
+          "code": "3",
+          "label": "3 Distinct: about 3 mm, heavier ring",
+          "sortOrder": 3,
+          "isActive": true
+        },
+        {
+          "code": "4",
+          "label": "4 Heavy: about 4 mm, entire bottom covered",
+          "sortOrder": 4,
+          "isActive": true
+        },
+        {
+          "code": "5",
+          "label": "5 Very heavy: 5 mm or more, entire bottom covered",
+          "sortOrder": 5,
+          "isActive": true
+        }
+      ]
+    },
+    {
+      "code": "SHAKE_PROTOCOL",
+      "name": "Shaking protocol",
+      "values": [
+        {
+          "code": "SOP_10X_180",
+          "label": "SOP: 10 shakes, 180\u00b0, medium force, about 5 s",
+          "sortOrder": 0,
+          "isActive": true
+        },
+        {
+          "code": "OTHER",
+          "label": "Other (record the count)",
+          "sortOrder": 1,
+          "isActive": true
+        },
+        {
+          "code": "NOT_SHAKEN",
+          "label": "Not shaken (unshaken evaluation only)",
+          "sortOrder": 2,
+          "isActive": true
+        }
+      ]
+    },
+    {
+      "code": "LAB_SOURCE",
+      "name": "Lab result source",
+      "values": [
+        {
+          "code": "TYPED_FROM_LIMS",
+          "label": "Typed from LIMS (no integration)",
+          "sortOrder": 0,
+          "isActive": true
+        },
+        {
+          "code": "MEASURED_IN_PD_LAB",
+          "label": "Measured in the PD lab",
+          "sortOrder": 1,
+          "isActive": true
+        },
+        {
+          "code": "NOT_AVAILABLE",
+          "label": "Not available at this pull",
+          "sortOrder": 2,
+          "isActive": true
+        }
+      ]
+    },
+    {
+      "code": "VISC_INSTRUMENT",
+      "name": "Viscosity instrument",
+      "values": [
+        {
+          "code": "PHYSICA_RHEOMETER",
+          "label": "Physica rheometer",
+          "sortOrder": 0,
+          "isActive": true
+        },
+        {
+          "code": "BROOKFIELD",
+          "label": "Brookfield viscometer",
+          "sortOrder": 1,
+          "isActive": true
+        },
+        {
+          "code": "OTHER",
+          "label": "Other",
+          "sortOrder": 2,
+          "isActive": true
+        }
+      ]
+    },
+    {
+      "code": "CREAM_RESIDUE",
+      "name": "Residue after shaking",
+      "values": [
+        {
+          "code": "FAT_RING_ON_BOTTLE",
+          "label": "Fat ring on the bottle",
+          "sortOrder": 0,
+          "isActive": true
+        },
+        {
+          "code": "FLOATING_FLAKES",
+          "label": "Floating flakes",
+          "sortOrder": 1,
+          "isActive": true
+        },
+        {
+          "code": "PLUG_AT_SPOUT",
+          "label": "Plug at the spout",
+          "sortOrder": 2,
+          "isActive": true
+        },
+        {
+          "code": "SKIN_OR_PAD",
+          "label": "Skin or pad",
+          "sortOrder": 3,
+          "isActive": true
+        },
+        {
+          "code": "NONE",
+          "label": "None",
+          "sortOrder": 4,
+          "isActive": true
+        }
+      ]
+    },
+    {
+      "code": "SED_COVERAGE",
+      "name": "Sediment coverage of the bottom",
+      "values": [
+        {
+          "code": "PARTIAL_RING",
+          "label": "Partial ring",
+          "sortOrder": 0,
+          "isActive": true
+        },
+        {
+          "code": "COMPLETE_RING",
+          "label": "Complete ring",
+          "sortOrder": 1,
+          "isActive": true
+        },
+        {
+          "code": "OUTER_RING_CLEAR_CENTER",
+          "label": "Outer ring, clear center",
+          "sortOrder": 2,
+          "isActive": true
+        },
+        {
+          "code": "ENTIRE_BOTTOM",
+          "label": "Entire bottom covered",
+          "sortOrder": 3,
+          "isActive": true
+        },
+        {
+          "code": "DEPRESSIONS_ONLY",
+          "label": "Depressions only",
+          "sortOrder": 4,
+          "isActive": true
+        }
+      ]
+    },
+    {
+      "code": "SED_MEAS_POINT",
+      "name": "Sediment measurement point",
+      "values": [
+        {
+          "code": "BEFORE_POUR",
+          "label": "Before pouring (through a clear bottle)",
+          "sortOrder": 0,
+          "isActive": true
+        },
+        {
+          "code": "AFTER_POUR",
+          "label": "After pouring (emptied bottle)",
+          "sortOrder": 1,
+          "isActive": true
+        }
+      ]
+    },
+    {
+      "code": "SED_MEAS_LOCATION",
+      "name": "Sediment measurement location",
+      "values": [
+        {
+          "code": "OUTER_RIM",
+          "label": "Outer rim (SOP worst case)",
+          "sortOrder": 0,
+          "isActive": true
+        },
+        {
+          "code": "CENTER",
+          "label": "Center",
+          "sortOrder": 1,
+          "isActive": true
+        },
+        {
+          "code": "AVERAGE",
+          "label": "Average of several points",
+          "sortOrder": 2,
+          "isActive": true
+        }
+      ]
+    },
+    {
+      "code": "NH_CONTEXT",
+      "name": "When lumps were seen",
+      "values": [
+        {
+          "code": "UNSHAKEN_POUR",
+          "label": "Pouring unshaken",
+          "sortOrder": 0,
+          "isActive": true
+        },
+        {
+          "code": "AFTER_SHAKING",
+          "label": "Pouring after shaking",
+          "sortOrder": 1,
+          "isActive": true
+        },
+        {
+          "code": "ON_SIEVE",
+          "label": "On the sieve",
+          "sortOrder": 2,
+          "isActive": true
+        }
+      ]
+    },
+    {
+      "code": "COLOR_METHOD",
+      "name": "Color measurement method",
+      "values": [
+        {
+          "code": "VISUAL",
+          "label": "Visual against T0",
+          "sortOrder": 0,
+          "isActive": true
+        },
+        {
+          "code": "LAB_METER",
+          "label": "L*a*b* meter",
+          "sortOrder": 1,
+          "isActive": true
+        },
+        {
+          "code": "DIGIEYE",
+          "label": "DigiEye",
+          "sortOrder": 2,
+          "isActive": true
+        }
+      ]
+    },
+    {
+      "code": "TEXTURE_SENSORY",
+      "name": "Texture in mouth or on pour",
+      "values": [
+        {
+          "code": "SMOOTH",
+          "label": "Smooth",
+          "sortOrder": 0,
+          "isActive": true
+        },
+        {
+          "code": "SLIGHTLY_THICKER",
+          "label": "Slightly thicker",
+          "sortOrder": 1,
+          "isActive": true
+        },
+        {
+          "code": "MILKSHAKE_THICK",
+          "label": "Milkshake thick",
+          "sortOrder": 2,
+          "isActive": true
+        },
+        {
+          "code": "PUDDING",
+          "label": "Pudding",
+          "sortOrder": 3,
+          "isActive": true
+        },
+        {
+          "code": "LUMPY",
+          "label": "Lumpy",
+          "sortOrder": 4,
+          "isActive": true
+        },
+        {
+          "code": "GRITTY",
+          "label": "Gritty",
+          "sortOrder": 5,
+          "isActive": true
+        }
+      ]
+    }
+  ],
+  "fields": [
+    {
+      "fieldCode": "project_code",
+      "domainCode": "TEST_CONTEXT",
+      "subDomain": "CONTEXT",
+      "label": "Project code",
+      "dataType": "ref",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": true,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-02",
+      "mvpScope": "MVP",
+      "sortOrder": 10,
+      "description": "Project code referenced read-only from the reference store (NESTMS data in the Blob reference container) (top of the Project > AR > Trial hierarchy)",
+      "isHeader": true,
+      "systemDerived": true
+    },
+    {
+      "fieldCode": "ar_number",
+      "domainCode": "TEST_CONTEXT",
+      "subDomain": "CONTEXT",
+      "label": "Stability AR number",
+      "dataType": "ref",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": true,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-03",
+      "mvpScope": "MVP",
+      "sortOrder": 20,
+      "description": "Stability Analysis Request number referenced read-only from the reference store (NESTMS data in the Blob reference container)",
+      "isHeader": true,
+      "systemDerived": true
+    },
+    {
+      "fieldCode": "trial_number",
+      "domainCode": "TEST_CONTEXT",
+      "subDomain": "CONTEXT",
+      "label": "Trial number",
+      "dataType": "ref",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": true,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-03",
+      "mvpScope": "MVP",
+      "sortOrder": 30,
+      "description": "Trial number referenced read-only from the reference store (NESTMS data in the Blob reference container)",
+      "isHeader": true,
+      "systemDerived": true
+    },
+    {
+      "fieldCode": "variant_number",
+      "domainCode": "TEST_CONTEXT",
+      "subDomain": "CONTEXT",
+      "label": "Variant number",
+      "dataType": "ref",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": true,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-03",
+      "mvpScope": "MVP",
+      "sortOrder": 40,
+      "description": "Variant number within the trial, referenced read-only",
+      "isHeader": true,
+      "systemDerived": true
+    },
+    {
+      "fieldCode": "sample_code",
+      "domainCode": "TEST_CONTEXT",
+      "subDomain": "CONTEXT",
+      "label": "Sample code",
+      "dataType": "ref",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": true,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-03",
+      "mvpScope": "MVP",
+      "sortOrder": 50,
+      "description": "Sample code referenced read-only from the reference store (NESTMS data in the Blob reference container)",
+      "isHeader": true,
+      "systemDerived": true
+    },
+    {
+      "fieldCode": "time_point",
+      "domainCode": "TEST_CONTEXT",
+      "subDomain": "CONTEXT",
+      "label": "Time point",
+      "dataType": "ref",
+      "unit": null,
+      "vocabularyCode": "TIME_POINT",
+      "requiredDefault": true,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-04",
+      "mvpScope": "MVP",
+      "sortOrder": 60,
+      "description": "Stability time point from the AR plan (T0, 2W, 1M, 3M, 6M, 9M, 12M, 18M)",
+      "isHeader": true,
+      "systemDerived": true
+    },
+    {
+      "fieldCode": "temperature_condition",
+      "domainCode": "TEST_CONTEXT",
+      "subDomain": "CONTEXT",
+      "label": "Storage condition",
+      "dataType": "ref",
+      "unit": null,
+      "vocabularyCode": "TEMP_CONDITION",
+      "requiredDefault": true,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-05",
+      "mvpScope": "MVP",
+      "sortOrder": 70,
+      "description": "Storage temperature condition from the AR plan (up to six per trial)",
+      "isHeader": true,
+      "systemDerived": true
+    },
+    {
+      "fieldCode": "formulation_class",
+      "domainCode": "TEST_CONTEXT",
+      "subDomain": "CONTEXT",
+      "label": "Formulation class",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "FORMULATION_CLASS",
+      "requiredDefault": true,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-16",
+      "mvpScope": "MVP",
+      "sortOrder": 80,
+      "description": "Liquid RTD, powder or VMS; drives which template is offered",
+      "isHeader": true,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "product_format",
+      "domainCode": "TEST_CONTEXT",
+      "subDomain": "CONTEXT",
+      "label": "Product format",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "PRODUCT_FORMAT",
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-26",
+      "mvpScope": "MVP",
+      "sortOrder": 90,
+      "description": "Package format of the sample under test",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "container_type",
+      "domainCode": "TEST_CONTEXT",
+      "subDomain": "CONTEXT",
+      "label": "Container type",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "CONTAINER_TYPE",
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-26",
+      "mvpScope": "MVP",
+      "sortOrder": 100,
+      "description": "Container material and closure",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "package_volume_ml",
+      "domainCode": "TEST_CONTEXT",
+      "subDomain": "CONTEXT",
+      "label": "Nominal package volume",
+      "dataType": "number",
+      "unit": "mL",
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": true,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-09",
+      "mvpScope": "MVP",
+      "sortOrder": 110,
+      "description": "Nominal fill volume; basis for percent-of-package-volume measures",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "package_fill_height_mm",
+      "domainCode": "TEST_CONTEXT",
+      "subDomain": "CONTEXT",
+      "label": "Fill height",
+      "dataType": "number",
+      "unit": "mm",
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": true,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-09",
+      "mvpScope": "MVP",
+      "sortOrder": 120,
+      "description": "Measured fill height in the container; basis for layer-to-fill ratios",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "sample_storage_orientation",
+      "domainCode": "TEST_CONTEXT",
+      "subDomain": "CONTEXT",
+      "label": "Storage orientation",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "ORIENTATION",
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-04",
+      "mvpScope": "MVP",
+      "sortOrder": 130,
+      "description": "How the sample was stored (upright, inverted, horizontal)",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "sample_temperature_at_test",
+      "domainCode": "TEST_CONTEXT",
+      "subDomain": "CONTEXT",
+      "label": "Sample temperature at observation",
+      "dataType": "number",
+      "unit": "\u00b0C",
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": true,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-05",
+      "mvpScope": "MVP",
+      "sortOrder": 135,
+      "description": "Sample temperature when observed, after equilibration from the storage condition",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "sample_opened_previously",
+      "domainCode": "TEST_CONTEXT",
+      "subDomain": "CONTEXT",
+      "label": "Sample opened previously",
+      "dataType": "boolean",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-02",
+      "mvpScope": "MVP",
+      "sortOrder": 140,
+      "description": "Whether the container was opened at an earlier time point",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "shake_protocol",
+      "domainCode": "TEST_CONTEXT",
+      "subDomain": "CAPTURE",
+      "label": "Shaking protocol",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "SHAKE_PROTOCOL",
+      "requiredDefault": true,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "SOP",
+      "sourceReq": "SOP-202",
+      "mvpScope": "MVP",
+      "sortOrder": 142,
+      "description": "SOP: shake 10 times with medium force in a 180\u00b0 arc (1A>1B>1C>1B>1A), about 5 seconds in total, the same way every pull",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "shake_count",
+      "domainCode": "TEST_CONTEXT",
+      "subDomain": "CAPTURE",
+      "label": "Shakes applied",
+      "dataType": "integer",
+      "unit": "shakes",
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "shake_protocol",
+      "dependsOnValues": [
+        "OTHER"
+      ],
+      "taxonomyGroup": "SOP",
+      "sourceReq": "SOP-202",
+      "mvpScope": "MVP",
+      "sortOrder": 143,
+      "description": "Number of shakes when the SOP protocol was not followed",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "result_type",
+      "domainCode": "TEST_CONTEXT",
+      "subDomain": "CONTEXT",
+      "label": "Result type",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "RESULT_TYPE",
+      "requiredDefault": true,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-02",
+      "mvpScope": "MVP",
+      "sortOrder": 150,
+      "description": "Scheduled, ad hoc, retest or pull-forward observation",
+      "isHeader": true,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "plan_status",
+      "domainCode": "TEST_CONTEXT",
+      "subDomain": "CONTEXT",
+      "label": "Plan status at capture",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "PLAN_STATUS",
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-04",
+      "mvpScope": "MVP",
+      "sortOrder": 160,
+      "description": "Whether the stability plan was active or cancelled early on failure when this test was captured",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "observer_user_id",
+      "domainCode": "TEST_CONTEXT",
+      "subDomain": "CONTEXT",
+      "label": "Observer",
+      "dataType": "ref",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": true,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-02",
+      "mvpScope": "MVP",
+      "sortOrder": 170,
+      "description": "Entra ID user who captured the observation (system-derived)",
+      "isHeader": true,
+      "systemDerived": true
+    },
+    {
+      "fieldCode": "observation_timestamp",
+      "domainCode": "TEST_CONTEXT",
+      "subDomain": "CONTEXT",
+      "label": "Observation timestamp",
+      "dataType": "datetime",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": true,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-02",
+      "mvpScope": "MVP",
+      "sortOrder": 180,
+      "description": "When the physical observation was made (system-derived, editable within same day)",
+      "isHeader": true,
+      "systemDerived": true
+    },
+    {
+      "fieldCode": "test_status",
+      "domainCode": "TEST_CONTEXT",
+      "subDomain": "CONTEXT",
+      "label": "Test status",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "TEST_STATUS",
+      "requiredDefault": true,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-31",
+      "mvpScope": "MVP",
+      "sortOrder": 190,
+      "description": "Draft, submitted or reviewed (system-managed)",
+      "isHeader": true,
+      "systemDerived": true
+    },
+    {
+      "fieldCode": "overall_result",
+      "domainCode": "TEST_CONTEXT",
+      "subDomain": "CONTEXT",
+      "label": "Overall result",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "OVERALL_RESULT",
+      "requiredDefault": true,
+      "allowNA": true,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-13",
+      "mvpScope": "MVP",
+      "sortOrder": 200,
+      "description": "Structured overall assessment replacing the 0 to 5 scale",
+      "isHeader": true,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "exclude_from_trend",
+      "domainCode": "TEST_CONTEXT",
+      "subDomain": "CAPTURE",
+      "label": "Exclude from trend analysis",
+      "dataType": "boolean",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "SOP",
+      "sourceReq": "Team sheet",
+      "mvpScope": "MVP",
+      "sortOrder": 205,
+      "description": "Set when the pull is not representative (e.g. \"way too cooked, ignore\"); the record is kept but left out of trend charts",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "exclude_reason",
+      "domainCode": "TEST_CONTEXT",
+      "subDomain": "CAPTURE",
+      "label": "Exclusion reason",
+      "dataType": "text",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "exclude_from_trend",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "SOP",
+      "sourceReq": "Team sheet",
+      "mvpScope": "MVP",
+      "sortOrder": 206,
+      "description": "Why this pull is excluded",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "overall_comments",
+      "domainCode": "TEST_CONTEXT",
+      "subDomain": "CONTEXT",
+      "label": "Overall comments",
+      "dataType": "longtext",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-02",
+      "mvpScope": "MVP",
+      "sortOrder": 210,
+      "description": "Free-text context that supplements, never replaces, structured descriptors",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "lab_source",
+      "domainCode": "LAB_RESULTS",
+      "subDomain": "LAB",
+      "label": "Lab results source",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "LAB_SOURCE",
+      "requiredDefault": true,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "SOP",
+      "sourceReq": "Team sheet",
+      "mvpScope": "MVP",
+      "sortOrder": 10,
+      "description": "There is no LIMS integration: results are typed in from LIMS or measured in the PD lab, or marked not available",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "lab_lims_reference",
+      "domainCode": "LAB_RESULTS",
+      "subDomain": "LAB",
+      "label": "LIMS reference",
+      "dataType": "text",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "lab_source",
+      "dependsOnValues": [
+        "TYPED_FROM_LIMS"
+      ],
+      "taxonomyGroup": "SOP",
+      "sourceReq": "Team sheet",
+      "mvpScope": "MVP",
+      "sortOrder": 20,
+      "description": "LIMS sample or result id for traceability",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "lab_ph",
+      "domainCode": "LAB_RESULTS",
+      "subDomain": "LAB",
+      "label": "pH",
+      "dataType": "number",
+      "unit": "pH",
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": true,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-15, Team sheet",
+      "mvpScope": "MVP",
+      "sortOrder": 30,
+      "description": "pH typed in from LIMS for this sample and time point (no LIMS integration)",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "lab_visc1_value",
+      "domainCode": "LAB_RESULTS",
+      "subDomain": "VISCOSITY",
+      "label": "Viscosity 1",
+      "dataType": "number",
+      "unit": "mPa\u00b7s",
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": true,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "SOP",
+      "sourceReq": "Team sheet",
+      "mvpScope": "MVP",
+      "sortOrder": 40,
+      "description": "First viscosity result (e.g. Physica CC27, 100 1/s, 20\u00b0C)",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "lab_visc1_instrument",
+      "domainCode": "LAB_RESULTS",
+      "subDomain": "VISCOSITY",
+      "label": "Viscosity 1 instrument",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "VISC_INSTRUMENT",
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "SOP",
+      "sourceReq": "Team sheet",
+      "mvpScope": "MVP",
+      "sortOrder": 41,
+      "description": "Physica rheometer or Brookfield (Mural: align on one setting)",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "lab_visc1_geometry",
+      "domainCode": "LAB_RESULTS",
+      "subDomain": "VISCOSITY",
+      "label": "Viscosity 1 geometry / spindle",
+      "dataType": "text",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "SOP",
+      "sourceReq": "Team sheet",
+      "mvpScope": "MVP",
+      "sortOrder": 42,
+      "description": "e.g. CC27",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "lab_visc1_shear_rate",
+      "domainCode": "LAB_RESULTS",
+      "subDomain": "VISCOSITY",
+      "label": "Viscosity 1 shear rate",
+      "dataType": "number",
+      "unit": "1/s",
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "SOP",
+      "sourceReq": "Team sheet",
+      "mvpScope": "MVP",
+      "sortOrder": 43,
+      "description": "e.g. 100 or 1291",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "lab_visc1_temp_c",
+      "domainCode": "LAB_RESULTS",
+      "subDomain": "VISCOSITY",
+      "label": "Viscosity 1 measurement temperature",
+      "dataType": "number",
+      "unit": "\u00b0C",
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "SOP",
+      "sourceReq": "Team sheet",
+      "mvpScope": "MVP",
+      "sortOrder": 44,
+      "description": "e.g. 20",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "lab_visc2_value",
+      "domainCode": "LAB_RESULTS",
+      "subDomain": "VISCOSITY",
+      "label": "Viscosity 2",
+      "dataType": "number",
+      "unit": "mPa\u00b7s",
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": true,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "SOP",
+      "sourceReq": "Team sheet",
+      "mvpScope": "MVP",
+      "sortOrder": 50,
+      "description": "Second viscosity result at another temperature or setting (e.g. 4\u00b0C)",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "lab_visc2_instrument",
+      "domainCode": "LAB_RESULTS",
+      "subDomain": "VISCOSITY",
+      "label": "Viscosity 2 instrument",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "VISC_INSTRUMENT",
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "SOP",
+      "sourceReq": "Team sheet",
+      "mvpScope": "MVP",
+      "sortOrder": 51,
+      "description": "",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "lab_visc2_geometry",
+      "domainCode": "LAB_RESULTS",
+      "subDomain": "VISCOSITY",
+      "label": "Viscosity 2 geometry / spindle",
+      "dataType": "text",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "SOP",
+      "sourceReq": "Team sheet",
+      "mvpScope": "MVP",
+      "sortOrder": 52,
+      "description": "",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "lab_visc2_shear_rate",
+      "domainCode": "LAB_RESULTS",
+      "subDomain": "VISCOSITY",
+      "label": "Viscosity 2 shear rate",
+      "dataType": "number",
+      "unit": "1/s",
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "SOP",
+      "sourceReq": "Team sheet",
+      "mvpScope": "MVP",
+      "sortOrder": 53,
+      "description": "",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "lab_visc2_temp_c",
+      "domainCode": "LAB_RESULTS",
+      "subDomain": "VISCOSITY",
+      "label": "Viscosity 2 measurement temperature",
+      "dataType": "number",
+      "unit": "\u00b0C",
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "SOP",
+      "sourceReq": "Team sheet",
+      "mvpScope": "MVP",
+      "sortOrder": 54,
+      "description": "",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "lab_brix",
+      "domainCode": "LAB_RESULTS",
+      "subDomain": "LAB",
+      "label": "Brix",
+      "dataType": "number",
+      "unit": "\u00b0Bx",
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": true,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-15",
+      "mvpScope": "MVP",
+      "sortOrder": 140,
+      "description": "Brix typed in from LIMS",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "lab_particle_size_d50_um",
+      "domainCode": "LAB_RESULTS",
+      "subDomain": "LAB",
+      "label": "Particle size D50",
+      "dataType": "number",
+      "unit": "\u00b5m",
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": true,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-15",
+      "mvpScope": "MVP",
+      "sortOrder": 150,
+      "description": "Particle size D50 typed in from LIMS",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "lab_measured_at",
+      "domainCode": "LAB_RESULTS",
+      "subDomain": "LAB",
+      "label": "Lab measurement date",
+      "dataType": "datetime",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "SOP",
+      "sourceReq": "Team sheet",
+      "mvpScope": "MVP",
+      "sortOrder": 160,
+      "description": "When the lab result was measured, from LIMS",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "general_overview_photo",
+      "domainCode": "GENERAL_MEDIA",
+      "subDomain": "MEDIA",
+      "label": "Full bottle photo (before pouring)",
+      "dataType": "media_photo",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": true,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-17",
+      "mvpScope": "MVP",
+      "sortOrder": 10,
+      "description": "Whole bottle in a controlled light environment before anything is poured; mandatory record for the time point",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "general_empty_bottle_photo",
+      "domainCode": "GENERAL_MEDIA",
+      "subDomain": "MEDIA",
+      "label": "Emptied bottle photo (after pouring)",
+      "dataType": "media_photo",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": true,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "SOP",
+      "sourceReq": "Kneil, SOP-202",
+      "mvpScope": "MVP",
+      "sortOrder": 20,
+      "description": "Bottom and walls of the emptied bottle, to assess sediment and coating; mandatory record for the time point",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "general_beaker_photo",
+      "domainCode": "GENERAL_MEDIA",
+      "subDomain": "MEDIA",
+      "label": "Poured product in beaker photo",
+      "dataType": "media_photo",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "SOP",
+      "sourceReq": "SOP-202",
+      "mvpScope": "MVP",
+      "sortOrder": 30,
+      "description": "Poured product, for serum and pour non-homogeneity",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "general_pour_out_video",
+      "domainCode": "GENERAL_MEDIA",
+      "subDomain": "MEDIA",
+      "label": "Pour-out video",
+      "dataType": "media_video",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-17",
+      "mvpScope": "MVP",
+      "sortOrder": 40,
+      "description": "Optional pour-out video of the sample",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "homog_unshaken_homogeneous",
+      "domainCode": "HOMOG",
+      "subDomain": "UNSHAKEN",
+      "label": "Homogeneous when unshaken",
+      "dataType": "boolean",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": true,
+      "allowNA": true,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-07",
+      "mvpScope": "MVP",
+      "sortOrder": 10,
+      "description": "Is the product homogeneous before shaking",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "homog_unshaken_appearance",
+      "domainCode": "HOMOG",
+      "subDomain": "UNSHAKEN",
+      "label": "Unshaken appearance",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "APPEARANCE",
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "homog_unshaken_homogeneous",
+      "dependsOnValues": [
+        "N"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-07",
+      "mvpScope": "MVP",
+      "sortOrder": 20,
+      "description": "Descriptor of the non-homogeneous appearance",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "homog_unshaken_photo",
+      "domainCode": "HOMOG",
+      "subDomain": "UNSHAKEN",
+      "label": "Unshaken photo",
+      "dataType": "media_photo",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": true,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-07",
+      "mvpScope": "MVP",
+      "sortOrder": 30,
+      "description": "Photo evidence of the unshaken sample",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "homog_shaken_test_performed",
+      "domainCode": "HOMOG",
+      "subDomain": "SHAKEN",
+      "label": "Shaken test performed",
+      "dataType": "boolean",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-07",
+      "mvpScope": "MVP",
+      "sortOrder": 40,
+      "description": "Optional shaken homogeneity test",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "homog_shaken_homogeneous",
+      "domainCode": "HOMOG",
+      "subDomain": "SHAKEN",
+      "label": "Homogeneous after shaking",
+      "dataType": "boolean",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": true,
+      "dependsOnField": "homog_shaken_test_performed",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-07",
+      "mvpScope": "MVP",
+      "sortOrder": 50,
+      "description": "Is the product homogeneous after shaking",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "homog_post_shake_color_change",
+      "domainCode": "HOMOG",
+      "subDomain": "SHAKEN",
+      "label": "Color change after shaking",
+      "dataType": "boolean",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "homog_shaken_test_performed",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-07",
+      "mvpScope": "MVP",
+      "sortOrder": 60,
+      "description": "Did the color change after shaking",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "homog_post_shake_color_description",
+      "domainCode": "HOMOG",
+      "subDomain": "SHAKEN",
+      "label": "Post-shake color description",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "COLOR_DESC",
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "homog_post_shake_color_change",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-07",
+      "mvpScope": "MVP",
+      "sortOrder": 70,
+      "description": "Controlled color descriptor after shaking",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "homog_post_shake_color_code",
+      "domainCode": "HOMOG",
+      "subDomain": "SHAKEN",
+      "label": "Post-shake color code",
+      "dataType": "code",
+      "unit": null,
+      "vocabularyCode": "COLOR_CODE",
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "homog_post_shake_color_change",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-07",
+      "mvpScope": "MVP",
+      "sortOrder": 80,
+      "description": "Standard color code after shaking",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "homog_shaken_photo",
+      "domainCode": "HOMOG",
+      "subDomain": "SHAKEN",
+      "label": "Shaken photo",
+      "dataType": "media_photo",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "homog_shaken_test_performed",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-07",
+      "mvpScope": "MVP",
+      "sortOrder": 90,
+      "description": "Photo evidence after shaking",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "homog_comments",
+      "domainCode": "HOMOG",
+      "subDomain": "GENERAL",
+      "label": "Homogeneity comments",
+      "dataType": "longtext",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-07",
+      "mvpScope": "MVP",
+      "sortOrder": 100,
+      "description": "Supplementary homogeneity notes",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "cream_unsh_present",
+      "domainCode": "CREAMING",
+      "subDomain": "UNSHAKEN",
+      "label": "Creaming present (unshaken)",
+      "dataType": "boolean",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": true,
+      "allowNA": true,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-08",
+      "mvpScope": "MVP",
+      "sortOrder": 10,
+      "description": "Is a cream layer present before shaking",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "cream_unsh_rating",
+      "domainCode": "CREAMING",
+      "subDomain": "UNSHAKEN",
+      "label": "Creaming rating (unshaken)",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "RATING_CREAMING",
+      "requiredDefault": true,
+      "allowNA": true,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "SOP",
+      "sourceReq": "SOP-202",
+      "mvpScope": "MVP",
+      "sortOrder": 15,
+      "description": "SOP Table 2. Suggested from the ring thickness when measured; confirm or override",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "cream_unsh_layer_measurable",
+      "domainCode": "CREAMING",
+      "subDomain": "UNSHAKEN",
+      "label": "Cream layer measurable",
+      "dataType": "boolean",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "cream_unsh_present",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-08",
+      "mvpScope": "MVP",
+      "sortOrder": 20,
+      "description": "Can the cream layer thickness be measured",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "cream_unsh_layer_thickness_value",
+      "domainCode": "CREAMING",
+      "subDomain": "UNSHAKEN",
+      "label": "Cream layer thickness",
+      "dataType": "number",
+      "unit": "mm",
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": true,
+      "dependsOnField": "cream_unsh_layer_measurable",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-08",
+      "mvpScope": "MVP",
+      "sortOrder": 30,
+      "description": "Measured thickness of the cream layer",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "cream_unsh_layer_thickness_unit",
+      "domainCode": "CREAMING",
+      "subDomain": "UNSHAKEN",
+      "label": "Cream layer thickness unit",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "UNIT_LENGTH",
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "cream_unsh_layer_measurable",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-08",
+      "mvpScope": "MVP",
+      "sortOrder": 40,
+      "description": "Unit of the cream layer measurement",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "cream_unsh_layer_description",
+      "domainCode": "CREAMING",
+      "subDomain": "UNSHAKEN",
+      "label": "Cream layer description",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "CREAM_LAYER_DESC",
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "cream_unsh_present",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-08",
+      "mvpScope": "MVP",
+      "sortOrder": 50,
+      "description": "SOP Table 2 words: trace, slight thin ring, distinct 5 to 8 mm, heavy 8 to 10 mm, very heavy 10 mm or more",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "cream_unsh_layer_color",
+      "domainCode": "CREAMING",
+      "subDomain": "UNSHAKEN",
+      "label": "Cream layer color",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "COLOR_DESC",
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "cream_unsh_present",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-08",
+      "mvpScope": "MVP",
+      "sortOrder": 60,
+      "description": "Cream is usually white or pale yellow; strawberry gives pink; real-food recipes can show an oily fat layer (SOP, Mural)",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "cream_unsh_marbling_present",
+      "domainCode": "CREAMING",
+      "subDomain": "UNSHAKEN",
+      "label": "Marbling present",
+      "dataType": "boolean",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "cream_unsh_present",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-08",
+      "mvpScope": "MVP",
+      "sortOrder": 70,
+      "description": "Marbled fat pattern on the surface",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "cream_unsh_minor_spots_present",
+      "domainCode": "CREAMING",
+      "subDomain": "UNSHAKEN",
+      "label": "Minor spots present",
+      "dataType": "boolean",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "cream_unsh_present",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-08",
+      "mvpScope": "MVP",
+      "sortOrder": 80,
+      "description": "Isolated cream spots rather than a continuous layer",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "cream_unsh_surface_volume_pct",
+      "domainCode": "CREAMING",
+      "subDomain": "UNSHAKEN",
+      "label": "Surface coverage",
+      "dataType": "percent",
+      "unit": "%",
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": true,
+      "dependsOnField": "cream_unsh_present",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-08",
+      "mvpScope": "MVP",
+      "sortOrder": 90,
+      "description": "Share of the bottle that pours as cream layer, when a ruler cannot be used (SOP alternate method)",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "cream_unsh_pour_exit_time_s",
+      "domainCode": "CREAMING",
+      "subDomain": "UNSHAKEN",
+      "label": "Cream layer pour exit time",
+      "dataType": "number",
+      "unit": "s",
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": true,
+      "dependsOnField": "cream_unsh_present",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "SOP",
+      "sourceReq": "SOP-202",
+      "mvpScope": "MVP",
+      "sortOrder": 95,
+      "description": "Seconds for the cream layer to exit the bottle while pouring (SOP alternate measure when a ruler cannot be used)",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "cream_unsh_photo",
+      "domainCode": "CREAMING",
+      "subDomain": "UNSHAKEN",
+      "label": "Unshaken creaming photo",
+      "dataType": "media_photo",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": true,
+      "allowNA": false,
+      "dependsOnField": "cream_unsh_present",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-08",
+      "mvpScope": "MVP",
+      "sortOrder": 100,
+      "description": "Photo evidence of the cream layer",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "cream_unsh_pour_out_video",
+      "domainCode": "CREAMING",
+      "subDomain": "UNSHAKEN",
+      "label": "Pour-out video",
+      "dataType": "media_video",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "cream_unsh_present",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-08",
+      "mvpScope": "MVP",
+      "sortOrder": 110,
+      "description": "Video of the pour-out showing cream behaviour",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "cream_unsh_pour_out_result",
+      "domainCode": "CREAMING",
+      "subDomain": "UNSHAKEN",
+      "label": "Pour-out result",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "POUR_RESULT",
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "cream_unsh_present",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-08",
+      "mvpScope": "MVP",
+      "sortOrder": 120,
+      "description": "What remained in the container after pour-out",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "cream_sh_shakes_in",
+      "domainCode": "CREAMING",
+      "subDomain": "SHAKEN",
+      "label": "Shakes in",
+      "dataType": "boolean",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "cream_unsh_present",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-08",
+      "mvpScope": "MVP",
+      "sortOrder": 130,
+      "description": "Does the cream layer redisperse on shaking",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "cream_sh_rating",
+      "domainCode": "CREAMING",
+      "subDomain": "SHAKEN",
+      "label": "Creaming rating (shaken)",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "RATING_CREAMING",
+      "requiredDefault": false,
+      "allowNA": true,
+      "dependsOnField": "cream_unsh_present",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "SOP",
+      "sourceReq": "SOP-202",
+      "mvpScope": "MVP",
+      "sortOrder": 131,
+      "description": "SOP Table 2 after the standard shake; 0 when the layer shakes in",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "cream_sh_result",
+      "domainCode": "CREAMING",
+      "subDomain": "SHAKEN",
+      "label": "Shaken result",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "SHAKE_RESULT",
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "cream_unsh_present",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-08",
+      "mvpScope": "MVP",
+      "sortOrder": 150,
+      "description": "Fully, partially or not redispersed",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "cream_sh_residue_type",
+      "domainCode": "CREAMING",
+      "subDomain": "SHAKEN",
+      "label": "Residue after shaking",
+      "dataType": "multiselect",
+      "unit": null,
+      "vocabularyCode": "CREAM_RESIDUE",
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "cream_sh_result",
+      "dependsOnValues": [
+        "PARTIAL",
+        "NOT_REDISPERSED"
+      ],
+      "taxonomyGroup": "SOP",
+      "sourceReq": "Mural",
+      "mvpScope": "MVP",
+      "sortOrder": 155,
+      "description": "What is left when the cream does not shake in: fat ring, flakes, plug at spout, skin or pad",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "cream_sh_residual_pct",
+      "domainCode": "CREAMING",
+      "subDomain": "SHAKEN",
+      "label": "Residual cream after shaking",
+      "dataType": "percent",
+      "unit": "%",
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": true,
+      "dependsOnField": "cream_sh_result",
+      "dependsOnValues": [
+        "PARTIAL",
+        "NOT_REDISPERSED"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-08",
+      "mvpScope": "MVP",
+      "sortOrder": 160,
+      "description": "Residual cream as percent of original layer",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "cream_sh_photo",
+      "domainCode": "CREAMING",
+      "subDomain": "SHAKEN",
+      "label": "Shaken creaming photo",
+      "dataType": "media_photo",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "cream_unsh_present",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-08",
+      "mvpScope": "MVP",
+      "sortOrder": 170,
+      "description": "Photo evidence after shaking",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "cream_emulsifier_flag",
+      "domainCode": "CREAMING",
+      "subDomain": "FLAGS",
+      "label": "Emulsifier review flag",
+      "dataType": "boolean",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "cream_unsh_present",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-08",
+      "mvpScope": "MVP",
+      "sortOrder": 180,
+      "description": "Flag the emulsifier system for formulation review",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "cream_rim_dried_residue_present",
+      "domainCode": "CREAMING",
+      "subDomain": "FLAGS",
+      "label": "Dried residue on rim or foil seal",
+      "dataType": "boolean",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "SOP",
+      "sourceReq": "SOP-202",
+      "mvpScope": "MVP",
+      "sortOrder": 182,
+      "description": "Dried or foamy product on the rim or seal is not creaming (SOP Figures 3 and 4); record it separately",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "cream_rim_residue_fatty",
+      "domainCode": "CREAMING",
+      "subDomain": "FLAGS",
+      "label": "Rim residue feels fatty",
+      "dataType": "boolean",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "cream_rim_dried_residue_present",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "SOP",
+      "sourceReq": "SOP-202",
+      "mvpScope": "MVP",
+      "sortOrder": 183,
+      "description": "SOP touch test: if the ring feels fatty it counts as creaming, not a foaming issue",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "cream_market_restriction_flag",
+      "domainCode": "CREAMING",
+      "subDomain": "FLAGS",
+      "label": "Market restriction flag",
+      "dataType": "boolean",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "cream_emulsifier_flag",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-08",
+      "mvpScope": "MVP",
+      "sortOrder": 190,
+      "description": "Emulsifier options are restricted in the target market",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "cream_review_prompt",
+      "domainCode": "CREAMING",
+      "subDomain": "FLAGS",
+      "label": "Creaming review guidance",
+      "dataType": "guidance",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "cream_sh_result",
+      "dependsOnValues": [
+        "PARTIAL",
+        "NOT_REDISPERSED"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-08",
+      "mvpScope": "MVP",
+      "sortOrder": 200,
+      "description": "If cream does not redisperse, review emulsifier system and homogenisation pressure",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "cream_comments",
+      "domainCode": "CREAMING",
+      "subDomain": "GENERAL",
+      "label": "Creaming comments",
+      "dataType": "longtext",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-08",
+      "mvpScope": "MVP",
+      "sortOrder": 210,
+      "description": "Supplementary creaming notes",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "serum_unsh_present",
+      "domainCode": "SERUM",
+      "subDomain": "UNSHAKEN",
+      "label": "Serum separation present (unshaken)",
+      "dataType": "boolean",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": true,
+      "allowNA": true,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-09",
+      "mvpScope": "MVP",
+      "sortOrder": 10,
+      "description": "Is serum separation visible before shaking",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "serum_unsh_rating",
+      "domainCode": "SERUM",
+      "subDomain": "UNSHAKEN",
+      "label": "Serum rating (unshaken)",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "RATING_SERUM",
+      "requiredDefault": true,
+      "allowNA": true,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "SOP",
+      "sourceReq": "SOP-202",
+      "mvpScope": "MVP",
+      "sortOrder": 15,
+      "description": "SOP Table 3. Suggested from the % of package volume when measured; confirm or override",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "serum_unsh_measurable",
+      "domainCode": "SERUM",
+      "subDomain": "UNSHAKEN",
+      "label": "Serum layer measurable",
+      "dataType": "boolean",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "serum_unsh_present",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-09",
+      "mvpScope": "MVP",
+      "sortOrder": 20,
+      "description": "Can the serum layer be measured",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "serum_unsh_value",
+      "domainCode": "SERUM",
+      "subDomain": "UNSHAKEN",
+      "label": "Serum layer measurement",
+      "dataType": "number",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": true,
+      "dependsOnField": "serum_unsh_measurable",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-09",
+      "mvpScope": "MVP",
+      "sortOrder": 30,
+      "description": "Measured serum layer",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "serum_unsh_unit",
+      "domainCode": "SERUM",
+      "subDomain": "UNSHAKEN",
+      "label": "Serum measurement unit",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "UNIT_SERUM",
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "serum_unsh_measurable",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-09",
+      "mvpScope": "MVP",
+      "sortOrder": 40,
+      "description": "mm, mL or percent",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "serum_unsh_pct_package_volume",
+      "domainCode": "SERUM",
+      "subDomain": "UNSHAKEN",
+      "label": "Serum as percent of package volume",
+      "dataType": "percent",
+      "unit": "%",
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": true,
+      "dependsOnField": "serum_unsh_present",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-09",
+      "mvpScope": "MVP",
+      "sortOrder": 50,
+      "description": "Serum layer relative to nominal package volume",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "serum_unsh_locations",
+      "domainCode": "SERUM",
+      "subDomain": "UNSHAKEN",
+      "label": "Serum locations",
+      "dataType": "multiselect",
+      "unit": null,
+      "vocabularyCode": "SERUM_LOCATION",
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "serum_unsh_present",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-09",
+      "mvpScope": "MVP",
+      "sortOrder": 60,
+      "description": "Where the serum is observed in the container",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "serum_unsh_clarity",
+      "domainCode": "SERUM",
+      "subDomain": "UNSHAKEN",
+      "label": "Serum clarity",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "SERUM_CLARITY",
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "serum_unsh_present",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-09",
+      "mvpScope": "MVP",
+      "sortOrder": 70,
+      "description": "Clear, translucent or opaque serum",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "serum_unsh_color",
+      "domainCode": "SERUM",
+      "subDomain": "UNSHAKEN",
+      "label": "Serum color",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "COLOR_DESC",
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "serum_unsh_present",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-09",
+      "mvpScope": "MVP",
+      "sortOrder": 80,
+      "description": "Controlled color descriptor of the serum",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "serum_unsh_photo",
+      "domainCode": "SERUM",
+      "subDomain": "UNSHAKEN",
+      "label": "Unshaken serum photo",
+      "dataType": "media_photo",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": true,
+      "allowNA": false,
+      "dependsOnField": "serum_unsh_present",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-09",
+      "mvpScope": "MVP",
+      "sortOrder": 90,
+      "description": "Photo evidence of serum separation",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "serum_sh_shakes_in",
+      "domainCode": "SERUM",
+      "subDomain": "SHAKEN",
+      "label": "Shakes in",
+      "dataType": "boolean",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "serum_unsh_present",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-09",
+      "mvpScope": "MVP",
+      "sortOrder": 100,
+      "description": "Does the serum reincorporate on shaking",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "serum_sh_rating",
+      "domainCode": "SERUM",
+      "subDomain": "SHAKEN",
+      "label": "Serum rating (shaken)",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "RATING_SERUM",
+      "requiredDefault": false,
+      "allowNA": true,
+      "dependsOnField": "serum_unsh_present",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "SOP",
+      "sourceReq": "SOP-202",
+      "mvpScope": "MVP",
+      "sortOrder": 101,
+      "description": "SOP Table 3 after the standard shake; 0 when it shakes in",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "serum_sh_value",
+      "domainCode": "SERUM",
+      "subDomain": "SHAKEN",
+      "label": "Residual serum after shaking",
+      "dataType": "number",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": true,
+      "dependsOnField": "serum_sh_shakes_in",
+      "dependsOnValues": [
+        "N"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-09",
+      "mvpScope": "MVP",
+      "sortOrder": 110,
+      "description": "Serum remaining after the standard shake",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "serum_sh_unit",
+      "domainCode": "SERUM",
+      "subDomain": "SHAKEN",
+      "label": "Residual serum unit",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "UNIT_SERUM",
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "serum_sh_shakes_in",
+      "dependsOnValues": [
+        "N"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-09",
+      "mvpScope": "MVP",
+      "sortOrder": 120,
+      "description": "mm, mL or percent",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "serum_sh_result",
+      "domainCode": "SERUM",
+      "subDomain": "SHAKEN",
+      "label": "Shaken result",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "SHAKE_RESULT",
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "serum_unsh_present",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-09",
+      "mvpScope": "MVP",
+      "sortOrder": 130,
+      "description": "Fully, partially or not reincorporated",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "serum_sh_photo",
+      "domainCode": "SERUM",
+      "subDomain": "SHAKEN",
+      "label": "Shaken serum photo",
+      "dataType": "media_photo",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "serum_unsh_present",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-09",
+      "mvpScope": "MVP",
+      "sortOrder": 140,
+      "description": "Photo evidence after shaking",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "serum_gelation_flag",
+      "domainCode": "SERUM",
+      "subDomain": "FLAGS",
+      "label": "Gelation suspected",
+      "dataType": "boolean",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "serum_unsh_present",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-09",
+      "mvpScope": "MVP",
+      "sortOrder": 150,
+      "description": "Serum separation accompanied by gel formation",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "serum_protein_flag",
+      "domainCode": "SERUM",
+      "subDomain": "FLAGS",
+      "label": "Protein instability suspected",
+      "dataType": "boolean",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "serum_unsh_present",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-09",
+      "mvpScope": "MVP",
+      "sortOrder": 160,
+      "description": "Serum separation attributed to protein destabilisation",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "serum_resep_check_performed",
+      "domainCode": "SERUM",
+      "subDomain": "RESEPARATION",
+      "label": "Re-separation check after shaking",
+      "dataType": "boolean",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "SOP",
+      "sourceReq": "SOP-202",
+      "mvpScope": "SCHEMA_READY",
+      "sortOrder": 160,
+      "description": "For products with a consumer usage period (e.g. 24 h tube feeding): was the shaken product checked again later?",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "serum_resep_hours_after_shake",
+      "domainCode": "SERUM",
+      "subDomain": "RESEPARATION",
+      "label": "Hours after shaking",
+      "dataType": "number",
+      "unit": "h",
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "serum_resep_check_performed",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "SOP",
+      "sourceReq": "SOP-202",
+      "mvpScope": "SCHEMA_READY",
+      "sortOrder": 161,
+      "description": "",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "serum_resep_present",
+      "domainCode": "SERUM",
+      "subDomain": "RESEPARATION",
+      "label": "Serum re-formed",
+      "dataType": "boolean",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "serum_resep_check_performed",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "SOP",
+      "sourceReq": "SOP-202",
+      "mvpScope": "SCHEMA_READY",
+      "sortOrder": 162,
+      "description": "Re-separation within the usage period can be a product concern (SOP Peptamen example)",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "serum_resep_rating",
+      "domainCode": "SERUM",
+      "subDomain": "RESEPARATION",
+      "label": "Re-separation serum rating",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "RATING_SERUM",
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "serum_resep_present",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "SOP",
+      "sourceReq": "SOP-202",
+      "mvpScope": "SCHEMA_READY",
+      "sortOrder": 163,
+      "description": "",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "serum_resep_photo",
+      "domainCode": "SERUM",
+      "subDomain": "RESEPARATION",
+      "label": "Re-separation photo",
+      "dataType": "media_photo",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "serum_resep_present",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "SOP",
+      "sourceReq": "SOP-202",
+      "mvpScope": "SCHEMA_READY",
+      "sortOrder": 164,
+      "description": "",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "serum_scale_up_viscosity_warning",
+      "domainCode": "SERUM",
+      "subDomain": "FLAGS",
+      "label": "Scale-up viscosity warning",
+      "dataType": "boolean",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "serum_unsh_present",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-09",
+      "mvpScope": "MVP",
+      "sortOrder": 170,
+      "description": "Low viscosity at bench may worsen serum separation at scale",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "serum_review_prompt",
+      "domainCode": "SERUM",
+      "subDomain": "FLAGS",
+      "label": "Serum review guidance",
+      "dataType": "guidance",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "serum_unsh_present",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-09",
+      "mvpScope": "MVP",
+      "sortOrder": 180,
+      "description": "Serum above 2% of package volume: review hydrocolloid and stabiliser system; confirm scale-up viscosity target",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "serum_comments",
+      "domainCode": "SERUM",
+      "subDomain": "GENERAL",
+      "label": "Serum comments",
+      "dataType": "longtext",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-09",
+      "mvpScope": "MVP",
+      "sortOrder": 190,
+      "description": "Supplementary serum notes",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "sed_unsh_present",
+      "domainCode": "SEDIMENT",
+      "subDomain": "UNSHAKEN",
+      "label": "Sediment present (unshaken)",
+      "dataType": "boolean",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": true,
+      "allowNA": true,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-10",
+      "mvpScope": "MVP",
+      "sortOrder": 10,
+      "description": "Is sediment present before shaking",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "sed_unsh_rating",
+      "domainCode": "SEDIMENT",
+      "subDomain": "UNSHAKEN",
+      "label": "Sediment rating (unshaken)",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "RATING_SEDIMENT",
+      "requiredDefault": true,
+      "allowNA": true,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "SOP",
+      "sourceReq": "SOP-202",
+      "mvpScope": "MVP",
+      "sortOrder": 15,
+      "description": "SOP Table 4. Suggested from height and coverage when measured; bottles with a raised center (BOOST) need 4 mm for a 4",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "sed_unsh_height_value",
+      "domainCode": "SEDIMENT",
+      "subDomain": "UNSHAKEN",
+      "label": "Sediment height (unshaken)",
+      "dataType": "number",
+      "unit": "mm",
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": true,
+      "dependsOnField": "sed_unsh_present",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-10, SOP-202",
+      "mvpScope": "MVP",
+      "sortOrder": 30,
+      "description": "Ruler reading at the outer rim (SOP worst case), 0 mm at the edge",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "sed_unsh_height_unit",
+      "domainCode": "SEDIMENT",
+      "subDomain": "UNSHAKEN",
+      "label": "Sediment height unit",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "UNIT_LENGTH",
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "sed_unsh_present",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-10",
+      "mvpScope": "MVP",
+      "sortOrder": 31,
+      "description": "mm (SOP) or cm (older sheets)",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "sed_unsh_coverage",
+      "domainCode": "SEDIMENT",
+      "subDomain": "UNSHAKEN",
+      "label": "Coverage of the bottom",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "SED_COVERAGE",
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "sed_unsh_present",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "SOP",
+      "sourceReq": "SOP-202",
+      "mvpScope": "MVP",
+      "sortOrder": 40,
+      "description": "Partial ring, complete ring, outer ring with clear center, entire bottom, depressions only",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "sed_unsh_texture",
+      "domainCode": "SEDIMENT",
+      "subDomain": "UNSHAKEN",
+      "label": "Sediment texture",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "SED_TEXTURE",
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "sed_unsh_present",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-10, Team sheet",
+      "mvpScope": "MVP",
+      "sortOrder": 50,
+      "description": "Loose, soft, compact, hard, sticky, lumpy, sandy, flaky",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "sed_measurement_point",
+      "domainCode": "SEDIMENT",
+      "subDomain": "UNSHAKEN",
+      "label": "Measured",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "SED_MEAS_POINT",
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "sed_unsh_present",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "SOP",
+      "sourceReq": "SOP-202",
+      "mvpScope": "MVP",
+      "sortOrder": 60,
+      "description": "Before pouring through a clear bottle, or after pouring in the emptied bottle (SOP default)",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "sed_measurement_location",
+      "domainCode": "SEDIMENT",
+      "subDomain": "UNSHAKEN",
+      "label": "Measurement location",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "SED_MEAS_LOCATION",
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "sed_unsh_present",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "SOP",
+      "sourceReq": "SOP-202",
+      "mvpScope": "MVP",
+      "sortOrder": 70,
+      "description": "SOP: measure at the outer rim to record the worst case",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "sed_weight_g",
+      "domainCode": "SEDIMENT",
+      "subDomain": "UNSHAKEN",
+      "label": "Sediment weight",
+      "dataType": "number",
+      "unit": "g",
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": true,
+      "dependsOnField": "sed_unsh_present",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "SOP",
+      "sourceReq": "SOP-202",
+      "mvpScope": "MVP",
+      "sortOrder": 80,
+      "description": "Optional weighing when an empty package is available; more reliable than the 0 to 5 rating (SOP)",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "sed_bottle_cut_to_evaluate",
+      "domainCode": "SEDIMENT",
+      "subDomain": "UNSHAKEN",
+      "label": "Bottle cut open to evaluate",
+      "dataType": "boolean",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "sed_unsh_present",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "SOP",
+      "sourceReq": "SOP-202",
+      "mvpScope": "MVP",
+      "sortOrder": 90,
+      "description": "Opaque bottles may need to be cut to see the sediment (SOP)",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "sed_bottle_coating_present",
+      "domainCode": "SEDIMENT",
+      "subDomain": "UNSHAKEN",
+      "label": "Bottle coating present (not sediment)",
+      "dataType": "boolean",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "SOP",
+      "sourceReq": "Team sheet",
+      "mvpScope": "MVP",
+      "sortOrder": 100,
+      "description": "Thick product coating the walls after pouring; recorded separately because it is not true sediment",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "sed_unsh_photo",
+      "domainCode": "SEDIMENT",
+      "subDomain": "UNSHAKEN",
+      "label": "Unshaken sediment photo",
+      "dataType": "media_photo",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": true,
+      "allowNA": false,
+      "dependsOnField": "sed_unsh_present",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-10",
+      "mvpScope": "MVP",
+      "sortOrder": 120,
+      "description": "Photo evidence of sediment before shaking",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "sed_predominant_type",
+      "domainCode": "SEDIMENT",
+      "subDomain": "UNSHAKEN",
+      "label": "Predominant sediment type",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "SED_TYPE",
+      "requiredDefault": true,
+      "allowNA": false,
+      "dependsOnField": "sed_unsh_present",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-10",
+      "mvpScope": "MVP",
+      "sortOrder": 140,
+      "description": "Protein, mineral or cocoa; branches the sub-flow",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "sed_prot_review_prompt",
+      "domainCode": "SEDIMENT",
+      "subDomain": "PROTEIN",
+      "label": "Protein sediment guidance",
+      "dataType": "guidance",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "sed_predominant_type",
+      "dependsOnValues": [
+        "PROTEIN"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-10",
+      "mvpScope": "MVP",
+      "sortOrder": 150,
+      "description": "Hard or significant protein sediment, or clumps after shaking: flag to the team; check ionic balance (citrate) and the hydrocolloid system; protein type and level matter (Mural)",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "sed_min_appearance",
+      "domainCode": "SEDIMENT",
+      "subDomain": "MINERAL",
+      "label": "Mineral sediment appearance",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "SED_MIN_APPEAR",
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "sed_predominant_type",
+      "dependsOnValues": [
+        "MINERAL"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-10",
+      "mvpScope": "SCHEMA_READY",
+      "sortOrder": 160,
+      "description": "Fine powder, gritty or crystalline",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "sed_min_review_prompt",
+      "domainCode": "SEDIMENT",
+      "subDomain": "MINERAL",
+      "label": "Mineral sediment guidance",
+      "dataType": "guidance",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "sed_predominant_type",
+      "dependsOnValues": [
+        "MINERAL"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-10",
+      "mvpScope": "SCHEMA_READY",
+      "sortOrder": 170,
+      "description": "Mineral deposits are a compliance concern for label claims: test the sediment and the beverage for minerals and flag to the project team; starch or hydrocolloids can help suspension (SOP, Mural)",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "sed_coc_ring_present",
+      "domainCode": "SEDIMENT",
+      "subDomain": "COCOA",
+      "label": "Cocoa ring present",
+      "dataType": "boolean",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "sed_predominant_type",
+      "dependsOnValues": [
+        "COCOA"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-10",
+      "mvpScope": "SCHEMA_READY",
+      "sortOrder": 180,
+      "description": "Cocoa ring at the base of the container",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "sed_coc_settling_pct_volume",
+      "domainCode": "SEDIMENT",
+      "subDomain": "COCOA",
+      "label": "Cocoa settling, share of package",
+      "dataType": "percent",
+      "unit": "%",
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": true,
+      "dependsOnField": "sed_predominant_type",
+      "dependsOnValues": [
+        "COCOA"
+      ],
+      "taxonomyGroup": "SOP",
+      "sourceReq": "Mural",
+      "mvpScope": "MVP",
+      "sortOrder": 190,
+      "description": "Estimated share of the package with cocoa settling (e.g. bottom third)",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "sed_coc_review_prompt",
+      "domainCode": "SEDIMENT",
+      "subDomain": "COCOA",
+      "label": "Cocoa sediment guidance",
+      "dataType": "guidance",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "sed_predominant_type",
+      "dependsOnValues": [
+        "COCOA"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-10",
+      "mvpScope": "SCHEMA_READY",
+      "sortOrder": 195,
+      "description": "Cocoa settling is not necessarily sediment; it usually shakes in. Take a photo and estimate the share of the package affected (Mural)",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "sed_sh_rating",
+      "domainCode": "SEDIMENT",
+      "subDomain": "SHAKEN",
+      "label": "Sediment rating (shaken)",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "RATING_SEDIMENT",
+      "requiredDefault": false,
+      "allowNA": true,
+      "dependsOnField": "sed_unsh_present",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "SOP",
+      "sourceReq": "SOP-202",
+      "mvpScope": "MVP",
+      "sortOrder": 300,
+      "description": "SOP Table 4 after the standard shake",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "sed_sh_height_value",
+      "domainCode": "SEDIMENT",
+      "subDomain": "SHAKEN",
+      "label": "Sediment height (shaken)",
+      "dataType": "number",
+      "unit": "mm",
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": true,
+      "dependsOnField": "sed_unsh_present",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-10, Team sheet",
+      "mvpScope": "MVP",
+      "sortOrder": 310,
+      "description": "Residual sediment after shaking and pouring",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "sed_sh_height_unit",
+      "domainCode": "SEDIMENT",
+      "subDomain": "SHAKEN",
+      "label": "Shaken sediment height unit",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "UNIT_LENGTH",
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "sed_unsh_present",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-10",
+      "mvpScope": "MVP",
+      "sortOrder": 311,
+      "description": "",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "sed_sh_shake_in_extent",
+      "domainCode": "SEDIMENT",
+      "subDomain": "SHAKEN",
+      "label": "Shake-in extent",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "SHAKE_EXTENT",
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "sed_unsh_present",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-10",
+      "mvpScope": "MVP",
+      "sortOrder": 320,
+      "description": "How much of the sediment redispersed",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "sed_sh_lumps_present",
+      "domainCode": "SEDIMENT",
+      "subDomain": "SHAKEN",
+      "label": "Shaking produced clumps",
+      "dataType": "boolean",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "sed_unsh_present",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "SOP",
+      "sourceReq": "Mural",
+      "mvpScope": "MVP",
+      "sortOrder": 330,
+      "description": "Sediment lifted from the bottom as clumps after shaking; flag to the team",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "sed_sh_photo",
+      "domainCode": "SEDIMENT",
+      "subDomain": "SHAKEN",
+      "label": "Shaken sediment photo",
+      "dataType": "media_photo",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "sed_unsh_present",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-10",
+      "mvpScope": "MVP",
+      "sortOrder": 340,
+      "description": "",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "sed_composition_test_requested",
+      "domainCode": "SEDIMENT",
+      "subDomain": "FLAGS",
+      "label": "Composition test requested",
+      "dataType": "boolean",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "sed_unsh_present",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "SOP",
+      "sourceReq": "SOP-202",
+      "mvpScope": "MVP",
+      "sortOrder": 350,
+      "description": "Sediment sent for mineral / protein analysis when the type is unclear (SOP)",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "sed_comments",
+      "domainCode": "SEDIMENT",
+      "subDomain": "GENERAL",
+      "label": "Sediment comments",
+      "dataType": "longtext",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-10",
+      "mvpScope": "MVP",
+      "sortOrder": 400,
+      "description": "Supplementary sediment notes",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "gel_gelled",
+      "domainCode": "GELLING",
+      "subDomain": "UNSHAKEN",
+      "label": "Gelled",
+      "dataType": "boolean",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": true,
+      "allowNA": true,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-11, SOP-202",
+      "mvpScope": "MVP",
+      "sortOrder": 10,
+      "description": "Product semi or fully solidified, hard to empty out (SOP). Soft gel that liquefies on shaking may not be a failure",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "gel_type",
+      "domainCode": "GELLING",
+      "subDomain": "UNSHAKEN",
+      "label": "Gel type",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "GEL_TYPE",
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "gel_gelled",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-11",
+      "mvpScope": "SCHEMA_READY",
+      "sortOrder": 20,
+      "description": "Age gelation, thermal, microbial or undetermined",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "gel_too_thick_to_pour",
+      "domainCode": "GELLING",
+      "subDomain": "UNSHAKEN",
+      "label": "Too thick to pour",
+      "dataType": "boolean",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "gel_gelled",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "SOP",
+      "sourceReq": "Team sheet",
+      "mvpScope": "MVP",
+      "sortOrder": 25,
+      "description": "Product would not pour unshaken (the reason older sheets used 9999 for the unshaken ratings)",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "gel_firmness",
+      "domainCode": "GELLING",
+      "subDomain": "UNSHAKEN",
+      "label": "Gel firmness",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "GEL_FIRMNESS",
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "gel_gelled",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-11",
+      "mvpScope": "MVP",
+      "sortOrder": 30,
+      "description": "Soft, firm or rigid gel",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "gel_shake_test_performed",
+      "domainCode": "GELLING",
+      "subDomain": "SHAKEN",
+      "label": "Shake test performed",
+      "dataType": "boolean",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "gel_gelled",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-11",
+      "mvpScope": "MVP",
+      "sortOrder": 40,
+      "description": "Was a shake test performed on the gel",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "gel_reversibility",
+      "domainCode": "GELLING",
+      "subDomain": "SHAKEN",
+      "label": "Reversibility",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "GEL_REVERSIBILITY",
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "gel_shake_test_performed",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-11",
+      "mvpScope": "MVP",
+      "sortOrder": 50,
+      "description": "Reversible, partially reversible or irreversible on shaking",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "gel_spoilage_related",
+      "domainCode": "GELLING",
+      "subDomain": "FLAGS",
+      "label": "Spoilage related",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "TRI_STATE",
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "gel_gelled",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-11",
+      "mvpScope": "MVP",
+      "sortOrder": 60,
+      "description": "Was the gel caused by micro or spoilage rather than the recipe? (Mural asks for this explicitly)",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "gel_observations",
+      "domainCode": "GELLING",
+      "subDomain": "GENERAL",
+      "label": "Gel observations",
+      "dataType": "longtext",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "gel_gelled",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-11",
+      "mvpScope": "SCHEMA_READY",
+      "sortOrder": 70,
+      "description": "Structured notes on the gel",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "gel_photo",
+      "domainCode": "GELLING",
+      "subDomain": "GENERAL",
+      "label": "Gel photo",
+      "dataType": "media_photo",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "gel_gelled",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-11",
+      "mvpScope": "MVP",
+      "sortOrder": 80,
+      "description": "Photo evidence of the gel",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "gel_comments",
+      "domainCode": "GELLING",
+      "subDomain": "GENERAL",
+      "label": "Gelling comments",
+      "dataType": "longtext",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-11",
+      "mvpScope": "MVP",
+      "sortOrder": 90,
+      "description": "Supplementary gelling notes",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "nh_rippling_present",
+      "domainCode": "NON_HOMOG",
+      "subDomain": "UNSHAKEN",
+      "label": "Rippling present",
+      "dataType": "boolean",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": true,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-11, SOP-202",
+      "mvpScope": "MVP",
+      "sortOrder": 10,
+      "description": "Slight non-homogeneity heard or seen when pouring; not rated in the SOP, recorded here so trends can be seen",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "nh_lumps_present",
+      "domainCode": "NON_HOMOG",
+      "subDomain": "UNSHAKEN",
+      "label": "Lumps present",
+      "dataType": "boolean",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": true,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-11",
+      "mvpScope": "MVP",
+      "sortOrder": 20,
+      "description": "Clumps, chunks or lumps when pouring into a beaker or through a sieve (SOP)",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "nh_lumps_severity",
+      "domainCode": "NON_HOMOG",
+      "subDomain": "UNSHAKEN",
+      "label": "Lump severity",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "SEVERITY",
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "nh_lumps_present",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-11",
+      "mvpScope": "MVP",
+      "sortOrder": 30,
+      "description": "Slight, moderate or severe",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "nh_lumps_context",
+      "domainCode": "NON_HOMOG",
+      "subDomain": "UNSHAKEN",
+      "label": "When lumps were seen",
+      "dataType": "multiselect",
+      "unit": null,
+      "vocabularyCode": "NH_CONTEXT",
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "nh_lumps_present",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "SOP",
+      "sourceReq": "Mural",
+      "mvpScope": "MVP",
+      "sortOrder": 35,
+      "description": "Unshaken pour shows risk of later gelling or sedimentation; lumps after shaking may be sediment lifting from the bottom; describe both",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "nh_lumps_size_class",
+      "domainCode": "NON_HOMOG",
+      "subDomain": "UNSHAKEN",
+      "label": "Lump size class",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "LUMP_SIZE",
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "nh_lumps_present",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-11",
+      "mvpScope": "SCHEMA_READY",
+      "sortOrder": 40,
+      "description": "Fine, small or large lumps",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "nh_sieve_used",
+      "domainCode": "NON_HOMOG",
+      "subDomain": "UNSHAKEN",
+      "label": "Poured through a sieve",
+      "dataType": "boolean",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "SOP",
+      "sourceReq": "Mural",
+      "mvpScope": "MVP",
+      "sortOrder": 45,
+      "description": "Sieve pouring helps for collagen and high-protein products",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "nh_sieve_mesh",
+      "domainCode": "NON_HOMOG",
+      "subDomain": "UNSHAKEN",
+      "label": "Sieve mesh",
+      "dataType": "text",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "nh_sieve_used",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "SOP",
+      "sourceReq": "Mural",
+      "mvpScope": "MVP",
+      "sortOrder": 46,
+      "description": "",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "nh_curdling_present",
+      "domainCode": "NON_HOMOG",
+      "subDomain": "UNSHAKEN",
+      "label": "Curdling present",
+      "dataType": "boolean",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": true,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-11",
+      "mvpScope": "SCHEMA_READY",
+      "sortOrder": 50,
+      "description": "Curdled appearance",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "nh_smooth_after_shaking",
+      "domainCode": "NON_HOMOG",
+      "subDomain": "SHAKEN",
+      "label": "Smooth after shaking",
+      "dataType": "boolean",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "SOP",
+      "sourceReq": "Team sheet",
+      "mvpScope": "MVP",
+      "sortOrder": 55,
+      "description": "\"Rippling when pouring, smooth when shaken\" is the most common comment in the team sheets",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "nh_spoilage_related",
+      "domainCode": "NON_HOMOG",
+      "subDomain": "FLAGS",
+      "label": "Spoilage related",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "TRI_STATE",
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-11",
+      "mvpScope": "MVP",
+      "sortOrder": 60,
+      "description": "Whether the non-homogeneity is related to spoilage",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "nh_pour_video",
+      "domainCode": "NON_HOMOG",
+      "subDomain": "GENERAL",
+      "label": "Pour video (rippling)",
+      "dataType": "media_video",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "SOP",
+      "sourceReq": "Mural",
+      "mvpScope": "MVP",
+      "sortOrder": 65,
+      "description": "Video of the pour to monitor rippling over time",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "nh_photo",
+      "domainCode": "NON_HOMOG",
+      "subDomain": "GENERAL",
+      "label": "Non-homogeneity photo",
+      "dataType": "media_photo",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-11",
+      "mvpScope": "MVP",
+      "sortOrder": 70,
+      "description": "Photo evidence",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "nh_comments",
+      "domainCode": "NON_HOMOG",
+      "subDomain": "GENERAL",
+      "label": "Non-homogeneity comments",
+      "dataType": "longtext",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-11",
+      "mvpScope": "MVP",
+      "sortOrder": 80,
+      "description": "Supplementary notes",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "psag_vertical_stripes_present",
+      "domainCode": "PROTEIN_SAG",
+      "subDomain": "UNSHAKEN",
+      "label": "Vertical stripes present",
+      "dataType": "boolean",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": true,
+      "allowNA": true,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-11",
+      "mvpScope": "MVP",
+      "sortOrder": 10,
+      "description": "Vertical protein stripes on the container wall",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "psag_stripe_coverage",
+      "domainCode": "PROTEIN_SAG",
+      "subDomain": "UNSHAKEN",
+      "label": "Stripe coverage",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "COVERAGE",
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "psag_vertical_stripes_present",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-11",
+      "mvpScope": "MVP",
+      "sortOrder": 20,
+      "description": "Isolated, partial or extensive",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "psag_photo",
+      "domainCode": "PROTEIN_SAG",
+      "subDomain": "GENERAL",
+      "label": "Protein sagging photo",
+      "dataType": "media_photo",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "psag_vertical_stripes_present",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-11",
+      "mvpScope": "MVP",
+      "sortOrder": 30,
+      "description": "Photo evidence",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "psag_comments",
+      "domainCode": "PROTEIN_SAG",
+      "subDomain": "GENERAL",
+      "label": "Protein sagging comments",
+      "dataType": "longtext",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "CORE",
+      "sourceReq": "R-11",
+      "mvpScope": "MVP",
+      "sortOrder": 40,
+      "description": "Supplementary notes",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "app_color_change_vs_t0",
+      "domainCode": "APPEARANCE_SENSORY",
+      "subDomain": "COLOR",
+      "label": "Color change vs T0",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "SEVERITY_NONE",
+      "requiredDefault": false,
+      "allowNA": true,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "SOP",
+      "sourceReq": "SOP-202",
+      "mvpScope": "SCHEMA_READY",
+      "sortOrder": 10,
+      "description": "",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "app_color_method",
+      "domainCode": "APPEARANCE_SENSORY",
+      "subDomain": "COLOR",
+      "label": "Color method",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "COLOR_METHOD",
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "SOP",
+      "sourceReq": "SOP-202",
+      "mvpScope": "SCHEMA_READY",
+      "sortOrder": 20,
+      "description": "Visual, L*a*b* meter or DigiEye (Mural)",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "app_color_l",
+      "domainCode": "APPEARANCE_SENSORY",
+      "subDomain": "COLOR",
+      "label": "L*",
+      "dataType": "number",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": true,
+      "dependsOnField": "app_color_method",
+      "dependsOnValues": [
+        "LAB_METER",
+        "DIGIEYE"
+      ],
+      "taxonomyGroup": "SOP",
+      "sourceReq": "SOP-202",
+      "mvpScope": "SCHEMA_READY",
+      "sortOrder": 30,
+      "description": "",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "app_color_a",
+      "domainCode": "APPEARANCE_SENSORY",
+      "subDomain": "COLOR",
+      "label": "a*",
+      "dataType": "number",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": true,
+      "dependsOnField": "app_color_method",
+      "dependsOnValues": [
+        "LAB_METER",
+        "DIGIEYE"
+      ],
+      "taxonomyGroup": "SOP",
+      "sourceReq": "SOP-202",
+      "mvpScope": "SCHEMA_READY",
+      "sortOrder": 31,
+      "description": "",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "app_color_b",
+      "domainCode": "APPEARANCE_SENSORY",
+      "subDomain": "COLOR",
+      "label": "b*",
+      "dataType": "number",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": true,
+      "dependsOnField": "app_color_method",
+      "dependsOnValues": [
+        "LAB_METER",
+        "DIGIEYE"
+      ],
+      "taxonomyGroup": "SOP",
+      "sourceReq": "SOP-202",
+      "mvpScope": "SCHEMA_READY",
+      "sortOrder": 32,
+      "description": "",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "sens_recorded",
+      "domainCode": "APPEARANCE_SENSORY",
+      "subDomain": "SENSORY",
+      "label": "Sensory recorded",
+      "dataType": "boolean",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "SOP",
+      "sourceReq": "SOP-202",
+      "mvpScope": "SCHEMA_READY",
+      "sortOrder": 40,
+      "description": "Sensory on released product as needed (Mural)",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "sens_texture",
+      "domainCode": "APPEARANCE_SENSORY",
+      "subDomain": "SENSORY",
+      "label": "Texture in mouth or on pour",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "TEXTURE_SENSORY",
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "sens_recorded",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "SOP",
+      "sourceReq": "Team sheet",
+      "mvpScope": "SCHEMA_READY",
+      "sortOrder": 41,
+      "description": "Smooth, slightly thicker, milkshake, pudding, lumpy, gritty",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "sens_notes",
+      "domainCode": "APPEARANCE_SENSORY",
+      "subDomain": "SENSORY",
+      "label": "Sensory notes",
+      "dataType": "longtext",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": "sens_recorded",
+      "dependsOnValues": [
+        "Y"
+      ],
+      "taxonomyGroup": "SOP",
+      "sourceReq": "Team sheet",
+      "mvpScope": "SCHEMA_READY",
+      "sortOrder": 42,
+      "description": "",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "custom1_name",
+      "domainCode": "CUSTOM",
+      "subDomain": "CUSTOM",
+      "label": "Custom observation 1: name",
+      "dataType": "text",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "SOP",
+      "sourceReq": "Mural",
+      "mvpScope": "SCHEMA_READY",
+      "sortOrder": 10,
+      "description": "Name of a one-off parameter for this template",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "custom1_unshaken",
+      "domainCode": "CUSTOM",
+      "subDomain": "CUSTOM",
+      "label": "Custom observation 1: unshaken",
+      "dataType": "text",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": true,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "SOP",
+      "sourceReq": "Mural",
+      "mvpScope": "SCHEMA_READY",
+      "sortOrder": 11,
+      "description": "",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "custom1_shaken",
+      "domainCode": "CUSTOM",
+      "subDomain": "CUSTOM",
+      "label": "Custom observation 1: shaken",
+      "dataType": "text",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": true,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "SOP",
+      "sourceReq": "Mural",
+      "mvpScope": "SCHEMA_READY",
+      "sortOrder": 12,
+      "description": "",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "custom2_name",
+      "domainCode": "CUSTOM",
+      "subDomain": "CUSTOM",
+      "label": "Custom observation 2: name",
+      "dataType": "text",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "SOP",
+      "sourceReq": "Mural",
+      "mvpScope": "SCHEMA_READY",
+      "sortOrder": 20,
+      "description": "Name of a one-off parameter for this template",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "custom2_unshaken",
+      "domainCode": "CUSTOM",
+      "subDomain": "CUSTOM",
+      "label": "Custom observation 2: unshaken",
+      "dataType": "text",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": true,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "SOP",
+      "sourceReq": "Mural",
+      "mvpScope": "SCHEMA_READY",
+      "sortOrder": 21,
+      "description": "",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "custom2_shaken",
+      "domainCode": "CUSTOM",
+      "subDomain": "CUSTOM",
+      "label": "Custom observation 2: shaken",
+      "dataType": "text",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": true,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "SOP",
+      "sourceReq": "Mural",
+      "mvpScope": "SCHEMA_READY",
+      "sortOrder": 22,
+      "description": "",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "custom3_name",
+      "domainCode": "CUSTOM",
+      "subDomain": "CUSTOM",
+      "label": "Custom observation 3: name",
+      "dataType": "text",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "SOP",
+      "sourceReq": "Mural",
+      "mvpScope": "SCHEMA_READY",
+      "sortOrder": 30,
+      "description": "Name of a one-off parameter for this template",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "custom3_unshaken",
+      "domainCode": "CUSTOM",
+      "subDomain": "CUSTOM",
+      "label": "Custom observation 3: unshaken",
+      "dataType": "text",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": true,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "SOP",
+      "sourceReq": "Mural",
+      "mvpScope": "SCHEMA_READY",
+      "sortOrder": 31,
+      "description": "",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "custom3_shaken",
+      "domainCode": "CUSTOM",
+      "subDomain": "CUSTOM",
+      "label": "Custom observation 3: shaken",
+      "dataType": "text",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": true,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "SOP",
+      "sourceReq": "Mural",
+      "mvpScope": "SCHEMA_READY",
+      "sortOrder": 32,
+      "description": "",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "pwd_caking",
+      "domainCode": "EXT_POWDER",
+      "subDomain": "POWDER",
+      "label": "Caking",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "SEVERITY_NONE",
+      "requiredDefault": false,
+      "allowNA": true,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "EXT",
+      "sourceReq": "OnePager",
+      "mvpScope": "SCHEMA_READY",
+      "sortOrder": 10,
+      "description": "Powder caking severity",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "pwd_flowability",
+      "domainCode": "EXT_POWDER",
+      "subDomain": "POWDER",
+      "label": "Flowability",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "FLOWABILITY",
+      "requiredDefault": false,
+      "allowNA": true,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "EXT",
+      "sourceReq": "OnePager",
+      "mvpScope": "SCHEMA_READY",
+      "sortOrder": 20,
+      "description": "Free flowing to non-flowing",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "pwd_color_change",
+      "domainCode": "EXT_POWDER",
+      "subDomain": "POWDER",
+      "label": "Color change vs T0",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "SEVERITY_NONE",
+      "requiredDefault": false,
+      "allowNA": true,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "EXT",
+      "sourceReq": "OnePager",
+      "mvpScope": "SCHEMA_READY",
+      "sortOrder": 30,
+      "description": "Color change compared with the T0 reference",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "pwd_lumps_present",
+      "domainCode": "EXT_POWDER",
+      "subDomain": "POWDER",
+      "label": "Lumps present",
+      "dataType": "boolean",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": true,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "EXT",
+      "sourceReq": "OnePager",
+      "mvpScope": "SCHEMA_READY",
+      "sortOrder": 40,
+      "description": "Lumps in the dry powder",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "pwd_wettability_s",
+      "domainCode": "EXT_POWDER",
+      "subDomain": "RECONSTITUTION",
+      "label": "Wettability time",
+      "dataType": "number",
+      "unit": "s",
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": true,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "EXT",
+      "sourceReq": "OnePager",
+      "mvpScope": "SCHEMA_READY",
+      "sortOrder": 50,
+      "description": "Seconds for the powder to wet on the liquid surface",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "pwd_dissolution_s",
+      "domainCode": "EXT_POWDER",
+      "subDomain": "RECONSTITUTION",
+      "label": "Dissolution time",
+      "dataType": "number",
+      "unit": "s",
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": true,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "EXT",
+      "sourceReq": "OnePager",
+      "mvpScope": "SCHEMA_READY",
+      "sortOrder": 60,
+      "description": "Seconds to full dissolution under standard stirring",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "pwd_foaming",
+      "domainCode": "EXT_POWDER",
+      "subDomain": "RECONSTITUTION",
+      "label": "Foaming after reconstitution",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "SEVERITY_NONE",
+      "requiredDefault": false,
+      "allowNA": true,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "EXT",
+      "sourceReq": "OnePager",
+      "mvpScope": "SCHEMA_READY",
+      "sortOrder": 70,
+      "description": "Foam formation after reconstitution",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "pwd_photo",
+      "domainCode": "EXT_POWDER",
+      "subDomain": "GENERAL",
+      "label": "Powder photo",
+      "dataType": "media_photo",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "EXT",
+      "sourceReq": "OnePager",
+      "mvpScope": "SCHEMA_READY",
+      "sortOrder": 80,
+      "description": "Photo evidence",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "vms_appearance_change",
+      "domainCode": "EXT_VMS",
+      "subDomain": "TABLET",
+      "label": "Appearance change vs T0",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "SEVERITY_NONE",
+      "requiredDefault": false,
+      "allowNA": true,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "EXT",
+      "sourceReq": "OnePager",
+      "mvpScope": "SCHEMA_READY",
+      "sortOrder": 10,
+      "description": "Visible change in tablet, capsule or gummy appearance",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "vms_surface_mottling",
+      "domainCode": "EXT_VMS",
+      "subDomain": "TABLET",
+      "label": "Surface mottling",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "SEVERITY_NONE",
+      "requiredDefault": false,
+      "allowNA": true,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "EXT",
+      "sourceReq": "OnePager",
+      "mvpScope": "SCHEMA_READY",
+      "sortOrder": 20,
+      "description": "Mottled or spotted surface",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "vms_chipping_capping",
+      "domainCode": "EXT_VMS",
+      "subDomain": "TABLET",
+      "label": "Chipping or capping",
+      "dataType": "boolean",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": true,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "EXT",
+      "sourceReq": "OnePager",
+      "mvpScope": "SCHEMA_READY",
+      "sortOrder": 30,
+      "description": "Physical damage to the dosage form",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "vms_hardness_kp",
+      "domainCode": "EXT_VMS",
+      "subDomain": "TABLET",
+      "label": "Hardness",
+      "dataType": "number",
+      "unit": "kp",
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": true,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "EXT",
+      "sourceReq": "OnePager",
+      "mvpScope": "SCHEMA_READY",
+      "sortOrder": 40,
+      "description": "Tablet hardness",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "vms_disintegration_min",
+      "domainCode": "EXT_VMS",
+      "subDomain": "TABLET",
+      "label": "Disintegration time",
+      "dataType": "number",
+      "unit": "min",
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": true,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "EXT",
+      "sourceReq": "OnePager",
+      "mvpScope": "SCHEMA_READY",
+      "sortOrder": 50,
+      "description": "Minutes to disintegration under standard method",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "vms_odor_change",
+      "domainCode": "EXT_VMS",
+      "subDomain": "SENSORY",
+      "label": "Odor change vs T0",
+      "dataType": "select",
+      "unit": null,
+      "vocabularyCode": "SEVERITY_NONE",
+      "requiredDefault": false,
+      "allowNA": true,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "EXT",
+      "sourceReq": "OnePager",
+      "mvpScope": "SCHEMA_READY",
+      "sortOrder": 60,
+      "description": "Odor change compared with the T0 reference",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "vms_capsule_leakage",
+      "domainCode": "EXT_VMS",
+      "subDomain": "CAPSULE",
+      "label": "Capsule leakage",
+      "dataType": "boolean",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": true,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "EXT",
+      "sourceReq": "OnePager",
+      "mvpScope": "SCHEMA_READY",
+      "sortOrder": 70,
+      "description": "Softgel or capsule leakage",
+      "isHeader": false,
+      "systemDerived": false
+    },
+    {
+      "fieldCode": "vms_photo",
+      "domainCode": "EXT_VMS",
+      "subDomain": "GENERAL",
+      "label": "VMS photo",
+      "dataType": "media_photo",
+      "unit": null,
+      "vocabularyCode": null,
+      "requiredDefault": false,
+      "allowNA": false,
+      "dependsOnField": null,
+      "dependsOnValues": null,
+      "taxonomyGroup": "EXT",
+      "sourceReq": "OnePager",
+      "mvpScope": "SCHEMA_READY",
+      "sortOrder": 80,
+      "description": "Photo evidence",
+      "isHeader": false,
+      "systemDerived": false
+    }
+  ],
+  "templates": [
+    {
+      "templateId": "TPL_RTD_MVP",
+      "templateName": "RTD liquid: SOP guided questionnaire",
+      "formulationClass": "LIQUID_RTD",
+      "version": 1,
+      "status": "ACTIVE",
+      "description": "Homogeneity first, then unshaken and shaken creaming, serum and sediment with the SOP 0 to 5 rating suggested from each measurement, plus gelling, rippling and protein sagging. Lab results typed in from LIMS.",
+      "sections": [
+        {
+          "label": "Test context",
+          "fields": [
+            "project_code",
+            "ar_number",
+            "trial_number",
+            "variant_number",
+            "sample_code",
+            "time_point",
+            "temperature_condition",
+            "formulation_class",
+            "product_format",
+            "container_type",
+            "package_volume_ml",
+            "package_fill_height_mm",
+            "sample_storage_orientation",
+            "sample_temperature_at_test",
+            "sample_opened_previously",
+            "shake_protocol",
+            "shake_count",
+            "result_type",
+            "plan_status",
+            "observer_user_id",
+            "observation_timestamp",
+            "test_status",
+            "overall_result",
+            "exclude_from_trend",
+            "exclude_reason",
+            "overall_comments"
+          ]
+        },
+        {
+          "label": "Lab results (typed from LIMS)",
+          "fields": [
+            "lab_source",
+            "lab_lims_reference",
+            "lab_ph",
+            "lab_visc1_value",
+            "lab_visc1_instrument",
+            "lab_visc1_geometry",
+            "lab_visc1_shear_rate",
+            "lab_visc1_temp_c",
+            "lab_visc2_value",
+            "lab_visc2_instrument",
+            "lab_visc2_geometry",
+            "lab_visc2_shear_rate",
+            "lab_visc2_temp_c",
+            "lab_brix",
+            "lab_particle_size_d50_um",
+            "lab_measured_at"
+          ]
+        },
+        {
+          "label": "Sample media",
+          "fields": [
+            "general_overview_photo",
+            "general_empty_bottle_photo",
+            "general_beaker_photo",
+            "general_pour_out_video"
+          ]
+        },
+        {
+          "label": "Homogeneity",
+          "fields": [
+            "homog_unshaken_homogeneous",
+            "homog_unshaken_appearance",
+            "homog_unshaken_photo",
+            "homog_shaken_test_performed",
+            "homog_shaken_homogeneous",
+            "homog_post_shake_color_change",
+            "homog_post_shake_color_description",
+            "homog_post_shake_color_code",
+            "homog_shaken_photo",
+            "homog_comments"
+          ]
+        },
+        {
+          "label": "Creaming",
+          "fields": [
+            "cream_unsh_present",
+            "cream_unsh_rating",
+            "cream_unsh_layer_measurable",
+            "cream_unsh_layer_thickness_value",
+            "cream_unsh_layer_thickness_unit",
+            "cream_unsh_layer_description",
+            "cream_unsh_layer_color",
+            "cream_unsh_marbling_present",
+            "cream_unsh_minor_spots_present",
+            "cream_unsh_surface_volume_pct",
+            "cream_unsh_pour_exit_time_s",
+            "cream_unsh_photo",
+            "cream_unsh_pour_out_video",
+            "cream_unsh_pour_out_result",
+            "cream_sh_shakes_in",
+            "cream_sh_rating",
+            "cream_sh_result",
+            "cream_sh_residue_type",
+            "cream_sh_residual_pct",
+            "cream_sh_photo",
+            "cream_emulsifier_flag",
+            "cream_rim_dried_residue_present",
+            "cream_rim_residue_fatty",
+            "cream_market_restriction_flag",
+            "cream_review_prompt",
+            "cream_comments"
+          ]
+        },
+        {
+          "label": "Serum separation",
+          "fields": [
+            "serum_unsh_present",
+            "serum_unsh_rating",
+            "serum_unsh_measurable",
+            "serum_unsh_value",
+            "serum_unsh_unit",
+            "serum_unsh_pct_package_volume",
+            "serum_unsh_locations",
+            "serum_unsh_clarity",
+            "serum_unsh_color",
+            "serum_unsh_photo",
+            "serum_sh_shakes_in",
+            "serum_sh_rating",
+            "serum_sh_value",
+            "serum_sh_unit",
+            "serum_sh_result",
+            "serum_sh_photo",
+            "serum_gelation_flag",
+            "serum_protein_flag",
+            "serum_scale_up_viscosity_warning",
+            "serum_review_prompt",
+            "serum_comments"
+          ]
+        },
+        {
+          "label": "Sediment",
+          "fields": [
+            "sed_unsh_present",
+            "sed_unsh_rating",
+            "sed_unsh_height_value",
+            "sed_unsh_height_unit",
+            "sed_unsh_coverage",
+            "sed_unsh_texture",
+            "sed_measurement_point",
+            "sed_measurement_location",
+            "sed_weight_g",
+            "sed_bottle_cut_to_evaluate",
+            "sed_bottle_coating_present",
+            "sed_unsh_photo",
+            "sed_predominant_type",
+            "sed_prot_review_prompt",
+            "sed_coc_settling_pct_volume",
+            "sed_sh_rating",
+            "sed_sh_height_value",
+            "sed_sh_height_unit",
+            "sed_sh_shake_in_extent",
+            "sed_sh_lumps_present",
+            "sed_sh_photo",
+            "sed_composition_test_requested",
+            "sed_comments"
+          ]
+        },
+        {
+          "label": "Gelling",
+          "fields": [
+            "gel_gelled",
+            "gel_too_thick_to_pour",
+            "gel_firmness",
+            "gel_shake_test_performed",
+            "gel_reversibility",
+            "gel_spoilage_related",
+            "gel_photo",
+            "gel_comments"
+          ]
+        },
+        {
+          "label": "Non-homogeneity",
+          "fields": [
+            "nh_rippling_present",
+            "nh_lumps_present",
+            "nh_lumps_severity",
+            "nh_lumps_context",
+            "nh_sieve_used",
+            "nh_sieve_mesh",
+            "nh_smooth_after_shaking",
+            "nh_spoilage_related",
+            "nh_pour_video",
+            "nh_photo",
+            "nh_comments"
+          ]
+        },
+        {
+          "label": "Protein sagging",
+          "fields": [
+            "psag_vertical_stripes_present",
+            "psag_stripe_coverage",
+            "psag_photo",
+            "psag_comments"
+          ]
+        }
+      ]
+    },
+    {
+      "templateId": "TPL_RTD_FULL",
+      "templateName": "RTD liquid: full catalog",
+      "formulationClass": "LIQUID_RTD",
+      "version": 1,
+      "status": "ACTIVE",
+      "description": "Every RTD descriptor including re-separation checks, appearance and sensory, and three custom slots.",
+      "sections": [
+        {
+          "label": "Test context",
+          "fields": [
+            "project_code",
+            "ar_number",
+            "trial_number",
+            "variant_number",
+            "sample_code",
+            "time_point",
+            "temperature_condition",
+            "formulation_class",
+            "product_format",
+            "container_type",
+            "package_volume_ml",
+            "package_fill_height_mm",
+            "sample_storage_orientation",
+            "sample_temperature_at_test",
+            "sample_opened_previously",
+            "shake_protocol",
+            "shake_count",
+            "result_type",
+            "plan_status",
+            "observer_user_id",
+            "observation_timestamp",
+            "test_status",
+            "overall_result",
+            "exclude_from_trend",
+            "exclude_reason",
+            "overall_comments"
+          ]
+        },
+        {
+          "label": "Lab results",
+          "fields": [
+            "lab_source",
+            "lab_lims_reference",
+            "lab_ph",
+            "lab_visc1_value",
+            "lab_visc1_instrument",
+            "lab_visc1_geometry",
+            "lab_visc1_shear_rate",
+            "lab_visc1_temp_c",
+            "lab_visc2_value",
+            "lab_visc2_instrument",
+            "lab_visc2_geometry",
+            "lab_visc2_shear_rate",
+            "lab_visc2_temp_c",
+            "lab_brix",
+            "lab_particle_size_d50_um",
+            "lab_measured_at"
+          ]
+        },
+        {
+          "label": "Sample media",
+          "fields": [
+            "general_overview_photo",
+            "general_empty_bottle_photo",
+            "general_beaker_photo",
+            "general_pour_out_video"
+          ]
+        },
+        {
+          "label": "Homogeneity",
+          "fields": [
+            "homog_unshaken_homogeneous",
+            "homog_unshaken_appearance",
+            "homog_unshaken_photo",
+            "homog_shaken_test_performed",
+            "homog_shaken_homogeneous",
+            "homog_post_shake_color_change",
+            "homog_post_shake_color_description",
+            "homog_post_shake_color_code",
+            "homog_shaken_photo",
+            "homog_comments"
+          ]
+        },
+        {
+          "label": "Creaming",
+          "fields": [
+            "cream_unsh_present",
+            "cream_unsh_rating",
+            "cream_unsh_layer_measurable",
+            "cream_unsh_layer_thickness_value",
+            "cream_unsh_layer_thickness_unit",
+            "cream_unsh_layer_description",
+            "cream_unsh_layer_color",
+            "cream_unsh_marbling_present",
+            "cream_unsh_minor_spots_present",
+            "cream_unsh_surface_volume_pct",
+            "cream_unsh_pour_exit_time_s",
+            "cream_unsh_photo",
+            "cream_unsh_pour_out_video",
+            "cream_unsh_pour_out_result",
+            "cream_sh_shakes_in",
+            "cream_sh_rating",
+            "cream_sh_result",
+            "cream_sh_residue_type",
+            "cream_sh_residual_pct",
+            "cream_sh_photo",
+            "cream_emulsifier_flag",
+            "cream_rim_dried_residue_present",
+            "cream_rim_residue_fatty",
+            "cream_market_restriction_flag",
+            "cream_review_prompt",
+            "cream_comments"
+          ]
+        },
+        {
+          "label": "Serum separation",
+          "fields": [
+            "serum_unsh_present",
+            "serum_unsh_rating",
+            "serum_unsh_measurable",
+            "serum_unsh_value",
+            "serum_unsh_unit",
+            "serum_unsh_pct_package_volume",
+            "serum_unsh_locations",
+            "serum_unsh_clarity",
+            "serum_unsh_color",
+            "serum_unsh_photo",
+            "serum_sh_shakes_in",
+            "serum_sh_rating",
+            "serum_sh_value",
+            "serum_sh_unit",
+            "serum_sh_result",
+            "serum_sh_photo",
+            "serum_gelation_flag",
+            "serum_protein_flag",
+            "serum_resep_check_performed",
+            "serum_resep_hours_after_shake",
+            "serum_resep_present",
+            "serum_resep_rating",
+            "serum_resep_photo",
+            "serum_scale_up_viscosity_warning",
+            "serum_review_prompt",
+            "serum_comments"
+          ]
+        },
+        {
+          "label": "Sediment",
+          "fields": [
+            "sed_unsh_present",
+            "sed_unsh_rating",
+            "sed_unsh_height_value",
+            "sed_unsh_height_unit",
+            "sed_unsh_coverage",
+            "sed_unsh_texture",
+            "sed_measurement_point",
+            "sed_measurement_location",
+            "sed_weight_g",
+            "sed_bottle_cut_to_evaluate",
+            "sed_bottle_coating_present",
+            "sed_unsh_photo",
+            "sed_predominant_type",
+            "sed_prot_review_prompt",
+            "sed_min_appearance",
+            "sed_min_review_prompt",
+            "sed_coc_ring_present",
+            "sed_coc_settling_pct_volume",
+            "sed_coc_review_prompt",
+            "sed_sh_rating",
+            "sed_sh_height_value",
+            "sed_sh_height_unit",
+            "sed_sh_shake_in_extent",
+            "sed_sh_lumps_present",
+            "sed_sh_photo",
+            "sed_composition_test_requested",
+            "sed_comments"
+          ]
+        },
+        {
+          "label": "Gelling",
+          "fields": [
+            "gel_gelled",
+            "gel_type",
+            "gel_too_thick_to_pour",
+            "gel_firmness",
+            "gel_shake_test_performed",
+            "gel_reversibility",
+            "gel_spoilage_related",
+            "gel_observations",
+            "gel_photo",
+            "gel_comments"
+          ]
+        },
+        {
+          "label": "Non-homogeneity",
+          "fields": [
+            "nh_rippling_present",
+            "nh_lumps_present",
+            "nh_lumps_severity",
+            "nh_lumps_context",
+            "nh_lumps_size_class",
+            "nh_sieve_used",
+            "nh_sieve_mesh",
+            "nh_curdling_present",
+            "nh_smooth_after_shaking",
+            "nh_spoilage_related",
+            "nh_pour_video",
+            "nh_photo",
+            "nh_comments"
+          ]
+        },
+        {
+          "label": "Protein sagging",
+          "fields": [
+            "psag_vertical_stripes_present",
+            "psag_stripe_coverage",
+            "psag_photo",
+            "psag_comments"
+          ]
+        },
+        {
+          "label": "Appearance and sensory",
+          "fields": [
+            "app_color_change_vs_t0",
+            "app_color_method",
+            "app_color_l",
+            "app_color_a",
+            "app_color_b",
+            "sens_recorded",
+            "sens_texture",
+            "sens_notes"
+          ]
+        },
+        {
+          "label": "Custom observations",
+          "fields": [
+            "custom1_name",
+            "custom1_unshaken",
+            "custom1_shaken",
+            "custom2_name",
+            "custom2_unshaken",
+            "custom2_shaken",
+            "custom3_name",
+            "custom3_unshaken",
+            "custom3_shaken"
+          ]
+        }
+      ]
+    },
+    {
+      "templateId": "TPL_RTD_QUICK",
+      "templateName": "RTD liquid: SOP rating sheet",
+      "formulationClass": "LIQUID_RTD",
+      "version": 1,
+      "status": "ACTIVE",
+      "description": "The six SOP ratings (creaming, serum, sediment; unshaken and shaken), sediment heights, pH and viscosity, photos and a comment: the team spreadsheet as a form.",
+      "sections": [
+        {
+          "label": "Test context",
+          "fields": [
+            "project_code",
+            "ar_number",
+            "trial_number",
+            "variant_number",
+            "sample_code",
+            "time_point",
+            "temperature_condition",
+            "formulation_class",
+            "shake_protocol",
+            "result_type",
+            "observer_user_id",
+            "observation_timestamp",
+            "test_status",
+            "overall_result",
+            "overall_comments"
+          ]
+        },
+        {
+          "label": "Lab results (typed from LIMS)",
+          "fields": [
+            "lab_source",
+            "lab_ph",
+            "lab_visc1_value",
+            "lab_visc1_instrument",
+            "lab_visc1_shear_rate",
+            "lab_visc1_temp_c",
+            "lab_visc2_value",
+            "lab_visc2_temp_c"
+          ]
+        },
+        {
+          "label": "Photos",
+          "fields": [
+            "general_overview_photo",
+            "general_empty_bottle_photo"
+          ]
+        },
+        {
+          "label": "SOP ratings",
+          "fields": [
+            "homog_unshaken_homogeneous",
+            "cream_unsh_present",
+            "cream_unsh_rating",
+            "cream_sh_rating",
+            "serum_unsh_present",
+            "serum_unsh_rating",
+            "serum_sh_rating",
+            "sed_unsh_present",
+            "sed_unsh_rating",
+            "sed_unsh_height_value",
+            "sed_unsh_height_unit",
+            "sed_sh_rating",
+            "sed_sh_height_value",
+            "sed_sh_height_unit",
+            "sed_bottle_coating_present",
+            "gel_gelled",
+            "nh_rippling_present",
+            "nh_lumps_present",
+            "nh_smooth_after_shaking"
+          ]
+        }
+      ]
+    },
+    {
+      "templateId": "TPL_POWDER",
+      "templateName": "Powder: physical stability",
+      "formulationClass": "POWDER",
+      "version": 1,
+      "status": "DRAFT",
+      "description": "Extension template for powder formulations. Fields are outside the URS 127-field count and need PD vocabulary confirmation.",
+      "sections": [
+        {
+          "label": "Test context",
+          "fields": [
+            "project_code",
+            "ar_number",
+            "trial_number",
+            "variant_number",
+            "sample_code",
+            "time_point",
+            "temperature_condition",
+            "formulation_class",
+            "product_format",
+            "container_type",
+            "package_volume_ml",
+            "package_fill_height_mm",
+            "sample_storage_orientation",
+            "sample_temperature_at_test",
+            "sample_opened_previously",
+            "result_type",
+            "plan_status",
+            "observer_user_id",
+            "observation_timestamp",
+            "test_status",
+            "overall_result",
+            "overall_comments"
+          ]
+        },
+        {
+          "label": "Sample media",
+          "fields": [
+            "general_overview_photo"
+          ]
+        },
+        {
+          "label": "Powder observations",
+          "fields": [
+            "pwd_caking",
+            "pwd_flowability",
+            "pwd_color_change",
+            "pwd_lumps_present",
+            "pwd_wettability_s",
+            "pwd_dissolution_s",
+            "pwd_foaming",
+            "pwd_photo"
+          ]
+        }
+      ]
+    },
+    {
+      "templateId": "TPL_VMS",
+      "templateName": "VMS: physical stability",
+      "formulationClass": "VMS",
+      "version": 1,
+      "status": "DRAFT",
+      "description": "Extension template for tablets, capsules and gummies. Fields are outside the URS 127-field count and need PD vocabulary confirmation.",
+      "sections": [
+        {
+          "label": "Test context",
+          "fields": [
+            "project_code",
+            "ar_number",
+            "trial_number",
+            "variant_number",
+            "sample_code",
+            "time_point",
+            "temperature_condition",
+            "formulation_class",
+            "product_format",
+            "container_type",
+            "package_volume_ml",
+            "package_fill_height_mm",
+            "sample_storage_orientation",
+            "sample_temperature_at_test",
+            "sample_opened_previously",
+            "result_type",
+            "plan_status",
+            "observer_user_id",
+            "observation_timestamp",
+            "test_status",
+            "overall_result",
+            "overall_comments"
+          ]
+        },
+        {
+          "label": "Sample media",
+          "fields": [
+            "general_overview_photo"
+          ]
+        },
+        {
+          "label": "VMS observations",
+          "fields": [
+            "vms_appearance_change",
+            "vms_surface_mottling",
+            "vms_chipping_capping",
+            "vms_hardness_kp",
+            "vms_disintegration_min",
+            "vms_odor_change",
+            "vms_capsule_leakage",
+            "vms_photo"
+          ]
+        }
+      ]
+    }
+  ],
+  "headerFields": [
+    "project_code",
+    "ar_number",
+    "trial_number",
+    "variant_number",
+    "sample_code",
+    "time_point",
+    "temperature_condition",
+    "formulation_class",
+    "result_type",
+    "observer_user_id",
+    "observation_timestamp",
+    "test_status",
+    "overall_result"
+  ]
+}

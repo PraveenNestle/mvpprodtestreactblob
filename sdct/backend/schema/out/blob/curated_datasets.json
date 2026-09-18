@@ -1,0 +1,1998 @@
+{
+  "generatedAt": "2026-09-01T17:25:11Z",
+  "container": "curated",
+  "layout": "{dataset}/{yyyy}/{mm}/{dd}.ndjson, one JSON object per line, appended by the API at submit / review / config change",
+  "timePointOffsetDays": {
+    "T0": 0,
+    "1D": 1,
+    "1W": 7,
+    "2W": 14,
+    "1M": 30,
+    "2M": 61,
+    "3M": 91,
+    "4M": 122,
+    "6M": 182,
+    "9M": 273,
+    "12M": 365,
+    "15M": 456,
+    "18M": 548
+  },
+  "datasets": {
+    "observation_header": {
+      "grain": "one row per observation version event (submit, amend, review)",
+      "primaryKey": [
+        "observationId",
+        "versionNo",
+        "appendedAt"
+      ],
+      "columns": [
+        {
+          "name": "observationId",
+          "type": "string",
+          "description": "UUID of the observation; stable across versions"
+        },
+        {
+          "name": "versionNo",
+          "type": "integer",
+          "description": ""
+        },
+        {
+          "name": "isCurrent",
+          "type": "boolean",
+          "description": "true on every appended row; the latest appendedAt per observationId is the current one"
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "description": "SUBMITTED | REVIEWED | REJECTED"
+        },
+        {
+          "name": "projectCode",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "arNumber",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "trialNumber",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "variantId",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "variantNumber",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "sampleCode",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "timePointCode",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "conditionCode",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "formulationClass",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "planId",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "planVersion",
+          "type": "integer",
+          "description": ""
+        },
+        {
+          "name": "templateId",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "templateVersion",
+          "type": "integer",
+          "description": ""
+        },
+        {
+          "name": "resultType",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "overallResult",
+          "type": "string",
+          "description": "ACCEPTABLE | WATCH | UNACCEPTABLE | null"
+        },
+        {
+          "name": "overallResultNA",
+          "type": "boolean",
+          "description": ""
+        },
+        {
+          "name": "observerUserId",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "observerName",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "observedAt",
+          "type": "datetime",
+          "description": ""
+        },
+        {
+          "name": "submittedAt",
+          "type": "datetime",
+          "description": ""
+        },
+        {
+          "name": "reviewedBy",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "reviewedAt",
+          "type": "datetime",
+          "description": ""
+        },
+        {
+          "name": "mediaCount",
+          "type": "integer",
+          "description": ""
+        },
+        {
+          "name": "blobPath",
+          "type": "string",
+          "description": "observations/{PROJECT}/{AR}/{TRIAL}/{observationId}.json"
+        },
+        {
+          "name": "blobVersionId",
+          "type": "string",
+          "description": "Blob version id of the document this row describes"
+        },
+        {
+          "name": "previousVersionNo",
+          "type": "integer",
+          "description": ""
+        },
+        {
+          "name": "appendedAt",
+          "type": "datetime",
+          "description": "server time the row was appended; used to pick the current row"
+        }
+      ]
+    },
+    "observation_value": {
+      "grain": "one row per captured field per observation version",
+      "primaryKey": [
+        "observationId",
+        "versionNo",
+        "fieldCode"
+      ],
+      "columns": [
+        {
+          "name": "observationId",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "versionNo",
+          "type": "integer",
+          "description": ""
+        },
+        {
+          "name": "fieldCode",
+          "type": "string",
+          "description": "one of the catalog field codes"
+        },
+        {
+          "name": "domainCode",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "dataType",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "valueText",
+          "type": "string",
+          "description": "string form of the value; multiselect codes joined with |; null when N/A"
+        },
+        {
+          "name": "valueNumber",
+          "type": "number",
+          "description": "numeric fields only"
+        },
+        {
+          "name": "valueBoolean",
+          "type": "boolean",
+          "description": "boolean and guidance fields only"
+        },
+        {
+          "name": "unit",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "isNA",
+          "type": "boolean",
+          "description": ""
+        },
+        {
+          "name": "naReason",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "mediaAssetId",
+          "type": "string",
+          "description": "first media asset for media fields"
+        },
+        {
+          "name": "sampleCode",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "timePointCode",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "conditionCode",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "arNumber",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "projectCode",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "observedAt",
+          "type": "datetime",
+          "description": ""
+        }
+      ]
+    },
+    "media_asset": {
+      "grain": "one row per photo or video per observation version",
+      "primaryKey": [
+        "mediaAssetId",
+        "observationId",
+        "versionNo"
+      ],
+      "columns": [
+        {
+          "name": "mediaAssetId",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "observationId",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "versionNo",
+          "type": "integer",
+          "description": ""
+        },
+        {
+          "name": "fieldCode",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "mediaType",
+          "type": "string",
+          "description": "PHOTO | VIDEO"
+        },
+        {
+          "name": "blobContainer",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "blobPath",
+          "type": "string",
+          "description": "{PROJECT}/{AR}/{TRIAL}/{standardFilename}"
+        },
+        {
+          "name": "blobUri",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "standardFilename",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "originalFilename",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "contentType",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "sizeBytes",
+          "type": "integer",
+          "description": ""
+        },
+        {
+          "name": "widthPx",
+          "type": "integer",
+          "description": ""
+        },
+        {
+          "name": "heightPx",
+          "type": "integer",
+          "description": ""
+        },
+        {
+          "name": "durationS",
+          "type": "number",
+          "description": ""
+        },
+        {
+          "name": "capturedAt",
+          "type": "datetime",
+          "description": ""
+        },
+        {
+          "name": "deviceModel",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "checksumMd5",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "sampleCode",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "timePointCode",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "conditionCode",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "arNumber",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "projectCode",
+          "type": "string",
+          "description": ""
+        }
+      ]
+    },
+    "audit_log": {
+      "grain": "one row per audited action",
+      "primaryKey": [
+        "auditId"
+      ],
+      "columns": [
+        {
+          "name": "auditId",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "eventTime",
+          "type": "datetime",
+          "description": ""
+        },
+        {
+          "name": "actorUserId",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "actorName",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "actorRole",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "action",
+          "type": "string",
+          "description": "CREATE | UPDATE | REVIEW | REJECT | MEDIA_UPLOAD | CONFIG_CHANGE"
+        },
+        {
+          "name": "entityType",
+          "type": "string",
+          "description": "OBSERVATION | MEDIA_ASSET | TEMPLATE | VOCABULARY | REFERENCE"
+        },
+        {
+          "name": "entityId",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "entityVersion",
+          "type": "integer",
+          "description": ""
+        },
+        {
+          "name": "correlationId",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "detail",
+          "type": "string",
+          "description": ""
+        }
+      ]
+    }
+  },
+  "derived": {
+    "ObservationCurrent": "latest observation_header row per observationId (max appendedAt), status <> REJECTED",
+    "ObservationFlat": "ObservationCurrent joined to observation_value pivoted to one column per field code (list below)",
+    "DefectIncidence": "presence flag per defect domain per current observation",
+    "PlanProgress": "reference plans expanded to time point x condition cells with CAPTURED / DUE / OVERDUE / PLANNED",
+    "MediaCoverage": "media counts and overview-photo flag per current observation"
+  },
+  "flatColumns": [
+    {
+      "name": "product_format",
+      "type": "select",
+      "domainCode": "TEST_CONTEXT",
+      "label": "Product format",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "container_type",
+      "type": "select",
+      "domainCode": "TEST_CONTEXT",
+      "label": "Container type",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "package_volume_ml",
+      "type": "number",
+      "domainCode": "TEST_CONTEXT",
+      "label": "Nominal package volume",
+      "unit": "mL",
+      "pqType": "type number"
+    },
+    {
+      "name": "package_fill_height_mm",
+      "type": "number",
+      "domainCode": "TEST_CONTEXT",
+      "label": "Fill height",
+      "unit": "mm",
+      "pqType": "type number"
+    },
+    {
+      "name": "sample_storage_orientation",
+      "type": "select",
+      "domainCode": "TEST_CONTEXT",
+      "label": "Storage orientation",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "sample_temperature_at_test",
+      "type": "number",
+      "domainCode": "TEST_CONTEXT",
+      "label": "Sample temperature at observation",
+      "unit": "\u00b0C",
+      "pqType": "type number"
+    },
+    {
+      "name": "sample_opened_previously",
+      "type": "boolean",
+      "domainCode": "TEST_CONTEXT",
+      "label": "Sample opened previously",
+      "unit": null,
+      "pqType": "type logical"
+    },
+    {
+      "name": "shake_protocol",
+      "type": "select",
+      "domainCode": "TEST_CONTEXT",
+      "label": "Shaking protocol",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "shake_count",
+      "type": "integer",
+      "domainCode": "TEST_CONTEXT",
+      "label": "Shakes applied",
+      "unit": "shakes",
+      "pqType": "Int64.Type"
+    },
+    {
+      "name": "plan_status",
+      "type": "select",
+      "domainCode": "TEST_CONTEXT",
+      "label": "Plan status at capture",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "exclude_from_trend",
+      "type": "boolean",
+      "domainCode": "TEST_CONTEXT",
+      "label": "Exclude from trend analysis",
+      "unit": null,
+      "pqType": "type logical"
+    },
+    {
+      "name": "exclude_reason",
+      "type": "text",
+      "domainCode": "TEST_CONTEXT",
+      "label": "Exclusion reason",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "overall_comments",
+      "type": "longtext",
+      "domainCode": "TEST_CONTEXT",
+      "label": "Overall comments",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "lab_source",
+      "type": "select",
+      "domainCode": "LAB_RESULTS",
+      "label": "Lab results source",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "lab_lims_reference",
+      "type": "text",
+      "domainCode": "LAB_RESULTS",
+      "label": "LIMS reference",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "lab_ph",
+      "type": "number",
+      "domainCode": "LAB_RESULTS",
+      "label": "pH",
+      "unit": "pH",
+      "pqType": "type number"
+    },
+    {
+      "name": "lab_visc1_value",
+      "type": "number",
+      "domainCode": "LAB_RESULTS",
+      "label": "Viscosity 1",
+      "unit": "mPa\u00b7s",
+      "pqType": "type number"
+    },
+    {
+      "name": "lab_visc1_instrument",
+      "type": "select",
+      "domainCode": "LAB_RESULTS",
+      "label": "Viscosity 1 instrument",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "lab_visc1_geometry",
+      "type": "text",
+      "domainCode": "LAB_RESULTS",
+      "label": "Viscosity 1 geometry / spindle",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "lab_visc1_shear_rate",
+      "type": "number",
+      "domainCode": "LAB_RESULTS",
+      "label": "Viscosity 1 shear rate",
+      "unit": "1/s",
+      "pqType": "type number"
+    },
+    {
+      "name": "lab_visc1_temp_c",
+      "type": "number",
+      "domainCode": "LAB_RESULTS",
+      "label": "Viscosity 1 measurement temperature",
+      "unit": "\u00b0C",
+      "pqType": "type number"
+    },
+    {
+      "name": "lab_visc2_value",
+      "type": "number",
+      "domainCode": "LAB_RESULTS",
+      "label": "Viscosity 2",
+      "unit": "mPa\u00b7s",
+      "pqType": "type number"
+    },
+    {
+      "name": "lab_visc2_instrument",
+      "type": "select",
+      "domainCode": "LAB_RESULTS",
+      "label": "Viscosity 2 instrument",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "lab_visc2_geometry",
+      "type": "text",
+      "domainCode": "LAB_RESULTS",
+      "label": "Viscosity 2 geometry / spindle",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "lab_visc2_shear_rate",
+      "type": "number",
+      "domainCode": "LAB_RESULTS",
+      "label": "Viscosity 2 shear rate",
+      "unit": "1/s",
+      "pqType": "type number"
+    },
+    {
+      "name": "lab_visc2_temp_c",
+      "type": "number",
+      "domainCode": "LAB_RESULTS",
+      "label": "Viscosity 2 measurement temperature",
+      "unit": "\u00b0C",
+      "pqType": "type number"
+    },
+    {
+      "name": "lab_brix",
+      "type": "number",
+      "domainCode": "LAB_RESULTS",
+      "label": "Brix",
+      "unit": "\u00b0Bx",
+      "pqType": "type number"
+    },
+    {
+      "name": "lab_particle_size_d50_um",
+      "type": "number",
+      "domainCode": "LAB_RESULTS",
+      "label": "Particle size D50",
+      "unit": "\u00b5m",
+      "pqType": "type number"
+    },
+    {
+      "name": "lab_measured_at",
+      "type": "datetime",
+      "domainCode": "LAB_RESULTS",
+      "label": "Lab measurement date",
+      "unit": null,
+      "pqType": "type datetimezone"
+    },
+    {
+      "name": "general_overview_photo",
+      "type": "media_photo",
+      "domainCode": "GENERAL_MEDIA",
+      "label": "Full bottle photo (before pouring)",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "general_empty_bottle_photo",
+      "type": "media_photo",
+      "domainCode": "GENERAL_MEDIA",
+      "label": "Emptied bottle photo (after pouring)",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "general_beaker_photo",
+      "type": "media_photo",
+      "domainCode": "GENERAL_MEDIA",
+      "label": "Poured product in beaker photo",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "general_pour_out_video",
+      "type": "media_video",
+      "domainCode": "GENERAL_MEDIA",
+      "label": "Pour-out video",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "homog_unshaken_homogeneous",
+      "type": "boolean",
+      "domainCode": "HOMOG",
+      "label": "Homogeneous when unshaken",
+      "unit": null,
+      "pqType": "type logical"
+    },
+    {
+      "name": "homog_unshaken_appearance",
+      "type": "select",
+      "domainCode": "HOMOG",
+      "label": "Unshaken appearance",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "homog_unshaken_photo",
+      "type": "media_photo",
+      "domainCode": "HOMOG",
+      "label": "Unshaken photo",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "homog_shaken_test_performed",
+      "type": "boolean",
+      "domainCode": "HOMOG",
+      "label": "Shaken test performed",
+      "unit": null,
+      "pqType": "type logical"
+    },
+    {
+      "name": "homog_shaken_homogeneous",
+      "type": "boolean",
+      "domainCode": "HOMOG",
+      "label": "Homogeneous after shaking",
+      "unit": null,
+      "pqType": "type logical"
+    },
+    {
+      "name": "homog_post_shake_color_change",
+      "type": "boolean",
+      "domainCode": "HOMOG",
+      "label": "Color change after shaking",
+      "unit": null,
+      "pqType": "type logical"
+    },
+    {
+      "name": "homog_post_shake_color_description",
+      "type": "select",
+      "domainCode": "HOMOG",
+      "label": "Post-shake color description",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "homog_post_shake_color_code",
+      "type": "code",
+      "domainCode": "HOMOG",
+      "label": "Post-shake color code",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "homog_shaken_photo",
+      "type": "media_photo",
+      "domainCode": "HOMOG",
+      "label": "Shaken photo",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "homog_comments",
+      "type": "longtext",
+      "domainCode": "HOMOG",
+      "label": "Homogeneity comments",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "cream_unsh_present",
+      "type": "boolean",
+      "domainCode": "CREAMING",
+      "label": "Creaming present (unshaken)",
+      "unit": null,
+      "pqType": "type logical"
+    },
+    {
+      "name": "cream_unsh_rating",
+      "type": "select",
+      "domainCode": "CREAMING",
+      "label": "Creaming rating (unshaken)",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "cream_unsh_layer_measurable",
+      "type": "boolean",
+      "domainCode": "CREAMING",
+      "label": "Cream layer measurable",
+      "unit": null,
+      "pqType": "type logical"
+    },
+    {
+      "name": "cream_unsh_layer_thickness_value",
+      "type": "number",
+      "domainCode": "CREAMING",
+      "label": "Cream layer thickness",
+      "unit": "mm",
+      "pqType": "type number"
+    },
+    {
+      "name": "cream_unsh_layer_thickness_unit",
+      "type": "select",
+      "domainCode": "CREAMING",
+      "label": "Cream layer thickness unit",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "cream_unsh_layer_description",
+      "type": "select",
+      "domainCode": "CREAMING",
+      "label": "Cream layer description",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "cream_unsh_layer_color",
+      "type": "select",
+      "domainCode": "CREAMING",
+      "label": "Cream layer color",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "cream_unsh_marbling_present",
+      "type": "boolean",
+      "domainCode": "CREAMING",
+      "label": "Marbling present",
+      "unit": null,
+      "pqType": "type logical"
+    },
+    {
+      "name": "cream_unsh_minor_spots_present",
+      "type": "boolean",
+      "domainCode": "CREAMING",
+      "label": "Minor spots present",
+      "unit": null,
+      "pqType": "type logical"
+    },
+    {
+      "name": "cream_unsh_surface_volume_pct",
+      "type": "percent",
+      "domainCode": "CREAMING",
+      "label": "Surface coverage",
+      "unit": "%",
+      "pqType": "type number"
+    },
+    {
+      "name": "cream_unsh_pour_exit_time_s",
+      "type": "number",
+      "domainCode": "CREAMING",
+      "label": "Cream layer pour exit time",
+      "unit": "s",
+      "pqType": "type number"
+    },
+    {
+      "name": "cream_unsh_photo",
+      "type": "media_photo",
+      "domainCode": "CREAMING",
+      "label": "Unshaken creaming photo",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "cream_unsh_pour_out_video",
+      "type": "media_video",
+      "domainCode": "CREAMING",
+      "label": "Pour-out video",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "cream_unsh_pour_out_result",
+      "type": "select",
+      "domainCode": "CREAMING",
+      "label": "Pour-out result",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "cream_sh_shakes_in",
+      "type": "boolean",
+      "domainCode": "CREAMING",
+      "label": "Shakes in",
+      "unit": null,
+      "pqType": "type logical"
+    },
+    {
+      "name": "cream_sh_rating",
+      "type": "select",
+      "domainCode": "CREAMING",
+      "label": "Creaming rating (shaken)",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "cream_sh_result",
+      "type": "select",
+      "domainCode": "CREAMING",
+      "label": "Shaken result",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "cream_sh_residue_type",
+      "type": "multiselect",
+      "domainCode": "CREAMING",
+      "label": "Residue after shaking",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "cream_sh_residual_pct",
+      "type": "percent",
+      "domainCode": "CREAMING",
+      "label": "Residual cream after shaking",
+      "unit": "%",
+      "pqType": "type number"
+    },
+    {
+      "name": "cream_sh_photo",
+      "type": "media_photo",
+      "domainCode": "CREAMING",
+      "label": "Shaken creaming photo",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "cream_emulsifier_flag",
+      "type": "boolean",
+      "domainCode": "CREAMING",
+      "label": "Emulsifier review flag",
+      "unit": null,
+      "pqType": "type logical"
+    },
+    {
+      "name": "cream_rim_dried_residue_present",
+      "type": "boolean",
+      "domainCode": "CREAMING",
+      "label": "Dried residue on rim or foil seal",
+      "unit": null,
+      "pqType": "type logical"
+    },
+    {
+      "name": "cream_rim_residue_fatty",
+      "type": "boolean",
+      "domainCode": "CREAMING",
+      "label": "Rim residue feels fatty",
+      "unit": null,
+      "pqType": "type logical"
+    },
+    {
+      "name": "cream_market_restriction_flag",
+      "type": "boolean",
+      "domainCode": "CREAMING",
+      "label": "Market restriction flag",
+      "unit": null,
+      "pqType": "type logical"
+    },
+    {
+      "name": "cream_review_prompt",
+      "type": "guidance",
+      "domainCode": "CREAMING",
+      "label": "Creaming review guidance",
+      "unit": null,
+      "pqType": "type logical"
+    },
+    {
+      "name": "cream_comments",
+      "type": "longtext",
+      "domainCode": "CREAMING",
+      "label": "Creaming comments",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "serum_unsh_present",
+      "type": "boolean",
+      "domainCode": "SERUM",
+      "label": "Serum separation present (unshaken)",
+      "unit": null,
+      "pqType": "type logical"
+    },
+    {
+      "name": "serum_unsh_rating",
+      "type": "select",
+      "domainCode": "SERUM",
+      "label": "Serum rating (unshaken)",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "serum_unsh_measurable",
+      "type": "boolean",
+      "domainCode": "SERUM",
+      "label": "Serum layer measurable",
+      "unit": null,
+      "pqType": "type logical"
+    },
+    {
+      "name": "serum_unsh_value",
+      "type": "number",
+      "domainCode": "SERUM",
+      "label": "Serum layer measurement",
+      "unit": null,
+      "pqType": "type number"
+    },
+    {
+      "name": "serum_unsh_unit",
+      "type": "select",
+      "domainCode": "SERUM",
+      "label": "Serum measurement unit",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "serum_unsh_pct_package_volume",
+      "type": "percent",
+      "domainCode": "SERUM",
+      "label": "Serum as percent of package volume",
+      "unit": "%",
+      "pqType": "type number"
+    },
+    {
+      "name": "serum_unsh_locations",
+      "type": "multiselect",
+      "domainCode": "SERUM",
+      "label": "Serum locations",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "serum_unsh_clarity",
+      "type": "select",
+      "domainCode": "SERUM",
+      "label": "Serum clarity",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "serum_unsh_color",
+      "type": "select",
+      "domainCode": "SERUM",
+      "label": "Serum color",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "serum_unsh_photo",
+      "type": "media_photo",
+      "domainCode": "SERUM",
+      "label": "Unshaken serum photo",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "serum_sh_shakes_in",
+      "type": "boolean",
+      "domainCode": "SERUM",
+      "label": "Shakes in",
+      "unit": null,
+      "pqType": "type logical"
+    },
+    {
+      "name": "serum_sh_rating",
+      "type": "select",
+      "domainCode": "SERUM",
+      "label": "Serum rating (shaken)",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "serum_sh_value",
+      "type": "number",
+      "domainCode": "SERUM",
+      "label": "Residual serum after shaking",
+      "unit": null,
+      "pqType": "type number"
+    },
+    {
+      "name": "serum_sh_unit",
+      "type": "select",
+      "domainCode": "SERUM",
+      "label": "Residual serum unit",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "serum_sh_result",
+      "type": "select",
+      "domainCode": "SERUM",
+      "label": "Shaken result",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "serum_sh_photo",
+      "type": "media_photo",
+      "domainCode": "SERUM",
+      "label": "Shaken serum photo",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "serum_gelation_flag",
+      "type": "boolean",
+      "domainCode": "SERUM",
+      "label": "Gelation suspected",
+      "unit": null,
+      "pqType": "type logical"
+    },
+    {
+      "name": "serum_protein_flag",
+      "type": "boolean",
+      "domainCode": "SERUM",
+      "label": "Protein instability suspected",
+      "unit": null,
+      "pqType": "type logical"
+    },
+    {
+      "name": "serum_resep_check_performed",
+      "type": "boolean",
+      "domainCode": "SERUM",
+      "label": "Re-separation check after shaking",
+      "unit": null,
+      "pqType": "type logical"
+    },
+    {
+      "name": "serum_resep_hours_after_shake",
+      "type": "number",
+      "domainCode": "SERUM",
+      "label": "Hours after shaking",
+      "unit": "h",
+      "pqType": "type number"
+    },
+    {
+      "name": "serum_resep_present",
+      "type": "boolean",
+      "domainCode": "SERUM",
+      "label": "Serum re-formed",
+      "unit": null,
+      "pqType": "type logical"
+    },
+    {
+      "name": "serum_resep_rating",
+      "type": "select",
+      "domainCode": "SERUM",
+      "label": "Re-separation serum rating",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "serum_resep_photo",
+      "type": "media_photo",
+      "domainCode": "SERUM",
+      "label": "Re-separation photo",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "serum_scale_up_viscosity_warning",
+      "type": "boolean",
+      "domainCode": "SERUM",
+      "label": "Scale-up viscosity warning",
+      "unit": null,
+      "pqType": "type logical"
+    },
+    {
+      "name": "serum_review_prompt",
+      "type": "guidance",
+      "domainCode": "SERUM",
+      "label": "Serum review guidance",
+      "unit": null,
+      "pqType": "type logical"
+    },
+    {
+      "name": "serum_comments",
+      "type": "longtext",
+      "domainCode": "SERUM",
+      "label": "Serum comments",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "sed_unsh_present",
+      "type": "boolean",
+      "domainCode": "SEDIMENT",
+      "label": "Sediment present (unshaken)",
+      "unit": null,
+      "pqType": "type logical"
+    },
+    {
+      "name": "sed_unsh_rating",
+      "type": "select",
+      "domainCode": "SEDIMENT",
+      "label": "Sediment rating (unshaken)",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "sed_unsh_height_value",
+      "type": "number",
+      "domainCode": "SEDIMENT",
+      "label": "Sediment height (unshaken)",
+      "unit": "mm",
+      "pqType": "type number"
+    },
+    {
+      "name": "sed_unsh_height_unit",
+      "type": "select",
+      "domainCode": "SEDIMENT",
+      "label": "Sediment height unit",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "sed_unsh_coverage",
+      "type": "select",
+      "domainCode": "SEDIMENT",
+      "label": "Coverage of the bottom",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "sed_unsh_texture",
+      "type": "select",
+      "domainCode": "SEDIMENT",
+      "label": "Sediment texture",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "sed_measurement_point",
+      "type": "select",
+      "domainCode": "SEDIMENT",
+      "label": "Measured",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "sed_measurement_location",
+      "type": "select",
+      "domainCode": "SEDIMENT",
+      "label": "Measurement location",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "sed_weight_g",
+      "type": "number",
+      "domainCode": "SEDIMENT",
+      "label": "Sediment weight",
+      "unit": "g",
+      "pqType": "type number"
+    },
+    {
+      "name": "sed_bottle_cut_to_evaluate",
+      "type": "boolean",
+      "domainCode": "SEDIMENT",
+      "label": "Bottle cut open to evaluate",
+      "unit": null,
+      "pqType": "type logical"
+    },
+    {
+      "name": "sed_bottle_coating_present",
+      "type": "boolean",
+      "domainCode": "SEDIMENT",
+      "label": "Bottle coating present (not sediment)",
+      "unit": null,
+      "pqType": "type logical"
+    },
+    {
+      "name": "sed_unsh_photo",
+      "type": "media_photo",
+      "domainCode": "SEDIMENT",
+      "label": "Unshaken sediment photo",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "sed_predominant_type",
+      "type": "select",
+      "domainCode": "SEDIMENT",
+      "label": "Predominant sediment type",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "sed_prot_review_prompt",
+      "type": "guidance",
+      "domainCode": "SEDIMENT",
+      "label": "Protein sediment guidance",
+      "unit": null,
+      "pqType": "type logical"
+    },
+    {
+      "name": "sed_min_appearance",
+      "type": "select",
+      "domainCode": "SEDIMENT",
+      "label": "Mineral sediment appearance",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "sed_min_review_prompt",
+      "type": "guidance",
+      "domainCode": "SEDIMENT",
+      "label": "Mineral sediment guidance",
+      "unit": null,
+      "pqType": "type logical"
+    },
+    {
+      "name": "sed_coc_ring_present",
+      "type": "boolean",
+      "domainCode": "SEDIMENT",
+      "label": "Cocoa ring present",
+      "unit": null,
+      "pqType": "type logical"
+    },
+    {
+      "name": "sed_coc_settling_pct_volume",
+      "type": "percent",
+      "domainCode": "SEDIMENT",
+      "label": "Cocoa settling, share of package",
+      "unit": "%",
+      "pqType": "type number"
+    },
+    {
+      "name": "sed_coc_review_prompt",
+      "type": "guidance",
+      "domainCode": "SEDIMENT",
+      "label": "Cocoa sediment guidance",
+      "unit": null,
+      "pqType": "type logical"
+    },
+    {
+      "name": "sed_sh_rating",
+      "type": "select",
+      "domainCode": "SEDIMENT",
+      "label": "Sediment rating (shaken)",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "sed_sh_height_value",
+      "type": "number",
+      "domainCode": "SEDIMENT",
+      "label": "Sediment height (shaken)",
+      "unit": "mm",
+      "pqType": "type number"
+    },
+    {
+      "name": "sed_sh_height_unit",
+      "type": "select",
+      "domainCode": "SEDIMENT",
+      "label": "Shaken sediment height unit",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "sed_sh_shake_in_extent",
+      "type": "select",
+      "domainCode": "SEDIMENT",
+      "label": "Shake-in extent",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "sed_sh_lumps_present",
+      "type": "boolean",
+      "domainCode": "SEDIMENT",
+      "label": "Shaking produced clumps",
+      "unit": null,
+      "pqType": "type logical"
+    },
+    {
+      "name": "sed_sh_photo",
+      "type": "media_photo",
+      "domainCode": "SEDIMENT",
+      "label": "Shaken sediment photo",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "sed_composition_test_requested",
+      "type": "boolean",
+      "domainCode": "SEDIMENT",
+      "label": "Composition test requested",
+      "unit": null,
+      "pqType": "type logical"
+    },
+    {
+      "name": "sed_comments",
+      "type": "longtext",
+      "domainCode": "SEDIMENT",
+      "label": "Sediment comments",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "gel_gelled",
+      "type": "boolean",
+      "domainCode": "GELLING",
+      "label": "Gelled",
+      "unit": null,
+      "pqType": "type logical"
+    },
+    {
+      "name": "gel_type",
+      "type": "select",
+      "domainCode": "GELLING",
+      "label": "Gel type",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "gel_too_thick_to_pour",
+      "type": "boolean",
+      "domainCode": "GELLING",
+      "label": "Too thick to pour",
+      "unit": null,
+      "pqType": "type logical"
+    },
+    {
+      "name": "gel_firmness",
+      "type": "select",
+      "domainCode": "GELLING",
+      "label": "Gel firmness",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "gel_shake_test_performed",
+      "type": "boolean",
+      "domainCode": "GELLING",
+      "label": "Shake test performed",
+      "unit": null,
+      "pqType": "type logical"
+    },
+    {
+      "name": "gel_reversibility",
+      "type": "select",
+      "domainCode": "GELLING",
+      "label": "Reversibility",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "gel_spoilage_related",
+      "type": "select",
+      "domainCode": "GELLING",
+      "label": "Spoilage related",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "gel_observations",
+      "type": "longtext",
+      "domainCode": "GELLING",
+      "label": "Gel observations",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "gel_photo",
+      "type": "media_photo",
+      "domainCode": "GELLING",
+      "label": "Gel photo",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "gel_comments",
+      "type": "longtext",
+      "domainCode": "GELLING",
+      "label": "Gelling comments",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "nh_rippling_present",
+      "type": "boolean",
+      "domainCode": "NON_HOMOG",
+      "label": "Rippling present",
+      "unit": null,
+      "pqType": "type logical"
+    },
+    {
+      "name": "nh_lumps_present",
+      "type": "boolean",
+      "domainCode": "NON_HOMOG",
+      "label": "Lumps present",
+      "unit": null,
+      "pqType": "type logical"
+    },
+    {
+      "name": "nh_lumps_severity",
+      "type": "select",
+      "domainCode": "NON_HOMOG",
+      "label": "Lump severity",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "nh_lumps_context",
+      "type": "multiselect",
+      "domainCode": "NON_HOMOG",
+      "label": "When lumps were seen",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "nh_lumps_size_class",
+      "type": "select",
+      "domainCode": "NON_HOMOG",
+      "label": "Lump size class",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "nh_sieve_used",
+      "type": "boolean",
+      "domainCode": "NON_HOMOG",
+      "label": "Poured through a sieve",
+      "unit": null,
+      "pqType": "type logical"
+    },
+    {
+      "name": "nh_sieve_mesh",
+      "type": "text",
+      "domainCode": "NON_HOMOG",
+      "label": "Sieve mesh",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "nh_curdling_present",
+      "type": "boolean",
+      "domainCode": "NON_HOMOG",
+      "label": "Curdling present",
+      "unit": null,
+      "pqType": "type logical"
+    },
+    {
+      "name": "nh_smooth_after_shaking",
+      "type": "boolean",
+      "domainCode": "NON_HOMOG",
+      "label": "Smooth after shaking",
+      "unit": null,
+      "pqType": "type logical"
+    },
+    {
+      "name": "nh_spoilage_related",
+      "type": "select",
+      "domainCode": "NON_HOMOG",
+      "label": "Spoilage related",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "nh_pour_video",
+      "type": "media_video",
+      "domainCode": "NON_HOMOG",
+      "label": "Pour video (rippling)",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "nh_photo",
+      "type": "media_photo",
+      "domainCode": "NON_HOMOG",
+      "label": "Non-homogeneity photo",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "nh_comments",
+      "type": "longtext",
+      "domainCode": "NON_HOMOG",
+      "label": "Non-homogeneity comments",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "psag_vertical_stripes_present",
+      "type": "boolean",
+      "domainCode": "PROTEIN_SAG",
+      "label": "Vertical stripes present",
+      "unit": null,
+      "pqType": "type logical"
+    },
+    {
+      "name": "psag_stripe_coverage",
+      "type": "select",
+      "domainCode": "PROTEIN_SAG",
+      "label": "Stripe coverage",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "psag_photo",
+      "type": "media_photo",
+      "domainCode": "PROTEIN_SAG",
+      "label": "Protein sagging photo",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "psag_comments",
+      "type": "longtext",
+      "domainCode": "PROTEIN_SAG",
+      "label": "Protein sagging comments",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "app_color_change_vs_t0",
+      "type": "select",
+      "domainCode": "APPEARANCE_SENSORY",
+      "label": "Color change vs T0",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "app_color_method",
+      "type": "select",
+      "domainCode": "APPEARANCE_SENSORY",
+      "label": "Color method",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "app_color_l",
+      "type": "number",
+      "domainCode": "APPEARANCE_SENSORY",
+      "label": "L*",
+      "unit": null,
+      "pqType": "type number"
+    },
+    {
+      "name": "app_color_a",
+      "type": "number",
+      "domainCode": "APPEARANCE_SENSORY",
+      "label": "a*",
+      "unit": null,
+      "pqType": "type number"
+    },
+    {
+      "name": "app_color_b",
+      "type": "number",
+      "domainCode": "APPEARANCE_SENSORY",
+      "label": "b*",
+      "unit": null,
+      "pqType": "type number"
+    },
+    {
+      "name": "sens_recorded",
+      "type": "boolean",
+      "domainCode": "APPEARANCE_SENSORY",
+      "label": "Sensory recorded",
+      "unit": null,
+      "pqType": "type logical"
+    },
+    {
+      "name": "sens_texture",
+      "type": "select",
+      "domainCode": "APPEARANCE_SENSORY",
+      "label": "Texture in mouth or on pour",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "sens_notes",
+      "type": "longtext",
+      "domainCode": "APPEARANCE_SENSORY",
+      "label": "Sensory notes",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "custom1_name",
+      "type": "text",
+      "domainCode": "CUSTOM",
+      "label": "Custom observation 1: name",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "custom1_unshaken",
+      "type": "text",
+      "domainCode": "CUSTOM",
+      "label": "Custom observation 1: unshaken",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "custom1_shaken",
+      "type": "text",
+      "domainCode": "CUSTOM",
+      "label": "Custom observation 1: shaken",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "custom2_name",
+      "type": "text",
+      "domainCode": "CUSTOM",
+      "label": "Custom observation 2: name",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "custom2_unshaken",
+      "type": "text",
+      "domainCode": "CUSTOM",
+      "label": "Custom observation 2: unshaken",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "custom2_shaken",
+      "type": "text",
+      "domainCode": "CUSTOM",
+      "label": "Custom observation 2: shaken",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "custom3_name",
+      "type": "text",
+      "domainCode": "CUSTOM",
+      "label": "Custom observation 3: name",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "custom3_unshaken",
+      "type": "text",
+      "domainCode": "CUSTOM",
+      "label": "Custom observation 3: unshaken",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "custom3_shaken",
+      "type": "text",
+      "domainCode": "CUSTOM",
+      "label": "Custom observation 3: shaken",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "pwd_caking",
+      "type": "select",
+      "domainCode": "EXT_POWDER",
+      "label": "Caking",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "pwd_flowability",
+      "type": "select",
+      "domainCode": "EXT_POWDER",
+      "label": "Flowability",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "pwd_color_change",
+      "type": "select",
+      "domainCode": "EXT_POWDER",
+      "label": "Color change vs T0",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "pwd_lumps_present",
+      "type": "boolean",
+      "domainCode": "EXT_POWDER",
+      "label": "Lumps present",
+      "unit": null,
+      "pqType": "type logical"
+    },
+    {
+      "name": "pwd_wettability_s",
+      "type": "number",
+      "domainCode": "EXT_POWDER",
+      "label": "Wettability time",
+      "unit": "s",
+      "pqType": "type number"
+    },
+    {
+      "name": "pwd_dissolution_s",
+      "type": "number",
+      "domainCode": "EXT_POWDER",
+      "label": "Dissolution time",
+      "unit": "s",
+      "pqType": "type number"
+    },
+    {
+      "name": "pwd_foaming",
+      "type": "select",
+      "domainCode": "EXT_POWDER",
+      "label": "Foaming after reconstitution",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "pwd_photo",
+      "type": "media_photo",
+      "domainCode": "EXT_POWDER",
+      "label": "Powder photo",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "vms_appearance_change",
+      "type": "select",
+      "domainCode": "EXT_VMS",
+      "label": "Appearance change vs T0",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "vms_surface_mottling",
+      "type": "select",
+      "domainCode": "EXT_VMS",
+      "label": "Surface mottling",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "vms_chipping_capping",
+      "type": "boolean",
+      "domainCode": "EXT_VMS",
+      "label": "Chipping or capping",
+      "unit": null,
+      "pqType": "type logical"
+    },
+    {
+      "name": "vms_hardness_kp",
+      "type": "number",
+      "domainCode": "EXT_VMS",
+      "label": "Hardness",
+      "unit": "kp",
+      "pqType": "type number"
+    },
+    {
+      "name": "vms_disintegration_min",
+      "type": "number",
+      "domainCode": "EXT_VMS",
+      "label": "Disintegration time",
+      "unit": "min",
+      "pqType": "type number"
+    },
+    {
+      "name": "vms_odor_change",
+      "type": "select",
+      "domainCode": "EXT_VMS",
+      "label": "Odor change vs T0",
+      "unit": null,
+      "pqType": "type text"
+    },
+    {
+      "name": "vms_capsule_leakage",
+      "type": "boolean",
+      "domainCode": "EXT_VMS",
+      "label": "Capsule leakage",
+      "unit": null,
+      "pqType": "type logical"
+    },
+    {
+      "name": "vms_photo",
+      "type": "media_photo",
+      "domainCode": "EXT_VMS",
+      "label": "VMS photo",
+      "unit": null,
+      "pqType": "type text"
+    }
+  ],
+  "domains": [
+    {
+      "domainCode": "TEST_CONTEXT",
+      "name": "Test context"
+    },
+    {
+      "domainCode": "LAB_RESULTS",
+      "name": "Lab results"
+    },
+    {
+      "domainCode": "GENERAL_MEDIA",
+      "name": "Sample media"
+    },
+    {
+      "domainCode": "HOMOG",
+      "name": "Homogeneity"
+    },
+    {
+      "domainCode": "CREAMING",
+      "name": "Creaming"
+    },
+    {
+      "domainCode": "SERUM",
+      "name": "Serum separation"
+    },
+    {
+      "domainCode": "SEDIMENT",
+      "name": "Sediment"
+    },
+    {
+      "domainCode": "GELLING",
+      "name": "Gelling"
+    },
+    {
+      "domainCode": "NON_HOMOG",
+      "name": "Non-homogeneity"
+    },
+    {
+      "domainCode": "PROTEIN_SAG",
+      "name": "Protein sagging"
+    },
+    {
+      "domainCode": "APPEARANCE_SENSORY",
+      "name": "Appearance and sensory"
+    },
+    {
+      "domainCode": "CUSTOM",
+      "name": "Custom observations"
+    },
+    {
+      "domainCode": "EXT_POWDER",
+      "name": "Powder (extension)"
+    },
+    {
+      "domainCode": "EXT_VMS",
+      "name": "VMS (extension)"
+    }
+  ]
+}

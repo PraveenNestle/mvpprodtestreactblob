@@ -1,0 +1,15 @@
+domain_code,domain_name,short_name,sort_order,mvp_scope,source_req,description
+TEST_CONTEXT,Test context,Context,10,MVP,R-02,"Reference-store hierarchy (NESTMS via Blob), capture metadata and overall result"
+LAB_RESULTS,Lab results,Lab,20,MVP,"R-15, Team sheet","pH, viscosity (with instrument, geometry, shear rate, temperature), Brix, D50 typed in by the scientist from LIMS; there is no LIMS integration"
+GENERAL_MEDIA,Sample media,Media,30,MVP,R-17,"Mandatory full-bottle and emptied-bottle photos, optional beaker photo and pour-out video"
+HOMOG,Homogeneity,Homogeneity,40,MVP,R-07,Unshaken and shaken homogeneity with post-shake color
+CREAMING,Creaming,Creaming,50,MVP,R-08,"SOP rating, ring thickness, pour exit time, rim residue (not creaming), shaken residue type, emulsifier flags"
+SERUM,Serum separation,Serum,60,MVP,R-09,"SOP rating, % of package volume, locations, shaken result, optional re-separation check after the consumer usage period"
+SEDIMENT,Sediment,Sediment,70,MVP,R-10,"SOP rating, height, coverage, texture, measurement point, bottle coating; Protein, Mineral and Cocoa sub-flows"
+GELLING,Gelling,Gelling,80,MVP,"R-11, SOP-202","Gelled state, reversibility and spoilage relation"
+NON_HOMOG,Non-homogeneity,Non-homog.,90,MVP,"R-11, SOP-202","Rippling, lumps, curdling"
+PROTEIN_SAG,Protein sagging,Sagging,100,MVP,"R-11, SOP-202",Vertical protein stripes on the container wall
+EXT_POWDER,Powder (extension),Powder,110,SCHEMA_READY,OnePager,Powder stability descriptors; extension beyond the URS taxonomy
+EXT_VMS,VMS (extension),VMS,120,SCHEMA_READY,OnePager,VMS stability descriptors; extension beyond the URS taxonomy
+APPEARANCE_SENSORY,Appearance and sensory,Sensory,105,SCHEMA_READY,"SOP-202, Mural",Color change vs T0 (visual or L*a*b*) and texture in mouth or on pour
+CUSTOM,Custom observations,Custom,106,SCHEMA_READY,Mural,"Three free slots for a one-off parameter, unshaken and shaken, without a catalog change"

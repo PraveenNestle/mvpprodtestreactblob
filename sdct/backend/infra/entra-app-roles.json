@@ -1,0 +1,5 @@
+[
+  { "allowedMemberTypes": ["User"], "description": "Capture and view stability observations", "displayName": "Stability Scientist", "id": "6f1d2a3b-0001-4c5d-9e8f-000000000001", "isEnabled": true, "value": "Stability.Scientist" },
+  { "allowedMemberTypes": ["User"], "description": "Review, reject, export observations and manage templates", "displayName": "Stability Reviewer", "id": "6f1d2a3b-0002-4c5d-9e8f-000000000002", "isEnabled": true, "value": "Stability.Reviewer" },
+  { "allowedMemberTypes": ["User"], "description": "Administer vocabularies, templates and users", "displayName": "Stability Admin", "id": "6f1d2a3b-0003-4c5d-9e8f-000000000003", "isEnabled": true, "value": "Stability.Admin" }
+]

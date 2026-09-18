@@ -1,0 +1,23 @@
+{
+  "name": "stability-capture-app",
+  "private": true,
+  "version": "1.0.0",
+  "description": "R&D Stability Data Collection Tool - guided capture front end (React + Vite). Talks to the Express API on Azure Web App; runs in demo mode with no backend.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "build:mockup": "vite build --mode mockup",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@azure/msal-browser": "^3.20.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.1",
+    "vite": "^5.4.2",
+    "vite-plugin-singlefile": "^2.0.2"
+  }
+}

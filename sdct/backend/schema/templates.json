@@ -1,0 +1,646 @@
+[
+  {
+    "templateId": "TPL_RTD_MVP",
+    "templateName": "RTD liquid: SOP guided questionnaire",
+    "formulationClass": "LIQUID_RTD",
+    "version": 1,
+    "status": "ACTIVE",
+    "description": "Homogeneity first, then unshaken and shaken creaming, serum and sediment with the SOP 0 to 5 rating suggested from each measurement, plus gelling, rippling and protein sagging. Lab results typed in from LIMS.",
+    "sections": [
+      {
+        "label": "Test context",
+        "fields": [
+          "project_code",
+          "ar_number",
+          "trial_number",
+          "variant_number",
+          "sample_code",
+          "time_point",
+          "temperature_condition",
+          "formulation_class",
+          "product_format",
+          "container_type",
+          "package_volume_ml",
+          "package_fill_height_mm",
+          "sample_storage_orientation",
+          "sample_temperature_at_test",
+          "sample_opened_previously",
+          "shake_protocol",
+          "shake_count",
+          "result_type",
+          "plan_status",
+          "observer_user_id",
+          "observation_timestamp",
+          "test_status",
+          "overall_result",
+          "exclude_from_trend",
+          "exclude_reason",
+          "overall_comments"
+        ]
+      },
+      {
+        "label": "Lab results (typed from LIMS)",
+        "fields": [
+          "lab_source",
+          "lab_lims_reference",
+          "lab_ph",
+          "lab_visc1_value",
+          "lab_visc1_instrument",
+          "lab_visc1_geometry",
+          "lab_visc1_shear_rate",
+          "lab_visc1_temp_c",
+          "lab_visc2_value",
+          "lab_visc2_instrument",
+          "lab_visc2_geometry",
+          "lab_visc2_shear_rate",
+          "lab_visc2_temp_c",
+          "lab_brix",
+          "lab_particle_size_d50_um",
+          "lab_measured_at"
+        ]
+      },
+      {
+        "label": "Sample media",
+        "fields": [
+          "general_overview_photo",
+          "general_empty_bottle_photo",
+          "general_beaker_photo",
+          "general_pour_out_video"
+        ]
+      },
+      {
+        "label": "Homogeneity",
+        "fields": [
+          "homog_unshaken_homogeneous",
+          "homog_unshaken_appearance",
+          "homog_unshaken_photo",
+          "homog_shaken_test_performed",
+          "homog_shaken_homogeneous",
+          "homog_post_shake_color_change",
+          "homog_post_shake_color_description",
+          "homog_post_shake_color_code",
+          "homog_shaken_photo",
+          "homog_comments"
+        ]
+      },
+      {
+        "label": "Creaming",
+        "fields": [
+          "cream_unsh_present",
+          "cream_unsh_rating",
+          "cream_unsh_layer_measurable",
+          "cream_unsh_layer_thickness_value",
+          "cream_unsh_layer_thickness_unit",
+          "cream_unsh_layer_description",
+          "cream_unsh_layer_color",
+          "cream_unsh_marbling_present",
+          "cream_unsh_minor_spots_present",
+          "cream_unsh_surface_volume_pct",
+          "cream_unsh_pour_exit_time_s",
+          "cream_unsh_photo",
+          "cream_unsh_pour_out_video",
+          "cream_unsh_pour_out_result",
+          "cream_sh_shakes_in",
+          "cream_sh_rating",
+          "cream_sh_result",
+          "cream_sh_residue_type",
+          "cream_sh_residual_pct",
+          "cream_sh_photo",
+          "cream_emulsifier_flag",
+          "cream_rim_dried_residue_present",
+          "cream_rim_residue_fatty",
+          "cream_market_restriction_flag",
+          "cream_review_prompt",
+          "cream_comments"
+        ]
+      },
+      {
+        "label": "Serum separation",
+        "fields": [
+          "serum_unsh_present",
+          "serum_unsh_rating",
+          "serum_unsh_measurable",
+          "serum_unsh_value",
+          "serum_unsh_unit",
+          "serum_unsh_pct_package_volume",
+          "serum_unsh_locations",
+          "serum_unsh_clarity",
+          "serum_unsh_color",
+          "serum_unsh_photo",
+          "serum_sh_shakes_in",
+          "serum_sh_rating",
+          "serum_sh_value",
+          "serum_sh_unit",
+          "serum_sh_result",
+          "serum_sh_photo",
+          "serum_gelation_flag",
+          "serum_protein_flag",
+          "serum_scale_up_viscosity_warning",
+          "serum_review_prompt",
+          "serum_comments"
+        ]
+      },
+      {
+        "label": "Sediment",
+        "fields": [
+          "sed_unsh_present",
+          "sed_unsh_rating",
+          "sed_unsh_height_value",
+          "sed_unsh_height_unit",
+          "sed_unsh_coverage",
+          "sed_unsh_texture",
+          "sed_measurement_point",
+          "sed_measurement_location",
+          "sed_weight_g",
+          "sed_bottle_cut_to_evaluate",
+          "sed_bottle_coating_present",
+          "sed_unsh_photo",
+          "sed_predominant_type",
+          "sed_prot_review_prompt",
+          "sed_coc_settling_pct_volume",
+          "sed_sh_rating",
+          "sed_sh_height_value",
+          "sed_sh_height_unit",
+          "sed_sh_shake_in_extent",
+          "sed_sh_lumps_present",
+          "sed_sh_photo",
+          "sed_composition_test_requested",
+          "sed_comments"
+        ]
+      },
+      {
+        "label": "Gelling",
+        "fields": [
+          "gel_gelled",
+          "gel_too_thick_to_pour",
+          "gel_firmness",
+          "gel_shake_test_performed",
+          "gel_reversibility",
+          "gel_spoilage_related",
+          "gel_photo",
+          "gel_comments"
+        ]
+      },
+      {
+        "label": "Non-homogeneity",
+        "fields": [
+          "nh_rippling_present",
+          "nh_lumps_present",
+          "nh_lumps_severity",
+          "nh_lumps_context",
+          "nh_sieve_used",
+          "nh_sieve_mesh",
+          "nh_smooth_after_shaking",
+          "nh_spoilage_related",
+          "nh_pour_video",
+          "nh_photo",
+          "nh_comments"
+        ]
+      },
+      {
+        "label": "Protein sagging",
+        "fields": [
+          "psag_vertical_stripes_present",
+          "psag_stripe_coverage",
+          "psag_photo",
+          "psag_comments"
+        ]
+      }
+    ]
+  },
+  {
+    "templateId": "TPL_RTD_FULL",
+    "templateName": "RTD liquid: full catalog",
+    "formulationClass": "LIQUID_RTD",
+    "version": 1,
+    "status": "ACTIVE",
+    "description": "Every RTD descriptor including re-separation checks, appearance and sensory, and three custom slots.",
+    "sections": [
+      {
+        "label": "Test context",
+        "fields": [
+          "project_code",
+          "ar_number",
+          "trial_number",
+          "variant_number",
+          "sample_code",
+          "time_point",
+          "temperature_condition",
+          "formulation_class",
+          "product_format",
+          "container_type",
+          "package_volume_ml",
+          "package_fill_height_mm",
+          "sample_storage_orientation",
+          "sample_temperature_at_test",
+          "sample_opened_previously",
+          "shake_protocol",
+          "shake_count",
+          "result_type",
+          "plan_status",
+          "observer_user_id",
+          "observation_timestamp",
+          "test_status",
+          "overall_result",
+          "exclude_from_trend",
+          "exclude_reason",
+          "overall_comments"
+        ]
+      },
+      {
+        "label": "Lab results",
+        "fields": [
+          "lab_source",
+          "lab_lims_reference",
+          "lab_ph",
+          "lab_visc1_value",
+          "lab_visc1_instrument",
+          "lab_visc1_geometry",
+          "lab_visc1_shear_rate",
+          "lab_visc1_temp_c",
+          "lab_visc2_value",
+          "lab_visc2_instrument",
+          "lab_visc2_geometry",
+          "lab_visc2_shear_rate",
+          "lab_visc2_temp_c",
+          "lab_brix",
+          "lab_particle_size_d50_um",
+          "lab_measured_at"
+        ]
+      },
+      {
+        "label": "Sample media",
+        "fields": [
+          "general_overview_photo",
+          "general_empty_bottle_photo",
+          "general_beaker_photo",
+          "general_pour_out_video"
+        ]
+      },
+      {
+        "label": "Homogeneity",
+        "fields": [
+          "homog_unshaken_homogeneous",
+          "homog_unshaken_appearance",
+          "homog_unshaken_photo",
+          "homog_shaken_test_performed",
+          "homog_shaken_homogeneous",
+          "homog_post_shake_color_change",
+          "homog_post_shake_color_description",
+          "homog_post_shake_color_code",
+          "homog_shaken_photo",
+          "homog_comments"
+        ]
+      },
+      {
+        "label": "Creaming",
+        "fields": [
+          "cream_unsh_present",
+          "cream_unsh_rating",
+          "cream_unsh_layer_measurable",
+          "cream_unsh_layer_thickness_value",
+          "cream_unsh_layer_thickness_unit",
+          "cream_unsh_layer_description",
+          "cream_unsh_layer_color",
+          "cream_unsh_marbling_present",
+          "cream_unsh_minor_spots_present",
+          "cream_unsh_surface_volume_pct",
+          "cream_unsh_pour_exit_time_s",
+          "cream_unsh_photo",
+          "cream_unsh_pour_out_video",
+          "cream_unsh_pour_out_result",
+          "cream_sh_shakes_in",
+          "cream_sh_rating",
+          "cream_sh_result",
+          "cream_sh_residue_type",
+          "cream_sh_residual_pct",
+          "cream_sh_photo",
+          "cream_emulsifier_flag",
+          "cream_rim_dried_residue_present",
+          "cream_rim_residue_fatty",
+          "cream_market_restriction_flag",
+          "cream_review_prompt",
+          "cream_comments"
+        ]
+      },
+      {
+        "label": "Serum separation",
+        "fields": [
+          "serum_unsh_present",
+          "serum_unsh_rating",
+          "serum_unsh_measurable",
+          "serum_unsh_value",
+          "serum_unsh_unit",
+          "serum_unsh_pct_package_volume",
+          "serum_unsh_locations",
+          "serum_unsh_clarity",
+          "serum_unsh_color",
+          "serum_unsh_photo",
+          "serum_sh_shakes_in",
+          "serum_sh_rating",
+          "serum_sh_value",
+          "serum_sh_unit",
+          "serum_sh_result",
+          "serum_sh_photo",
+          "serum_gelation_flag",
+          "serum_protein_flag",
+          "serum_resep_check_performed",
+          "serum_resep_hours_after_shake",
+          "serum_resep_present",
+          "serum_resep_rating",
+          "serum_resep_photo",
+          "serum_scale_up_viscosity_warning",
+          "serum_review_prompt",
+          "serum_comments"
+        ]
+      },
+      {
+        "label": "Sediment",
+        "fields": [
+          "sed_unsh_present",
+          "sed_unsh_rating",
+          "sed_unsh_height_value",
+          "sed_unsh_height_unit",
+          "sed_unsh_coverage",
+          "sed_unsh_texture",
+          "sed_measurement_point",
+          "sed_measurement_location",
+          "sed_weight_g",
+          "sed_bottle_cut_to_evaluate",
+          "sed_bottle_coating_present",
+          "sed_unsh_photo",
+          "sed_predominant_type",
+          "sed_prot_review_prompt",
+          "sed_min_appearance",
+          "sed_min_review_prompt",
+          "sed_coc_ring_present",
+          "sed_coc_settling_pct_volume",
+          "sed_coc_review_prompt",
+          "sed_sh_rating",
+          "sed_sh_height_value",
+          "sed_sh_height_unit",
+          "sed_sh_shake_in_extent",
+          "sed_sh_lumps_present",
+          "sed_sh_photo",
+          "sed_composition_test_requested",
+          "sed_comments"
+        ]
+      },
+      {
+        "label": "Gelling",
+        "fields": [
+          "gel_gelled",
+          "gel_type",
+          "gel_too_thick_to_pour",
+          "gel_firmness",
+          "gel_shake_test_performed",
+          "gel_reversibility",
+          "gel_spoilage_related",
+          "gel_observations",
+          "gel_photo",
+          "gel_comments"
+        ]
+      },
+      {
+        "label": "Non-homogeneity",
+        "fields": [
+          "nh_rippling_present",
+          "nh_lumps_present",
+          "nh_lumps_severity",
+          "nh_lumps_context",
+          "nh_lumps_size_class",
+          "nh_sieve_used",
+          "nh_sieve_mesh",
+          "nh_curdling_present",
+          "nh_smooth_after_shaking",
+          "nh_spoilage_related",
+          "nh_pour_video",
+          "nh_photo",
+          "nh_comments"
+        ]
+      },
+      {
+        "label": "Protein sagging",
+        "fields": [
+          "psag_vertical_stripes_present",
+          "psag_stripe_coverage",
+          "psag_photo",
+          "psag_comments"
+        ]
+      },
+      {
+        "label": "Appearance and sensory",
+        "fields": [
+          "app_color_change_vs_t0",
+          "app_color_method",
+          "app_color_l",
+          "app_color_a",
+          "app_color_b",
+          "sens_recorded",
+          "sens_texture",
+          "sens_notes"
+        ]
+      },
+      {
+        "label": "Custom observations",
+        "fields": [
+          "custom1_name",
+          "custom1_unshaken",
+          "custom1_shaken",
+          "custom2_name",
+          "custom2_unshaken",
+          "custom2_shaken",
+          "custom3_name",
+          "custom3_unshaken",
+          "custom3_shaken"
+        ]
+      }
+    ]
+  },
+  {
+    "templateId": "TPL_RTD_QUICK",
+    "templateName": "RTD liquid: SOP rating sheet",
+    "formulationClass": "LIQUID_RTD",
+    "version": 1,
+    "status": "ACTIVE",
+    "description": "The six SOP ratings (creaming, serum, sediment; unshaken and shaken), sediment heights, pH and viscosity, photos and a comment: the team spreadsheet as a form.",
+    "sections": [
+      {
+        "label": "Test context",
+        "fields": [
+          "project_code",
+          "ar_number",
+          "trial_number",
+          "variant_number",
+          "sample_code",
+          "time_point",
+          "temperature_condition",
+          "formulation_class",
+          "shake_protocol",
+          "result_type",
+          "observer_user_id",
+          "observation_timestamp",
+          "test_status",
+          "overall_result",
+          "overall_comments"
+        ]
+      },
+      {
+        "label": "Lab results (typed from LIMS)",
+        "fields": [
+          "lab_source",
+          "lab_ph",
+          "lab_visc1_value",
+          "lab_visc1_instrument",
+          "lab_visc1_shear_rate",
+          "lab_visc1_temp_c",
+          "lab_visc2_value",
+          "lab_visc2_temp_c"
+        ]
+      },
+      {
+        "label": "Photos",
+        "fields": [
+          "general_overview_photo",
+          "general_empty_bottle_photo"
+        ]
+      },
+      {
+        "label": "SOP ratings",
+        "fields": [
+          "homog_unshaken_homogeneous",
+          "cream_unsh_present",
+          "cream_unsh_rating",
+          "cream_sh_rating",
+          "serum_unsh_present",
+          "serum_unsh_rating",
+          "serum_sh_rating",
+          "sed_unsh_present",
+          "sed_unsh_rating",
+          "sed_unsh_height_value",
+          "sed_unsh_height_unit",
+          "sed_sh_rating",
+          "sed_sh_height_value",
+          "sed_sh_height_unit",
+          "sed_bottle_coating_present",
+          "gel_gelled",
+          "nh_rippling_present",
+          "nh_lumps_present",
+          "nh_smooth_after_shaking"
+        ]
+      }
+    ]
+  },
+  {
+    "templateId": "TPL_POWDER",
+    "templateName": "Powder: physical stability",
+    "formulationClass": "POWDER",
+    "version": 1,
+    "status": "DRAFT",
+    "description": "Extension template for powder formulations. Fields are outside the URS 127-field count and need PD vocabulary confirmation.",
+    "sections": [
+      {
+        "label": "Test context",
+        "fields": [
+          "project_code",
+          "ar_number",
+          "trial_number",
+          "variant_number",
+          "sample_code",
+          "time_point",
+          "temperature_condition",
+          "formulation_class",
+          "product_format",
+          "container_type",
+          "package_volume_ml",
+          "package_fill_height_mm",
+          "sample_storage_orientation",
+          "sample_temperature_at_test",
+          "sample_opened_previously",
+          "result_type",
+          "plan_status",
+          "observer_user_id",
+          "observation_timestamp",
+          "test_status",
+          "overall_result",
+          "overall_comments"
+        ]
+      },
+      {
+        "label": "Sample media",
+        "fields": [
+          "general_overview_photo"
+        ]
+      },
+      {
+        "label": "Powder observations",
+        "fields": [
+          "pwd_caking",
+          "pwd_flowability",
+          "pwd_color_change",
+          "pwd_lumps_present",
+          "pwd_wettability_s",
+          "pwd_dissolution_s",
+          "pwd_foaming",
+          "pwd_photo"
+        ]
+      }
+    ]
+  },
+  {
+    "templateId": "TPL_VMS",
+    "templateName": "VMS: physical stability",
+    "formulationClass": "VMS",
+    "version": 1,
+    "status": "DRAFT",
+    "description": "Extension template for tablets, capsules and gummies. Fields are outside the URS 127-field count and need PD vocabulary confirmation.",
+    "sections": [
+      {
+        "label": "Test context",
+        "fields": [
+          "project_code",
+          "ar_number",
+          "trial_number",
+          "variant_number",
+          "sample_code",
+          "time_point",
+          "temperature_condition",
+          "formulation_class",
+          "product_format",
+          "container_type",
+          "package_volume_ml",
+          "package_fill_height_mm",
+          "sample_storage_orientation",
+          "sample_temperature_at_test",
+          "sample_opened_previously",
+          "result_type",
+          "plan_status",
+          "observer_user_id",
+          "observation_timestamp",
+          "test_status",
+          "overall_result",
+          "overall_comments"
+        ]
+      },
+      {
+        "label": "Sample media",
+        "fields": [
+          "general_overview_photo"
+        ]
+      },
+      {
+        "label": "VMS observations",
+        "fields": [
+          "vms_appearance_change",
+          "vms_surface_mottling",
+          "vms_chipping_capping",
+          "vms_hardness_kp",
+          "vms_disintegration_min",
+          "vms_odor_change",
+          "vms_capsule_leakage",
+          "vms_photo"
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,210 @@
+vocabulary_code,vocabulary_name,value_code,label,sort_order,is_active
+FORMULATION_CLASS,Formulation class,LIQUID_RTD,Liquid RTD,1,Y
+FORMULATION_CLASS,Formulation class,POWDER,Powder,2,Y
+FORMULATION_CLASS,Formulation class,VMS,VMS,3,Y
+PRODUCT_FORMAT,Product format,BOTTLE_PET,PET bottle,1,Y
+PRODUCT_FORMAT,Product format,BOTTLE_HDPE,HDPE bottle,2,Y
+PRODUCT_FORMAT,Product format,CAN,Aluminium can,3,Y
+PRODUCT_FORMAT,Product format,TETRA,Aseptic carton,4,Y
+PRODUCT_FORMAT,Product format,POUCH,Pouch,5,Y
+PRODUCT_FORMAT,Product format,SACHET,Sachet,6,Y
+PRODUCT_FORMAT,Product format,TUB,Tub,7,Y
+PRODUCT_FORMAT,Product format,BLISTER,Blister,8,Y
+PRODUCT_FORMAT,Product format,JAR,Jar,9,Y
+CONTAINER_TYPE,Container type,CLEAR_PLASTIC,Clear plastic,1,Y
+CONTAINER_TYPE,Container type,OPAQUE_PLASTIC,Opaque plastic,2,Y
+CONTAINER_TYPE,Container type,GLASS,Glass,3,Y
+CONTAINER_TYPE,Container type,METAL,Metal,4,Y
+CONTAINER_TYPE,Container type,LAMINATE,Laminate carton,5,Y
+CONTAINER_TYPE,Container type,LAB_TUBE,Lab tube / centrifuge tube,6,Y
+ORIENTATION,Storage orientation,UPRIGHT,Upright,1,Y
+ORIENTATION,Storage orientation,INVERTED,Inverted,2,Y
+ORIENTATION,Storage orientation,HORIZONTAL,Horizontal,3,Y
+RESULT_TYPE,Result type,SCHEDULED,Scheduled pull,1,Y
+RESULT_TYPE,Result type,AD_HOC,Ad hoc check,2,Y
+RESULT_TYPE,Result type,RETEST,Retest,3,Y
+RESULT_TYPE,Result type,PULL_FORWARD,Pull-forward,4,Y
+PLAN_STATUS,Plan status,ACTIVE,Active,1,Y
+PLAN_STATUS,Plan status,CANCELLED_EARLY,Cancelled early on failure,2,Y
+PLAN_STATUS,Plan status,COMPLETE,Complete,3,Y
+TEST_STATUS,Test status,DRAFT,Draft,1,Y
+TEST_STATUS,Test status,SUBMITTED,Submitted,2,Y
+TEST_STATUS,Test status,REVIEWED,Reviewed,3,Y
+TEST_STATUS,Test status,REJECTED,Rejected,4,Y
+APPEARANCE,Appearance,UNIFORM,Uniform,1,Y
+APPEARANCE,Appearance,SLIGHT_LAYERING,Slight layering,2,Y
+APPEARANCE,Appearance,DISTINCT_PHASES,Distinct phases,3,Y
+APPEARANCE,Appearance,CLOUDY,Cloudy,4,Y
+COLOR_DESC,Color descriptor,WHITE,White,1,Y
+COLOR_DESC,Color descriptor,OFF_WHITE,Off-white,2,Y
+COLOR_DESC,Color descriptor,CREAM,Cream,3,Y
+COLOR_DESC,Color descriptor,LIGHT_TAN,Light tan,4,Y
+COLOR_DESC,Color descriptor,TAN,Tan,5,Y
+COLOR_DESC,Color descriptor,LIGHT_BROWN,Light brown,6,Y
+COLOR_DESC,Color descriptor,BROWN,Brown,7,Y
+COLOR_DESC,Color descriptor,YELLOW,Yellow,8,Y
+COLOR_DESC,Color descriptor,PINK,Pink,9,Y
+COLOR_DESC,Color descriptor,GREY,Grey,10,Y
+COLOR_DESC,Color descriptor,TRANSLUCENT,Translucent,11,Y
+COLOR_CODE,Color code,C01,C01 White,1,Y
+COLOR_CODE,Color code,C02,C02 Off-white,2,Y
+COLOR_CODE,Color code,C03,C03 Cream,3,Y
+COLOR_CODE,Color code,C04,C04 Light tan,4,Y
+COLOR_CODE,Color code,C05,C05 Tan,5,Y
+COLOR_CODE,Color code,C06,C06 Light brown,6,Y
+COLOR_CODE,Color code,C07,C07 Brown,7,Y
+COLOR_CODE,Color code,C08,C08 Yellow,8,Y
+COLOR_CODE,Color code,C09,C09 Pink,9,Y
+COLOR_CODE,Color code,C10,C10 Grey,10,Y
+UNIT_LENGTH,Length unit,MM,mm,1,Y
+UNIT_LENGTH,Length unit,CM,cm,2,Y
+UNIT_SERUM,Serum unit,MM,mm,1,Y
+UNIT_SERUM,Serum unit,ML,mL,2,Y
+UNIT_SERUM,Serum unit,PCT,% of package,3,Y
+POUR_RESULT,Pour-out result,POURS_CLEAN,Pours clean,1,Y
+POUR_RESULT,Pour-out result,RESIDUE_ON_WALL,Residue on wall,2,Y
+POUR_RESULT,Pour-out result,PLUG_REMAINS,Plug remains in container,3,Y
+SHAKE_RESULT,Shaken result,FULLY_REDISPERSED,Fully redispersed,1,Y
+SHAKE_RESULT,Shaken result,PARTIAL,Partially redispersed,2,Y
+SHAKE_RESULT,Shaken result,NOT_REDISPERSED,Not redispersed,3,Y
+SERUM_LOCATION,Serum location,TOP,Top,1,Y
+SERUM_LOCATION,Serum location,BOTTOM,Bottom,2,Y
+SERUM_LOCATION,Serum location,SIDE_WALL,Side wall,3,Y
+SERUM_LOCATION,Serum location,NECK,Neck / shoulder,4,Y
+SERUM_LOCATION,Serum location,THROUGHOUT,Throughout,5,Y
+SERUM_CLARITY,Serum clarity,CLEAR,Clear,1,Y
+SERUM_CLARITY,Serum clarity,TRANSLUCENT,Translucent,2,Y
+SERUM_CLARITY,Serum clarity,OPAQUE,Opaque,3,Y
+SED_TYPE,Sediment type,PROTEIN,Protein,1,Y
+SED_TYPE,Sediment type,MINERAL,Mineral,2,Y
+SED_TYPE,Sediment type,COCOA,Cocoa,3,Y
+SED_TYPE,Sediment type,UNDETERMINED,Undetermined,4,Y
+SHAKE_EXTENT,Shake-in extent,NONE,None,1,Y
+SHAKE_EXTENT,Shake-in extent,PARTIAL,Partial,2,Y
+SHAKE_EXTENT,Shake-in extent,COMPLETE,Complete,3,Y
+SED_MIN_APPEAR,Mineral sediment appearance,FINE_POWDER,Fine powder,1,Y
+SED_MIN_APPEAR,Mineral sediment appearance,GRITTY,Gritty,2,Y
+SED_MIN_APPEAR,Mineral sediment appearance,CRYSTALLINE,Crystalline,3,Y
+GEL_TYPE,Gel type,AGE_GELATION,Age gelation,1,Y
+GEL_TYPE,Gel type,THERMAL,Thermal,2,Y
+GEL_TYPE,Gel type,MICROBIAL,Microbial,3,Y
+GEL_TYPE,Gel type,UNDETERMINED,Undetermined,4,Y
+GEL_FIRMNESS,Gel firmness,SOFT,Soft,1,Y
+GEL_FIRMNESS,Gel firmness,FIRM,Firm,2,Y
+GEL_FIRMNESS,Gel firmness,RIGID,Rigid,3,Y
+GEL_REVERSIBILITY,Gel reversibility,REVERSIBLE,Reversible,1,Y
+GEL_REVERSIBILITY,Gel reversibility,PARTIALLY_REVERSIBLE,Partially reversible,2,Y
+GEL_REVERSIBILITY,Gel reversibility,IRREVERSIBLE,Irreversible,3,Y
+TRI_STATE,Yes / No / Unknown,YES,Yes,1,Y
+TRI_STATE,Yes / No / Unknown,NO,No,2,Y
+TRI_STATE,Yes / No / Unknown,UNKNOWN,Unknown,3,Y
+SEVERITY,Severity,SLIGHT,Slight,1,Y
+SEVERITY,Severity,MODERATE,Moderate,2,Y
+SEVERITY,Severity,SEVERE,Severe,3,Y
+SEVERITY_NONE,Severity with none,NONE,None,0,Y
+SEVERITY_NONE,Severity with none,SLIGHT,Slight,1,Y
+SEVERITY_NONE,Severity with none,MODERATE,Moderate,2,Y
+SEVERITY_NONE,Severity with none,SEVERE,Severe,3,Y
+LUMP_SIZE,Lump size class,FINE,Fine (<1 mm),1,Y
+LUMP_SIZE,Lump size class,SMALL,Small (1 to 3 mm),2,Y
+LUMP_SIZE,Lump size class,LARGE,Large (>3 mm),3,Y
+COVERAGE,Coverage,ISOLATED,Isolated,1,Y
+COVERAGE,Coverage,PARTIAL,Partial,2,Y
+COVERAGE,Coverage,EXTENSIVE,Extensive,3,Y
+FLOWABILITY,Flowability,FREE_FLOWING,Free flowing,1,Y
+FLOWABILITY,Flowability,SLIGHTLY_COHESIVE,Slightly cohesive,2,Y
+FLOWABILITY,Flowability,COHESIVE,Cohesive,3,Y
+FLOWABILITY,Flowability,NON_FLOWING,Non-flowing,4,Y
+OVERALL_RESULT,Overall result (KSC language),IN,In,0,Y
+OVERALL_RESULT,Overall result (KSC language),JUST_IN,Just In,1,Y
+OVERALL_RESULT,Overall result (KSC language),OUT,Out,2,Y
+CREAM_LAYER_DESC,Cream layer description (SOP Table 2 words),TRACE,Trace,0,Y
+CREAM_LAYER_DESC,Cream layer description (SOP Table 2 words),SLIGHT_THIN_RING,Slight: thin ring (under 5 mm),1,Y
+CREAM_LAYER_DESC,Cream layer description (SOP Table 2 words),DISTINCT_RING,Distinct ring (5 to 8 mm),2,Y
+CREAM_LAYER_DESC,Cream layer description (SOP Table 2 words),HEAVY_RING,Heavy ring (8 to 10 mm),3,Y
+CREAM_LAYER_DESC,Cream layer description (SOP Table 2 words),VERY_HEAVY_RING,Very heavy ring (10 mm or more),4,Y
+SED_TEXTURE,Sediment texture,LOOSE,Loose,0,Y
+SED_TEXTURE,Sediment texture,SOFT,Soft,1,Y
+SED_TEXTURE,Sediment texture,COMPACT,Compact,2,Y
+SED_TEXTURE,Sediment texture,HARD,Hard,3,Y
+SED_TEXTURE,Sediment texture,STICKY,Sticky,4,Y
+SED_TEXTURE,Sediment texture,LUMPY,Lumpy / clumps,5,Y
+SED_TEXTURE,Sediment texture,SANDY_GRITTY,Sandy / gritty,6,Y
+SED_TEXTURE,Sediment texture,FLAKY,Flaky,7,Y
+TIME_POINT,Stability time point,T0,T0 (immediate),0,Y
+TIME_POINT,Stability time point,1D,1 day,1,Y
+TIME_POINT,Stability time point,1W,1 week,2,Y
+TIME_POINT,Stability time point,2W,2 weeks,3,Y
+TIME_POINT,Stability time point,1M,1 month,4,Y
+TIME_POINT,Stability time point,2M,2 months,5,Y
+TIME_POINT,Stability time point,3M,3 months,6,Y
+TIME_POINT,Stability time point,4M,4 months,7,Y
+TIME_POINT,Stability time point,6M,6 months,8,Y
+TIME_POINT,Stability time point,9M,9 months,9,Y
+TIME_POINT,Stability time point,12M,12 months,10,Y
+TIME_POINT,Stability time point,15M,15 months,11,Y
+TIME_POINT,Stability time point,18M,18 months,12,Y
+TEMP_CONDITION,Storage condition,4C,Refrigerated 4°C,0,Y
+TEMP_CONDITION,Storage condition,25C,Ambient 25°C,1,Y
+TEMP_CONDITION,Storage condition,30C,Tropical 30°C,2,Y
+TEMP_CONDITION,Storage condition,35C,Elevated 35°C,3,Y
+TEMP_CONDITION,Storage condition,45C,Elevated 45°C,4,Y
+TEMP_CONDITION,Storage condition,55C,Elevated 55°C,5,Y
+TEMP_CONDITION,Storage condition,FRZ,Freezer -18°C,6,Y
+RESULT_TYPE,Result type,HISTORICAL_IMPORT,Historical import (spreadsheet),5,Y
+COLOR_DESC,Color description,PALE_YELLOW,Pale yellow,12,Y
+COLOR_DESC,Color description,OILY,Oily / fat layer (real food),13,Y
+RATING_CREAMING,Creaming rating (SOP Table 2),0,0 Zero: no creaming visible,0,Y
+RATING_CREAMING,Creaming rating (SOP Table 2),1,1 Trace: creaming present,1,Y
+RATING_CREAMING,Creaming rating (SOP Table 2),2,2 Slight: thin ring (under 5 mm),2,Y
+RATING_CREAMING,Creaming rating (SOP Table 2),3,3 Distinct: ring 5 to 8 mm,3,Y
+RATING_CREAMING,Creaming rating (SOP Table 2),4,4 Heavy: ring 8 to 10 mm,4,Y
+RATING_CREAMING,Creaming rating (SOP Table 2),5,5 Very heavy: ring 10 mm or more,5,Y
+RATING_SERUM,Serum rating (SOP Table 3),0,0 Zero: no serum visible,0,Y
+RATING_SERUM,Serum rating (SOP Table 3),1,1 Trace: line during pouring,1,Y
+RATING_SERUM,Serum rating (SOP Table 3),2,2 Slight: about 2% of package volume,2,Y
+RATING_SERUM,Serum rating (SOP Table 3),3,3 Distinct: about 5% of package volume,3,Y
+RATING_SERUM,Serum rating (SOP Table 3),4,4 Heavy: about 10% of package volume,4,Y
+RATING_SERUM,Serum rating (SOP Table 3),5,5 Very heavy: 20% or more of package volume,5,Y
+RATING_SEDIMENT,Sediment rating (SOP Table 4),0,0 Zero: no sediment on the bottom,0,Y
+RATING_SEDIMENT,Sediment rating (SOP Table 4),1,1 Trace: partial ring or coverage in depressions,1,Y
+RATING_SEDIMENT,Sediment rating (SOP Table 4),2,"2 Slight: complete ring, 1 to 2 mm",2,Y
+RATING_SEDIMENT,Sediment rating (SOP Table 4),3,"3 Distinct: about 3 mm, heavier ring",3,Y
+RATING_SEDIMENT,Sediment rating (SOP Table 4),4,"4 Heavy: about 4 mm, entire bottom covered",4,Y
+RATING_SEDIMENT,Sediment rating (SOP Table 4),5,"5 Very heavy: 5 mm or more, entire bottom covered",5,Y
+SHAKE_PROTOCOL,Shaking protocol,SOP_10X_180,"SOP: 10 shakes, 180°, medium force, about 5 s",0,Y
+SHAKE_PROTOCOL,Shaking protocol,OTHER,Other (record the count),1,Y
+SHAKE_PROTOCOL,Shaking protocol,NOT_SHAKEN,Not shaken (unshaken evaluation only),2,Y
+LAB_SOURCE,Lab result source,TYPED_FROM_LIMS,Typed from LIMS (no integration),0,Y
+LAB_SOURCE,Lab result source,MEASURED_IN_PD_LAB,Measured in the PD lab,1,Y
+LAB_SOURCE,Lab result source,NOT_AVAILABLE,Not available at this pull,2,Y
+VISC_INSTRUMENT,Viscosity instrument,PHYSICA_RHEOMETER,Physica rheometer,0,Y
+VISC_INSTRUMENT,Viscosity instrument,BROOKFIELD,Brookfield viscometer,1,Y
+VISC_INSTRUMENT,Viscosity instrument,OTHER,Other,2,Y
+CREAM_RESIDUE,Residue after shaking,FAT_RING_ON_BOTTLE,Fat ring on the bottle,0,Y
+CREAM_RESIDUE,Residue after shaking,FLOATING_FLAKES,Floating flakes,1,Y
+CREAM_RESIDUE,Residue after shaking,PLUG_AT_SPOUT,Plug at the spout,2,Y
+CREAM_RESIDUE,Residue after shaking,SKIN_OR_PAD,Skin or pad,3,Y
+CREAM_RESIDUE,Residue after shaking,NONE,None,4,Y
+SED_COVERAGE,Sediment coverage of the bottom,PARTIAL_RING,Partial ring,0,Y
+SED_COVERAGE,Sediment coverage of the bottom,COMPLETE_RING,Complete ring,1,Y
+SED_COVERAGE,Sediment coverage of the bottom,OUTER_RING_CLEAR_CENTER,"Outer ring, clear center",2,Y
+SED_COVERAGE,Sediment coverage of the bottom,ENTIRE_BOTTOM,Entire bottom covered,3,Y
+SED_COVERAGE,Sediment coverage of the bottom,DEPRESSIONS_ONLY,Depressions only,4,Y
+SED_MEAS_POINT,Sediment measurement point,BEFORE_POUR,Before pouring (through a clear bottle),0,Y
+SED_MEAS_POINT,Sediment measurement point,AFTER_POUR,After pouring (emptied bottle),1,Y
+SED_MEAS_LOCATION,Sediment measurement location,OUTER_RIM,Outer rim (SOP worst case),0,Y
+SED_MEAS_LOCATION,Sediment measurement location,CENTER,Center,1,Y
+SED_MEAS_LOCATION,Sediment measurement location,AVERAGE,Average of several points,2,Y
+NH_CONTEXT,When lumps were seen,UNSHAKEN_POUR,Pouring unshaken,0,Y
+NH_CONTEXT,When lumps were seen,AFTER_SHAKING,Pouring after shaking,1,Y
+NH_CONTEXT,When lumps were seen,ON_SIEVE,On the sieve,2,Y
+COLOR_METHOD,Color measurement method,VISUAL,Visual against T0,0,Y
+COLOR_METHOD,Color measurement method,LAB_METER,L*a*b* meter,1,Y
+COLOR_METHOD,Color measurement method,DIGIEYE,DigiEye,2,Y
+TEXTURE_SENSORY,Texture in mouth or on pour,SMOOTH,Smooth,0,Y
+TEXTURE_SENSORY,Texture in mouth or on pour,SLIGHTLY_THICKER,Slightly thicker,1,Y
+TEXTURE_SENSORY,Texture in mouth or on pour,MILKSHAKE_THICK,Milkshake thick,2,Y
+TEXTURE_SENSORY,Texture in mouth or on pour,PUDDING,Pudding,3,Y
+TEXTURE_SENSORY,Texture in mouth or on pour,LUMPY,Lumpy,4,Y
+TEXTURE_SENSORY,Texture in mouth or on pour,GRITTY,Gritty,5,Y

@@ -364,15 +364,20 @@ The workflow uses `azure/webapps-deploy@v3` with the Web App publish profile. If
 Error: Deployment Failed, Error: No credentials found. Add an Azure login action before this action.
 ```
 
-Create these GitHub repository secrets:
+Create this GitHub repository secret:
 
 ```text
 AZUREAPPSERVICE_PUBLISHPROFILE_5145D9368E3940D2A3B53A42009CCF9F
+```
+
+Create these as GitHub repository variables or secrets:
+
+```text
 VITE_ENTRA_CLIENT_ID
 VITE_ENTRA_TENANT_ID
 ```
 
-The publish profile secret is used by `azure/webapps-deploy@v3` for deployment. `VITE_ENTRA_CLIENT_ID` and `VITE_ENTRA_TENANT_ID` are used when building the React app with MSAL settings.
+The publish profile secret is used by `azure/webapps-deploy@v3` for deployment. `VITE_ENTRA_CLIENT_ID` and `VITE_ENTRA_TENANT_ID` are used when building the React app with MSAL settings. The client ID and tenant ID are identifiers, so repository variables are usually fine.
 
 ## 14. Existing Resource Groups, Web App, and Storage Account
 
@@ -746,7 +751,7 @@ az ad app delete --id <spa-app-id>
 | Web App deploy succeeds but site returns `503` | Tail Web App logs and wait for postinstall dependency restore |
 | Runtime container verification fails | Check container name mismatch or RBAC propagation delay |
 | Reference import rejected | Fix the entity and field named in the validation error |
-| Web App stays on `Loading Stability Capture` / `Preparing demo data` | The React app was built in demo mode. Set `VITE_API_BASE` to `https://nsus-dv-sfdfdev-adi-281-app.azurewebsites.net` and make sure `VITE_ENTRA_CLIENT_ID` and `VITE_ENTRA_TENANT_ID` GitHub secrets are populated, then redeploy |
+| Web App stays on `Loading Stability Capture` / `Preparing demo data` | The React app was built in demo mode. Set `VITE_API_BASE` to `https://nsus-dv-sfdfdev-adi-281-app.azurewebsites.net` and make sure `VITE_ENTRA_CLIENT_ID` and `VITE_ENTRA_TENANT_ID` GitHub variables or secrets are populated, then redeploy |
 
 ## 25. Most Important Implementation Rule
 

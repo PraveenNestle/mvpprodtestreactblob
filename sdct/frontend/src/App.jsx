@@ -38,16 +38,18 @@ function Shell() {
   }), [toast]);
 
   const go = (name, params = {}) => { setRoute({ name, ...params }); window.scrollTo({ top: 0 }); };
+  const activeUser = user || (authMode() === 'demo' ? currentUser() : null);
+  const activeCatalog = catalog || (DEMO_MODE ? fallbackCatalog : null);
   if (loadError) return <div className="empty"><h3>Stability Capture could not start</h3><p>{loadError}</p><p className="small muted">Check the deployed frontend settings, API health endpoint, and Entra configuration.</p></div>;
-  if (!user || !catalog) return <div className="empty"><h3>Loading Stability Capture</h3>{authMode() === 'msal' ? 'Signing in with Microsoft Entra ID' : 'Preparing demo data'}</div>;
+  if (!activeUser || !activeCatalog) return <div className="empty"><h3>Loading Stability Capture</h3>{authMode() === 'msal' ? 'Signing in with Microsoft Entra ID' : 'Preparing demo data'}</div>;
 
-  const initials = user.displayName.split(' ').map((s) => s[0]).join('').slice(0, 2).toUpperCase();
+  const initials = activeUser.displayName.split(' ').map((s) => s[0]).join('').slice(0, 2).toUpperCase();
   return (
     <div className="app">
       <header className="topbar">
         <div className="brand"><span className="brand-mark">SC</span>Stability Capture</div>
         <nav className="nav" aria-label="Main">
-          {NAV.filter(([, , perm]) => can(user, perm)).map(([k, l]) => <button key={k} onClick={() => go(k)} aria-current={route.name === k ? 'page' : undefined}>{l}</button>)}
+          {NAV.filter(([, , perm]) => can(activeUser, perm)).map(([k, l]) => <button key={k} onClick={() => go(k)} aria-current={route.name === k ? 'page' : undefined}>{l}</button>)}
         </nav>
         <div className="topbar-right">
           {!online && <span className="pill offline">Offline</span>}
@@ -56,21 +58,21 @@ function Shell() {
           <div className="user-menu">
             <span className="avatar" aria-hidden="true">{initials}</span>
             {authMode() === 'demo' ? (
-              <select value={user.userId} onChange={(e) => switchDemoUser(e.target.value)} aria-label="Switch demo persona" title="Switch persona to exercise role-based access">
+              <select value={activeUser.userId} onChange={(e) => switchDemoUser(e.target.value)} aria-label="Switch demo persona" title="Switch persona to exercise role-based access">
                 {demoUsers.map((u) => <option key={u.userId} value={u.userId}>{u.displayName} · {u.role.toLowerCase()}</option>)}
               </select>
             ) : (
-              <><span className="small"><b>{user.displayName}</b> · {user.role.toLowerCase()}</span><button className="btn xs" onClick={signOut}>Sign out</button></>
+              <><span className="small"><b>{activeUser.displayName}</b> · {activeUser.role.toLowerCase()}</span><button className="btn xs" onClick={signOut}>Sign out</button></>
             )}
           </div>
         </div>
       </header>
       <main className="main">
-        {route.name === 'home' && <HomeScreen catalog={catalog} user={user} onCapture={(ctx) => go('capture', { ctx })} onReview={(id) => go('review', { focusId: id })} />}
-        {route.name === 'capture' && <CaptureScreen key={JSON.stringify(route.ctx || {})} catalog={catalog} user={user} online={online} initialContext={route.ctx} onSubmitted={() => setPending(queued().length)} />}
-        {route.name === 'review' && <ReviewScreen catalog={catalog} user={user} focusId={route.focusId} onOpenCapture={(ctx) => go('capture', { ctx })} />}
-        {route.name === 'templates' && <TemplatesScreen catalog={catalog} user={user} />}
-        {route.name === 'admin' && (can(user, 'admin') ? <AdminScreen catalog={catalog} user={user} onCatalogChange={reloadCatalog} /> : <div className="card">Administration is limited to the admin role.</div>)}
+        {route.name === 'home' && <HomeScreen catalog={activeCatalog} user={activeUser} onCapture={(ctx) => go('capture', { ctx })} onReview={(id) => go('review', { focusId: id })} />}
+        {route.name === 'capture' && <CaptureScreen key={JSON.stringify(route.ctx || {})} catalog={activeCatalog} user={activeUser} online={online} initialContext={route.ctx} onSubmitted={() => setPending(queued().length)} />}
+        {route.name === 'review' && <ReviewScreen catalog={activeCatalog} user={activeUser} focusId={route.focusId} onOpenCapture={(ctx) => go('capture', { ctx })} />}
+        {route.name === 'templates' && <TemplatesScreen catalog={activeCatalog} user={activeUser} />}
+        {route.name === 'admin' && (can(activeUser, 'admin') ? <AdminScreen catalog={activeCatalog} user={activeUser} onCatalogChange={reloadCatalog} /> : <div className="card">Administration is limited to the admin role.</div>)}
       </main>
     </div>
   );

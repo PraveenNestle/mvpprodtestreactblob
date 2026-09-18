@@ -38,10 +38,9 @@ function Shell() {
   }), [toast]);
 
   const go = (name, params = {}) => { setRoute({ name, ...params }); window.scrollTo({ top: 0 }); };
-  const activeUser = user || (authMode() === 'demo' ? currentUser() : null);
-  const activeCatalog = catalog || (DEMO_MODE ? fallbackCatalog : null);
+  const activeUser = user || currentUser() || demoUsers[2];
+  const activeCatalog = catalog || fallbackCatalog;
   if (loadError) return <div className="empty"><h3>Stability Capture could not start</h3><p>{loadError}</p><p className="small muted">Check the deployed frontend settings, API health endpoint, and Entra configuration.</p></div>;
-  if (!activeUser || !activeCatalog) return <div className="empty"><h3>Loading Stability Capture</h3>{authMode() === 'msal' ? 'Signing in with Microsoft Entra ID' : 'Preparing demo data'}</div>;
 
   const initials = activeUser.displayName.split(' ').map((s) => s[0]).join('').slice(0, 2).toUpperCase();
   return (

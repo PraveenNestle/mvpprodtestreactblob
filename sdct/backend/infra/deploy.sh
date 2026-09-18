@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# One-shot deployment of the stack (one Web App + one Storage account). Requires: az cli (logged in), node 20, npm.
+# One-shot deployment of the stack (one Web App + one Storage account). Requires: az cli (logged in), node 22, npm.
 set -euo pipefail
 ENV="${1:-dev}"; RG="${RG:-nsus-dv-sfdf-usea-rgp}"; LOC="${LOC:-eastus}"
 WEB_APP_NAME="${WEB_APP_NAME:-nsus-dv-sfdfdev-adi-281-app}"
@@ -55,16 +55,16 @@ VITE_ENTRA_CLIENT_ID=$SPA_APP_ID
 VITE_ENTRA_TENANT_ID=$TENANT_ID
 VITE_API_SCOPE=api://stability-capture-api-$ENV/access_as_user
 ENVEOF
-(cd "$ROOT/frontend" && npm ci && npm run build)
+(cd "$ROOT/frontend" && npm install --no-audit --no-fund && npm run build)
 
 echo "== 4/6 Package and deploy (frontend/dist + backend/api)"
 TMP=$(mktemp -d); mkdir -p "$TMP/frontend" "$TMP/backend"
 cp -r "$ROOT/frontend/dist" "$TMP/frontend/dist"; cp -r "$ROOT/backend/api" "$TMP/backend/api"; rm -rf "$TMP/backend/api/node_modules"
 cat > "$TMP/package.json" <<'PKG'
-{ "name": "stability-capture-webapp", "private": true, "scripts": { "start": "npm start --prefix backend/api", "postinstall": "npm ci --omit=dev --omit=optional --prefix backend/api" } }
+{ "name": "stability-capture-webapp", "private": true, "engines": { "node": ">=22" }, "scripts": { "start": "npm start --prefix backend/api", "postinstall": "npm install --omit=dev --omit=optional --no-audit --no-fund --prefix backend/api" } }
 PKG
 (cd "$TMP" && zip -qr deploy.zip .)
-az webapp config set -g "$RG" -n "$APP_NAME" --linux-fx-version "NODE|20-lts" --startup-file "npm start --prefix backend/api" --ftps-state Disabled --min-tls-version 1.2 --http20-enabled true -o none
+az webapp config set -g "$RG" -n "$APP_NAME" --linux-fx-version "NODE|22-lts" --startup-file "npm start --prefix backend/api" --ftps-state Disabled --min-tls-version 1.2 --http20-enabled true -o none
 az webapp deploy -g "$RG" -n "$APP_NAME" --src-path "$TMP/deploy.zip" --type zip -o none
 
 echo "== 5/6 Register the SPA redirect URI"

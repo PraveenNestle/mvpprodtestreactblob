@@ -74,10 +74,10 @@ need_az_login() {
 }
 
 check_node_version() {
-  need node "Install Node.js 20 LTS or newer."
+  need node "Install Node.js 22 LTS or newer."
   local major
   major="$(node -p 'process.versions.node.split(".")[0]')"
-  [ "$major" -ge 20 ] || fail "Node.js 20 or newer is required (found $(node --version)). The API and the Web App both run on Node 20."
+  [ "$major" -ge 22 ] || fail "Node.js 22 or newer is required (found $(node --version)). The API and the Web App both run on Node 22."
 }
 
 print_config() {

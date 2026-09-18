@@ -4,6 +4,9 @@
   "version": "1.0.0",
   "description": "R&D Stability Data Collection Tool - guided capture front end (React + Vite). Talks to the Express API on Azure Web App; runs in demo mode with no backend.",
   "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",

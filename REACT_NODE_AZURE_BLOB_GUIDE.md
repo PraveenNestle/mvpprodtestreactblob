@@ -116,7 +116,7 @@ The API also writes flattened reporting rows into the `curated` container so Pow
 Install these tools on the machine used for local development and deployment:
 
 ```bash
-node >= 20
+node >= 22
 npm
 az
 zip

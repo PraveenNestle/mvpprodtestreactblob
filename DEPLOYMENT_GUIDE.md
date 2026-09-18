@@ -2,7 +2,7 @@
 
 Technical guide for standing up the Stability Capture stack in Azure, installing this bundle into the storage account, and verifying everything. Written for the engineers doing the deployment. The business context, requirements traceability and architecture rationale live in `docs/`; this document only covers getting the system running.
 
-The whole stack is one Azure Web App (React front end + Express API in a single Node 20 app) and one Storage account. Azure Blob Storage is the only data store. There is no database, no Snowflake link, and no LIMS integration.
+The whole stack is one Azure Web App (React front end + Express API in a single Node 22 app) and one Storage account. Azure Blob Storage is the only data store. There is no database, no Snowflake link, and no LIMS integration.
 
 ## 1. What gets deployed
 
@@ -15,7 +15,7 @@ The whole stack is one Azure Web App (React front end + Express API in a single 
 | Lifecycle policy | `media-tiering` | `media/` blobs cool after 90 days, archive after 3 years; everything else stays hot |
 | Log Analytics + App Insights | `log-{prefix}-{env}`, `appi-{prefix}-{env}` | 90-day retention, workspace-based App Insights wired into the Web App |
 | App Service plan | `asp-{prefix}-{env}` | Linux, B1 by default (enough for the 3-month PoV), P1v3 recommended for 20 to 25 users with media uploads |
-| Web App | `app-{prefix}-{env}-{6-char hash}` | Node 20 LTS, system-assigned managed identity, HTTPS only, `npm start --prefix backend/api`, all app settings preconfigured including the storage account name |
+| Web App | `app-{prefix}-{env}-{6-char hash}` | Node 22 LTS, system-assigned managed identity, HTTPS only, `npm start --prefix backend/api`, all app settings preconfigured including the storage account name |
 | Role assignments | on the storage account and containers | Web App identity: Storage Blob Data Contributor + Storage Blob Delegator (to mint user delegation SAS for device uploads). Optional: reference importer identity gets Contributor on `reference` only; Power BI identity gets Reader on `curated` and `reference` only |
 | Entra app registrations | `Stability Capture API ({env})`, `Stability Capture SPA ({env})` | Created by `deploy.sh`, not Bicep. The API app carries the three app roles from `entra-app-roles.json`: Stability.Scientist, Stability.Reviewer, Stability.Admin |
 
@@ -26,7 +26,7 @@ Default prefix is `sdct`. The 6-character hash comes from `uniqueString(resource
 Tools on the machine running the deployment:
 
 ```
-node >= 20, npm          the API and the Web App run on Node 20
+node >= 22, npm          the API and the Web App run on Node 22
 az (Azure CLI), logged in with: az login
 zip, unzip               deploy.sh packages the Web App as a zip
 python3                  only for regenerating schema outputs when the catalog changes
@@ -102,7 +102,7 @@ This runs the check and smoke test, then hands off to `backend/infra/deploy.sh d
 
 1. **Entra app registrations.** Creates `Stability Capture API (dev)` with the three app roles and the identifier URI `api://stability-capture-api-dev`, plus `Stability Capture SPA (dev)`. Idempotent: existing registrations with those display names are reused.
 2. **Resource group and Bicep.** Creates the resource group and deploys `main.bicep` with the tenant id and API audience. Prints the Web App URL from the deployment output.
-3. **Front end build.** Writes `frontend/.env.production` with the SPA client id, tenant id and API scope, then `npm ci && npm run build`.
+3. **Front end build.** Writes `frontend/.env.production` with the SPA client id, tenant id and API scope, then `npm install --no-audit --no-fund && npm run build`.
 4. **Package and deploy.** Zips `frontend/dist` and `backend/api` (without node_modules) into one Node Web App with a root `package.json` whose postinstall restores API dependencies on the App Service, then `az webapp deploy`.
 5. **SPA redirect URI.** Registers the Web App URL as the SPA redirect URI.
 6. **Prints the health URL** and the next steps.

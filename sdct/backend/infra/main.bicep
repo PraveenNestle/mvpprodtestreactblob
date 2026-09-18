@@ -59,7 +59,7 @@ resource webAppSettings 'Microsoft.Web/sites/config@2023-12-01' = {
     SAS_UPLOAD_MINUTES: '15'
     APPLICATIONINSIGHTS_CONNECTION_STRING: appInsights.properties.ConnectionString
     SCM_DO_BUILD_DURING_DEPLOYMENT: 'true'
-    WEBSITE_NODE_DEFAULT_VERSION: '~20'
+    WEBSITE_NODE_DEFAULT_VERSION: '~22'
   }
 }
 

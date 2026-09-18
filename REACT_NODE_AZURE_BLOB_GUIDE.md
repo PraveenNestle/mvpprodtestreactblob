@@ -743,6 +743,7 @@ az ad app delete --id <spa-app-id>
 | Symptom | Likely fix |
 |---|---|
 | `403` on blob writes after deployment | Wait a few minutes for RBAC propagation, then retry |
+| GitHub Actions live-site verification gets `curl: (22) ... 403` | The Web App blocks GitHub-hosted runner traffic through access restrictions or authentication. The deployment can still succeed; verify from an allowed browser/network and check `/deploy-marker.json` manually |
 | Upload cannot discover storage account | Deploy first or set `STORAGE_ACCOUNT_NAME` manually |
 | `AUTH_MODE=key` fails against solution account | Expected because shared key access is disabled; use `AUTH_MODE=login` |
 | SAS upload fails | Check Storage Blob Data Contributor and Storage Blob Delegator assignments |

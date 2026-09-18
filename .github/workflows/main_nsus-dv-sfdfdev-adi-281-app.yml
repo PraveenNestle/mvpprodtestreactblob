@@ -92,9 +92,30 @@ jobs:
           cd deploy_package
           zip -qr ../deploy.zip .
 
+      - name: Verify deployment package content
+        shell: bash
+        run: |
+          unzip -q deploy.zip -d verify_package
+          if grep -R "Loading Stability Capture\|Preparing demo data" verify_package; then
+            echo "Old loading screen text found in deploy.zip. Refusing to deploy stale package."
+            exit 1
+          fi
+          test -f verify_package/frontend/dist/index.html || { echo "Missing frontend/dist/index.html in deploy.zip"; exit 1; }
+          echo "Deployment package verified."
+
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_5145D9368E3940D2A3B53A42009CCF9F }}
           package: deploy.zip
+
+      - name: Verify live site is not stale
+        shell: bash
+        run: |
+          body="$(curl -fsSL "${{ env.AZURE_WEBAPP_URL }}?build=${GITHUB_SHA}" || true)"
+          if echo "$body" | grep -E "Loading Stability Capture|Preparing demo data"; then
+            echo "Live Web App is still serving the old loading screen after deployment. Restart the App Service or clear the deployment cache, then rerun this workflow."
+            exit 1
+          fi
+          echo "Live site check completed."

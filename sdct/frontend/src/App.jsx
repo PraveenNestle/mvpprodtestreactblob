@@ -15,12 +15,13 @@ function Shell() {
   const toast = useToast();
   const [user, setUser] = useState(null);
   const [catalog, setCatalog] = useState(null);
+  const [loadError, setLoadError] = useState(null);
   const [route, setRoute] = useState({ name: 'home' });
   const [online, setOnline] = useState(typeof navigator === 'undefined' ? true : navigator.onLine);
   const [pending, setPending] = useState(queued().length);
 
-  useEffect(() => { initAuth().then(setUser); return onUserChange(setUser); }, []);
-  const reloadCatalog = useCallback(() => api.getCatalog().then(setCatalog), []);
+  useEffect(() => { initAuth().then(setUser).catch((err) => setLoadError(err.message || 'Authentication failed')); return onUserChange(setUser); }, []);
+  const reloadCatalog = useCallback(() => api.getCatalog().then(setCatalog).catch((err) => setLoadError(err.message || 'Catalog load failed')), []);
   useEffect(() => { reloadCatalog(); }, [reloadCatalog]);
 
   // Flush the offline queue when connectivity returns (R-36)
@@ -34,6 +35,7 @@ function Shell() {
   }), [toast]);
 
   const go = (name, params = {}) => { setRoute({ name, ...params }); window.scrollTo({ top: 0 }); };
+  if (loadError) return <div className="empty"><h3>Stability Capture could not start</h3><p>{loadError}</p><p className="small muted">Check the deployed frontend settings, API health endpoint, and Entra configuration.</p></div>;
   if (!user || !catalog) return <div className="empty"><h3>Loading Stability Capture</h3>{authMode() === 'msal' ? 'Signing in with Microsoft Entra ID' : 'Preparing demo data'}</div>;
 
   const initials = user.displayName.split(' ').map((s) => s[0]).join('').slice(0, 2).toUpperCase();

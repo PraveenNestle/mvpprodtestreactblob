@@ -9,6 +9,7 @@ on:
 env:
   NODE_VERSION: '22.x'
   AZURE_WEBAPP_NAME: nsus-dv-sfdfdev-adi-281-app
+  AZURE_WEBAPP_URL: https://nsus-dv-sfdfdev-adi-281-app.azurewebsites.net
   API_AUDIENCE: api://stability-capture-api-dev
 
 permissions:
@@ -39,10 +40,18 @@ jobs:
         working-directory: sdct/frontend
         run: npm ci --no-audit --no-fund
 
+      - name: Validate frontend auth settings
+        env:
+          VITE_ENTRA_CLIENT_ID: ${{ secrets.VITE_ENTRA_CLIENT_ID }}
+          VITE_ENTRA_TENANT_ID: ${{ secrets.VITE_ENTRA_TENANT_ID }}
+        run: |
+          test -n "$VITE_ENTRA_CLIENT_ID" || { echo "Missing GitHub secret: VITE_ENTRA_CLIENT_ID"; exit 1; }
+          test -n "$VITE_ENTRA_TENANT_ID" || { echo "Missing GitHub secret: VITE_ENTRA_TENANT_ID"; exit 1; }
+
       - name: Build frontend
         working-directory: sdct/frontend
         env:
-          VITE_API_BASE: ''
+          VITE_API_BASE: ${{ env.AZURE_WEBAPP_URL }}
           VITE_AUTH_MODE: msal
           VITE_ENTRA_CLIENT_ID: ${{ secrets.VITE_ENTRA_CLIENT_ID }}
           VITE_ENTRA_TENANT_ID: ${{ secrets.VITE_ENTRA_TENANT_ID }}

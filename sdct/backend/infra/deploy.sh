@@ -49,7 +49,7 @@ echo "Web app: $WEB"
 
 echo "== 3/6 Build the React app for this environment"
 cat > "$ROOT/frontend/.env.production" <<ENVEOF
-VITE_API_BASE=
+VITE_API_BASE=$WEB
 VITE_AUTH_MODE=msal
 VITE_ENTRA_CLIENT_ID=$SPA_APP_ID
 VITE_ENTRA_TENANT_ID=$TENANT_ID

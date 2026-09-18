@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - fresh-deploy
   workflow_dispatch:
 
 env:
@@ -77,6 +78,16 @@ jobs:
           cp -R sdct/frontend/dist/. deploy_package/
           cp -R sdct/backend/api deploy_package/backend/api
           rm -rf deploy_package/backend/api/node_modules
+          cat > deploy_package/deploy-marker.json <<MARKER
+          {
+            "app": "stability-capture",
+            "branch": "${GITHUB_REF_NAME}",
+            "commit": "${GITHUB_SHA}",
+            "runId": "${GITHUB_RUN_ID}",
+            "builtAtUtc": "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          }
+          MARKER
+          cp deploy_package/deploy-marker.json deploy_package/frontend/dist/deploy-marker.json
           cat > deploy_package/package.json <<'JSON'
           {
             "name": "stability-capture-webapp",
@@ -103,6 +114,8 @@ jobs:
           fi
           test -f verify_package/index.html || { echo "Missing root index.html in deploy.zip"; exit 1; }
           test -f verify_package/frontend/dist/index.html || { echo "Missing frontend/dist/index.html in deploy.zip"; exit 1; }
+          test -f verify_package/deploy-marker.json || { echo "Missing root deploy-marker.json in deploy.zip"; exit 1; }
+          test -f verify_package/frontend/dist/deploy-marker.json || { echo "Missing frontend/dist/deploy-marker.json in deploy.zip"; exit 1; }
           echo "Deployment package verified."
 
       - name: Deploy to Azure Web App
@@ -118,6 +131,12 @@ jobs:
           body="$(curl -fsSL "${{ env.AZURE_WEBAPP_URL }}?build=${GITHUB_SHA}" || true)"
           if echo "$body" | grep -E "Loading Stability Capture|Preparing demo data"; then
             echo "Live Web App is still serving the old loading screen after deployment. Restart the App Service or clear the deployment cache, then rerun this workflow."
+            exit 1
+          fi
+          marker="$(curl -fsSL "${{ env.AZURE_WEBAPP_URL }}/deploy-marker.json?build=${GITHUB_SHA}" || true)"
+          echo "$marker"
+          if ! echo "$marker" | grep "$GITHUB_SHA"; then
+            echo "Live Web App did not return the current deploy marker. Azure is not serving this workflow package."
             exit 1
           fi
           echo "Live site check completed."

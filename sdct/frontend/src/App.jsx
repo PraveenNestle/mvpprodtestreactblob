@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { api, DEMO_MODE } from './api/index.js';
+import { api, DEMO_MODE, catalog as fallbackCatalog } from './api/index.js';
 import { initAuth, currentUser, onUserChange, switchDemoUser, demoUsers, authMode, can, signOut } from './auth/auth.js';
 import { ToastProvider, useToast } from './components/ui.jsx';
 import { HomeScreen } from './screens/HomeScreen.jsx';
@@ -13,15 +13,18 @@ const NAV = [['home', 'Home', 'view'], ['capture', 'Capture', 'capture'], ['revi
 
 function Shell() {
   const toast = useToast();
-  const [user, setUser] = useState(null);
-  const [catalog, setCatalog] = useState(null);
+  const [user, setUser] = useState(() => (authMode() === 'demo' ? currentUser() : null));
+  const [catalog, setCatalog] = useState(() => (DEMO_MODE ? fallbackCatalog : null));
   const [loadError, setLoadError] = useState(null);
   const [route, setRoute] = useState({ name: 'home' });
   const [online, setOnline] = useState(typeof navigator === 'undefined' ? true : navigator.onLine);
   const [pending, setPending] = useState(queued().length);
 
   useEffect(() => { initAuth().then(setUser).catch((err) => setLoadError(err.message || 'Authentication failed')); return onUserChange(setUser); }, []);
-  const reloadCatalog = useCallback(() => api.getCatalog().then(setCatalog).catch((err) => setLoadError(err.message || 'Catalog load failed')), []);
+  const reloadCatalog = useCallback(() => api.getCatalog().then(setCatalog).catch((err) => {
+    if (DEMO_MODE) setCatalog(fallbackCatalog);
+    else setLoadError(err.message || 'Catalog load failed');
+  }), []);
   useEffect(() => { reloadCatalog(); }, [reloadCatalog]);
 
   // Flush the offline queue when connectivity returns (R-36)

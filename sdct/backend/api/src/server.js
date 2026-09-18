@@ -94,7 +94,18 @@ if (config.localMode) {
 // Serve the built React app from the same Web App when STATIC_DIR is set
 if (config.staticDir) {
   const dir = resolve(config.staticDir);
-  if (existsSync(dir)) { app.use(express.static(dir)); app.get('*', (req, res) => res.sendFile(resolve(dir, 'index.html'))); }
+  if (existsSync(dir)) {
+    app.use(express.static(dir, {
+      setHeaders: (res, path) => {
+        if (path.endsWith('index.html')) res.setHeader('Cache-Control', 'no-store');
+        else res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+      },
+    }));
+    app.get('*', (req, res) => {
+      res.setHeader('Cache-Control', 'no-store');
+      res.sendFile(resolve(dir, 'index.html'));
+    });
+  }
 }
 
 app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars

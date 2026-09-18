@@ -40,23 +40,27 @@ jobs:
         working-directory: sdct/frontend
         run: npm ci --no-audit --no-fund
 
-      - name: Validate frontend auth settings
-        env:
-          VITE_ENTRA_CLIENT_ID: ${{ secrets.VITE_ENTRA_CLIENT_ID || vars.VITE_ENTRA_CLIENT_ID }}
-          VITE_ENTRA_TENANT_ID: ${{ secrets.VITE_ENTRA_TENANT_ID || vars.VITE_ENTRA_TENANT_ID }}
-        run: |
-          test -n "$VITE_ENTRA_CLIENT_ID" || { echo "Missing VITE_ENTRA_CLIENT_ID. Add it under GitHub repository Settings > Secrets and variables > Actions as either a secret or variable."; exit 1; }
-          test -n "$VITE_ENTRA_TENANT_ID" || { echo "Missing VITE_ENTRA_TENANT_ID. Add it under GitHub repository Settings > Secrets and variables > Actions as either a secret or variable."; exit 1; }
-
       - name: Build frontend
         working-directory: sdct/frontend
         env:
-          VITE_API_BASE: ${{ env.AZURE_WEBAPP_URL }}
-          VITE_AUTH_MODE: msal
-          VITE_ENTRA_CLIENT_ID: ${{ secrets.VITE_ENTRA_CLIENT_ID || vars.VITE_ENTRA_CLIENT_ID }}
-          VITE_ENTRA_TENANT_ID: ${{ secrets.VITE_ENTRA_TENANT_ID || vars.VITE_ENTRA_TENANT_ID }}
-          VITE_API_SCOPE: ${{ env.API_AUDIENCE }}/access_as_user
-        run: npm run build
+          FRONTEND_API_BASE: ${{ env.AZURE_WEBAPP_URL }}
+          FRONTEND_API_SCOPE: ${{ env.API_AUDIENCE }}/access_as_user
+          FRONTEND_ENTRA_CLIENT_ID: ${{ secrets.VITE_ENTRA_CLIENT_ID || vars.VITE_ENTRA_CLIENT_ID }}
+          FRONTEND_ENTRA_TENANT_ID: ${{ secrets.VITE_ENTRA_TENANT_ID || vars.VITE_ENTRA_TENANT_ID }}
+        run: |
+          if [ -n "$FRONTEND_ENTRA_CLIENT_ID" ] && [ -n "$FRONTEND_ENTRA_TENANT_ID" ]; then
+            echo "Building frontend in Azure API + Microsoft Entra mode."
+            export VITE_API_BASE="$FRONTEND_API_BASE"
+            export VITE_AUTH_MODE=msal
+            export VITE_ENTRA_CLIENT_ID="$FRONTEND_ENTRA_CLIENT_ID"
+            export VITE_ENTRA_TENANT_ID="$FRONTEND_ENTRA_TENANT_ID"
+            export VITE_API_SCOPE="$FRONTEND_API_SCOPE"
+          else
+            echo "::warning::VITE_ENTRA_CLIENT_ID or VITE_ENTRA_TENANT_ID is missing. Building frontend in demo mode. Add them under Settings > Secrets and variables > Actions to use Azure API and Blob Storage."
+            export VITE_API_BASE=
+            export VITE_AUTH_MODE=demo
+          fi
+          npm run build
 
       - name: Create Azure Web App package
         shell: bash

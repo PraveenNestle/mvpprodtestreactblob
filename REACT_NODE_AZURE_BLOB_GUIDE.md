@@ -379,6 +379,8 @@ VITE_ENTRA_TENANT_ID
 
 The publish profile secret is used by `azure/webapps-deploy@v3` for deployment. `VITE_ENTRA_CLIENT_ID` and `VITE_ENTRA_TENANT_ID` are used when building the React app with MSAL settings. The client ID and tenant ID are identifiers, so repository variables are usually fine.
 
+If `VITE_ENTRA_CLIENT_ID` or `VITE_ENTRA_TENANT_ID` is missing, the workflow now deploys the frontend in demo mode and prints a warning. Demo mode is useful for proving the Web App deployment, but it does not use the Azure API or store questionnaire data in Blob Storage. Add both values and redeploy to enable the real Blob-backed application.
+
 ## 14. Existing Resource Groups, Web App, and Storage Account
 
 If you already have a resource group and App Service for the Web App, and a different resource group for the storage account, update the deployment details in these places.

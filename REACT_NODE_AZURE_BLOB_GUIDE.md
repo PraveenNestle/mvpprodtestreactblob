@@ -343,6 +343,39 @@ Deploy test and production environments with:
 ./install.sh azure prd
 ```
 
+### GitHub Actions deployment
+
+The GitHub Actions workflow is located at:
+
+```text
+.github/workflows/azure-webapp.yml
+```
+
+The workflow must run `npm` commands from the nested package folders, not the repository root:
+
+```text
+sdct/backend/api
+sdct/frontend
+```
+
+The workflow uses `azure/login@v2` before `azure/webapps-deploy@v3`. Without this login step, deployment fails with:
+
+```text
+Error: Deployment Failed, Error: No credentials found. Add an Azure login action before this action.
+```
+
+Create these GitHub repository secrets:
+
+```text
+AZURE_CLIENT_ID
+AZURE_TENANT_ID
+AZURE_SUBSCRIPTION_ID
+VITE_ENTRA_CLIENT_ID
+VITE_ENTRA_TENANT_ID
+```
+
+`AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, and `AZURE_SUBSCRIPTION_ID` are used by `azure/login@v2` for CI deployment. `VITE_ENTRA_CLIENT_ID` and `VITE_ENTRA_TENANT_ID` are used when building the React app with MSAL settings.
+
 ## 14. Existing Resource Groups, Web App, and Storage Account
 
 If you already have a resource group and App Service for the Web App, and a different resource group for the storage account, update the deployment details in these places.

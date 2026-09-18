@@ -1,7 +1,4 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-
-name: Build and deploy Node.js app to Azure Web App - nsus-dv-sfdfdev-adi-281-app
+name: Build and deploy Stability Capture to Azure Web App
 
 on:
   push:
@@ -9,47 +6,117 @@ on:
       - main
   workflow_dispatch:
 
+env:
+  NODE_VERSION: '22.x'
+  AZURE_WEBAPP_NAME: nsus-dv-sfdfdev-adi-281-app
+  AZURE_RESOURCE_GROUP: nsus-dv-sfdf-usea-rgp
+  API_AUDIENCE: api://stability-capture-api-dev
+  STORAGE_ACCOUNT_NAME: namsdvsrmcoreuseasta
+
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read #This is required for actions/checkout
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Set up Node.js version
-        uses: actions/setup-node@v3
+      - name: Azure login
+        uses: azure/login@v2
         with:
-          node-version: '22.x'
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      - name: npm install, build, and test
+      - name: Use Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install API dependencies
+        working-directory: sdct/backend/api
+        run: npm ci --no-audit --no-fund
+
+      - name: Run API smoke tests
+        working-directory: sdct/backend/api
+        run: npm test
+
+      - name: Install frontend dependencies
+        working-directory: sdct/frontend
+        run: npm ci --no-audit --no-fund
+
+      - name: Build frontend
+        working-directory: sdct/frontend
+        env:
+          VITE_API_BASE: ''
+          VITE_AUTH_MODE: msal
+          VITE_ENTRA_CLIENT_ID: ${{ secrets.VITE_ENTRA_CLIENT_ID }}
+          VITE_ENTRA_TENANT_ID: ${{ secrets.VITE_ENTRA_TENANT_ID }}
+          VITE_API_SCOPE: ${{ env.API_AUDIENCE }}/access_as_user
+        run: npm run build
+
+      - name: Create Azure Web App package
+        shell: bash
         run: |
-          npm install
-          npm run build --if-present
-          npm run test --if-present
+          rm -rf deploy_package deploy.zip
+          mkdir -p deploy_package/frontend deploy_package/backend
+          cp -R sdct/frontend/dist deploy_package/frontend/dist
+          cp -R sdct/backend/api deploy_package/backend/api
+          rm -rf deploy_package/backend/api/node_modules
+          cat > deploy_package/package.json <<'JSON'
+          {
+            "name": "stability-capture-webapp",
+            "private": true,
+            "engines": {
+              "node": ">=22"
+            },
+            "scripts": {
+              "start": "npm start --prefix backend/api",
+              "postinstall": "npm ci --omit=dev --omit=optional --no-audit --no-fund --prefix backend/api"
+            }
+          }
+          JSON
+          cd deploy_package
+          zip -qr ../deploy.zip .
 
-      - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v4
+      - name: Configure Azure Web App runtime settings
+        uses: azure/cli@v2
         with:
-          name: node-app
-          path: .
+          inlineScript: |
+            az webapp config set \
+              --resource-group "${{ env.AZURE_RESOURCE_GROUP }}" \
+              --name "${{ env.AZURE_WEBAPP_NAME }}" \
+              --linux-fx-version "NODE|22-lts" \
+              --startup-file "npm start --prefix backend/api" \
+              --ftps-state Disabled \
+              --min-tls-version 1.2 \
+              --http20-enabled true
+            az webapp config appsettings set \
+              --resource-group "${{ env.AZURE_RESOURCE_GROUP }}" \
+              --name "${{ env.AZURE_WEBAPP_NAME }}" \
+              --settings \
+                PORT=8080 \
+                LOCAL_MODE=false \
+                STATIC_DIR=/home/site/wwwroot/frontend/dist \
+                ALLOWED_ORIGINS=https://${{ env.AZURE_WEBAPP_NAME }}.azurewebsites.net \
+                ENTRA_TENANT_ID=${{ secrets.VITE_ENTRA_TENANT_ID }} \
+                ENTRA_API_AUDIENCE=${{ env.API_AUDIENCE }} \
+                STORAGE_ACCOUNT_NAME=${{ env.STORAGE_ACCOUNT_NAME }} \
+                CONTAINER_REFERENCE=reference \
+                CONTAINER_OBSERVATIONS=observations \
+                CONTAINER_MEDIA=media \
+                CONTAINER_CURATED=curated \
+                CONTAINER_CONFIG=config \
+                SAS_UPLOAD_MINUTES=15 \
+                SCM_DO_BUILD_DURING_DEPLOYMENT=true \
+                WEBSITE_NODE_DEFAULT_VERSION=~22
 
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    
-    steps:
-      - name: Download artifact from build job
-        uses: actions/download-artifact@v4
-        with:
-          name: node-app
-      
-      - name: 'Deploy to Azure Web App'
-        id: deploy-to-webapp
+      - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'nsus-dv-sfdfdev-adi-281-app'
-          slot-name: 'Production'
-          package: .
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_5145D9368E3940D2A3B53A42009CCF9F }}
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          package: deploy.zip

@@ -348,7 +348,7 @@ Deploy test and production environments with:
 The GitHub Actions workflow is located at:
 
 ```text
-.github/workflows/azure-webapp.yml
+.github/workflows/main_nsus-dv-sfdfdev-adi-281-app.yml
 ```
 
 The workflow must run `npm` commands from the nested package folders, not the repository root:
@@ -358,7 +358,7 @@ sdct/backend/api
 sdct/frontend
 ```
 
-The workflow uses `azure/login@v2` before `azure/webapps-deploy@v3`. Without this login step, deployment fails with:
+The workflow uses `azure/webapps-deploy@v3` with the Web App publish profile. If the publish profile secret is missing or empty, deployment can fail with:
 
 ```text
 Error: Deployment Failed, Error: No credentials found. Add an Azure login action before this action.
@@ -367,14 +367,12 @@ Error: Deployment Failed, Error: No credentials found. Add an Azure login action
 Create these GitHub repository secrets:
 
 ```text
-AZURE_CLIENT_ID
-AZURE_TENANT_ID
-AZURE_SUBSCRIPTION_ID
+AZUREAPPSERVICE_PUBLISHPROFILE_5145D9368E3940D2A3B53A42009CCF9F
 VITE_ENTRA_CLIENT_ID
 VITE_ENTRA_TENANT_ID
 ```
 
-`AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, and `AZURE_SUBSCRIPTION_ID` are used by `azure/login@v2` for CI deployment. `VITE_ENTRA_CLIENT_ID` and `VITE_ENTRA_TENANT_ID` are used when building the React app with MSAL settings.
+The publish profile secret is used by `azure/webapps-deploy@v3` for deployment. `VITE_ENTRA_CLIENT_ID` and `VITE_ENTRA_TENANT_ID` are used when building the React app with MSAL settings.
 
 ## 14. Existing Resource Groups, Web App, and Storage Account
 

@@ -10,6 +10,7 @@ import { AdminScreen } from './screens/AdminScreen.jsx';
 import { onConnectivity, queued, dequeue } from './lib/offlineQueue.js';
 
 const NAV = [['home', 'Home', 'view'], ['capture', 'Capture', 'capture'], ['review', 'Review', 'view'], ['templates', 'Templates', 'view'], ['admin', 'Admin', 'admin']];
+const BUILD_STAMP = import.meta.env.VITE_BUILD_STAMP || 'local';
 
 function Shell() {
   const toast = useToast();
@@ -54,6 +55,7 @@ function Shell() {
           {!online && <span className="pill offline">Offline</span>}
           {pending > 0 && <span className="pill watch">{pending} queued</span>}
           {DEMO_MODE && <span className="pill">Demo, no backend</span>}
+          <span className="pill">Build {BUILD_STAMP}</span>
           <div className="user-menu">
             <span className="avatar" aria-hidden="true">{initials}</span>
             {authMode() === 'demo' ? (

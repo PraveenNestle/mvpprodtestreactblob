@@ -48,6 +48,8 @@ jobs:
           FRONTEND_ENTRA_CLIENT_ID: ${{ secrets.VITE_ENTRA_CLIENT_ID || vars.VITE_ENTRA_CLIENT_ID }}
           FRONTEND_ENTRA_TENANT_ID: ${{ secrets.VITE_ENTRA_TENANT_ID || vars.VITE_ENTRA_TENANT_ID }}
         run: |
+          rm -rf dist
+          export VITE_BUILD_STAMP="${GITHUB_SHA::7}-$(date -u +%Y%m%d%H%M%S)"
           if [ -n "$FRONTEND_ENTRA_CLIENT_ID" ] && [ -n "$FRONTEND_ENTRA_TENANT_ID" ]; then
             echo "Building frontend in Azure API + Microsoft Entra mode."
             export VITE_API_BASE="$FRONTEND_API_BASE"
@@ -61,6 +63,10 @@ jobs:
             export VITE_AUTH_MODE=demo
           fi
           npm run build
+          if grep -R "Loading Stability Capture\|Preparing demo data" dist; then
+            echo "Old loading screen text found in built frontend. Refusing to deploy stale bundle."
+            exit 1
+          fi
 
       - name: Create Azure Web App package
         shell: bash

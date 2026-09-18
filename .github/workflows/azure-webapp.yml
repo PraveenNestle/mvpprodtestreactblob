@@ -1,0 +1,78 @@
+name: Deploy Stability Capture Web App
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+env:
+  NODE_VERSION: '22.x'
+  AZURE_WEBAPP_NAME: nsus-dv-sfdfdev-adi-281-app
+  API_AUDIENCE: api://stability-capture-api-dev
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install API dependencies
+        working-directory: sdct/backend/api
+        run: npm ci --no-audit --no-fund
+
+      - name: Run API smoke tests
+        working-directory: sdct/backend/api
+        run: npm test
+
+      - name: Install frontend dependencies
+        working-directory: sdct/frontend
+        run: npm ci --no-audit --no-fund
+
+      - name: Build frontend
+        working-directory: sdct/frontend
+        env:
+          VITE_API_BASE: ''
+          VITE_AUTH_MODE: msal
+          VITE_ENTRA_CLIENT_ID: ${{ secrets.VITE_ENTRA_CLIENT_ID }}
+          VITE_ENTRA_TENANT_ID: ${{ secrets.VITE_ENTRA_TENANT_ID }}
+          VITE_API_SCOPE: ${{ env.API_AUDIENCE }}/access_as_user
+        run: npm run build
+
+      - name: Create Azure Web App package
+        shell: bash
+        run: |
+          rm -rf deploy_package deploy.zip
+          mkdir -p deploy_package/frontend deploy_package/backend
+          cp -R sdct/frontend/dist deploy_package/frontend/dist
+          cp -R sdct/backend/api deploy_package/backend/api
+          rm -rf deploy_package/backend/api/node_modules
+          cat > deploy_package/package.json <<'JSON'
+          {
+            "name": "stability-capture-webapp",
+            "private": true,
+            "engines": {
+              "node": ">=22"
+            },
+            "scripts": {
+              "start": "npm start --prefix backend/api",
+              "postinstall": "npm ci --omit=dev --omit=optional --no-audit --no-fund --prefix backend/api"
+            }
+          }
+          JSON
+          cd deploy_package
+          zip -qr ../deploy.zip .
+
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          package: deploy.zip

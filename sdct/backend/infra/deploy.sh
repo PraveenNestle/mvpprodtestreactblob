@@ -60,6 +60,7 @@ ENVEOF
 echo "== 4/6 Package and deploy (frontend/dist + backend/api)"
 TMP=$(mktemp -d); mkdir -p "$TMP/frontend" "$TMP/backend"
 cp -r "$ROOT/frontend/dist" "$TMP/frontend/dist"; cp -r "$ROOT/backend/api" "$TMP/backend/api"; rm -rf "$TMP/backend/api/node_modules"
+cp -r "$ROOT/frontend/dist/." "$TMP/"
 cat > "$TMP/package.json" <<'PKG'
 { "name": "stability-capture-webapp", "private": true, "engines": { "node": ">=22" }, "scripts": { "start": "npm start --prefix backend/api", "postinstall": "npm install --omit=dev --omit=optional --no-audit --no-fund --prefix backend/api" } }
 PKG

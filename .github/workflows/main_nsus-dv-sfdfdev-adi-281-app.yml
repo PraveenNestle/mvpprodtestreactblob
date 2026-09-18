@@ -74,6 +74,7 @@ jobs:
           rm -rf deploy_package deploy.zip
           mkdir -p deploy_package/frontend deploy_package/backend
           cp -R sdct/frontend/dist deploy_package/frontend/dist
+          cp -R sdct/frontend/dist/. deploy_package/
           cp -R sdct/backend/api deploy_package/backend/api
           rm -rf deploy_package/backend/api/node_modules
           cat > deploy_package/package.json <<'JSON'
@@ -100,6 +101,7 @@ jobs:
             echo "Old loading screen text found in deploy.zip. Refusing to deploy stale package."
             exit 1
           fi
+          test -f verify_package/index.html || { echo "Missing root index.html in deploy.zip"; exit 1; }
           test -f verify_package/frontend/dist/index.html || { echo "Missing frontend/dist/index.html in deploy.zip"; exit 1; }
           echo "Deployment package verified."
 
